@@ -5,5 +5,6 @@ class Point
         int m_y ;
     public :
         Point() = default ;
+        // commentaire
         ~Point() ;
 } ;
