@@ -39,8 +39,8 @@
 //------------------------------------------------------------------------
 // Some constants
 //------------------------------------------------------------------------
-#define APPLICATION_WIDTH	600
-#define APPLICATION_HEIGHT	500 
+#define APPLICATION_WIDTH	1000
+#define APPLICATION_HEIGHT	800 
 #define WIDGET_PANEL_WIDTH	150
 #define WIDGET_Y0			30
 #define WIDGET_Y_STEP		50
@@ -57,7 +57,8 @@ enum
 	ID_SAVE,
 	ID_BUTTON1,
 	ID_SLIDER1,
-	ID_CHECKBOX1
+	ID_CHECKBOX1,
+	ID_BUTTON2
 };
 
 //------------------------------------------------------------------------
@@ -80,6 +81,8 @@ public:
 	MyDrawingPanel( wxWindow *parent ) ;
 	void OpenFile(wxString fileName) ;
 	void SaveFile(wxString fileName) ;
+	wxRect GetOneRect () ;
+	void SetOneRect (const wxRect & rectToCopy) ; 
 
 private:
 	void OnMouseMove(wxMouseEvent &event) ;
@@ -87,6 +90,7 @@ private:
 	void OnPaint(wxPaintEvent &event) ;
 	wxPoint m_mousePoint ;
 	wxPoint m_onePoint ;
+	wxRect m_oneRect ;
 };
 
 //------------------------------------------------------------------------
@@ -102,9 +106,11 @@ private:
 	void OnButton(wxCommandEvent &event) ;
 	void OnSlider(wxScrollEvent &event) ;
 	void OnCheckBox(wxCommandEvent &event) ;
+	void OnButtonRectangle(wxCommandEvent &event) ;
 	wxButton* m_button ;
 	wxSlider* m_slider ;
 	wxCheckBox* m_checkBox ;
+	wxButton* m_buttonRectangle ;
 };
 
 //------------------------------------------------------------------------
@@ -114,6 +120,7 @@ class MyFrame: public wxFrame
 public:
 	MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size);
 	MyControlPanel* GetControlPanel(){return m_controlPanel ;} ;
+	MyDrawingPanel* GetDrawingPanel(){return m_drawingPanel ;} ;
 	void RefreshDrawing(){m_drawingPanel->Refresh() ;} ;
 
 protected:
@@ -130,7 +137,7 @@ protected:
 
 //************************************************************************
 //************************************************************************
-// MyDrawingPanel class (where controls are displayed)
+// MyControlPanel class (where controls are displayed)
 //************************************************************************
 //************************************************************************
 
@@ -157,7 +164,11 @@ MyControlPanel::MyControlPanel(wxWindow *parent) : wxPanel(parent)
 	
 	y+= WIDGET_Y_STEP ;
 	m_checkBox = new wxCheckBox(this, ID_CHECKBOX1, "Show (x,y)", wxPoint(10, y), wxSize(100,20)) ;
-	Bind(wxEVT_CHECKBOX, &MyControlPanel::OnCheckBox, this, ID_CHECKBOX1) ;	
+	Bind(wxEVT_CHECKBOX, &MyControlPanel::OnCheckBox, this, ID_CHECKBOX1) ;
+
+	y+= WIDGET_Y_STEP ;
+	m_buttonRectangle = new wxButton(this, ID_BUTTON2, wxT("Rectangle"), wxPoint(10, y)) ;
+	Bind(wxEVT_BUTTON, &MyControlPanel::OnButtonRectangle, this, ID_BUTTON2) ;
 }
 
 //------------------------------------------------------------------------
@@ -185,6 +196,19 @@ void MyControlPanel::OnCheckBox(wxCommandEvent &event)
 	MyFrame* frame = (MyFrame*)GetParent() ;
 	frame->RefreshDrawing() ;	// update the drawing panel
 }
+
+//------------------------------------------------------------------------
+void MyControlPanel::OnButtonRectangle(wxCommandEvent &event)
+//------------------------------------------------------------------------
+{
+	/*
+	MyFrame* frame = (MyFrame*) GetParent() ;
+	MyDrawingPanel* drawingPanel = (MyDrawingPanel *)frame->GetDrawingPanel() ;
+	wxRect rectangle ;
+	drawingPanel->SetOneRect(rectangle) ;  // vraiment utile ?? m_oneRect n'a pas déjà été instancié ?
+	*/
+}
+
 
 //************************************************************************
 //************************************************************************
@@ -214,9 +238,13 @@ void MyDrawingPanel::OnMouseMove(wxMouseEvent &event)
 //------------------------------------------------------------------------
 // called when the mouse is moved
 {
-	m_mousePoint.x = event.m_x ;
-	m_mousePoint.y = event.m_y ;
-	Refresh() ;	// send an event that calls the OnPaint method
+	if (event.ButtonDown()) {
+		//m_mousePoint.x = event.m_x ;
+		//m_mousePoint.y = event.m_y ;
+		wxPoint point (event.m_x, event.m_y) ;
+		m_oneRect.SetBottomRight(point) ;
+		Refresh() ;	// send an event that calls the OnPaint method
+	}
 }
 
 //------------------------------------------------------------------------
@@ -224,9 +252,10 @@ void MyDrawingPanel::OnMouseLeftDown(wxMouseEvent &event)
 //------------------------------------------------------------------------
 // called when the mouse left button is pressed
 {
-	m_onePoint.x = event.m_x ;
-	m_onePoint.y = event.m_y ;
-	Refresh() ; // send an event that calls the OnPaint method
+	//m_onePoint.x = event.m_x ;
+	//m_onePoint.y = event.m_y ;
+	m_oneRect.SetX(event.m_x) ;
+ 	m_oneRect.SetY(event.m_y) ;
 }
 
 //------------------------------------------------------------------------
@@ -238,22 +267,24 @@ void MyDrawingPanel::OnPaint(wxPaintEvent &event)
 {
 	// read the control values
 	MyFrame* frame =  (MyFrame*)GetParent() ;
-	int radius = frame->GetControlPanel()->GetSliderValue() ;
-	bool check = frame->GetControlPanel()->GetCheckBoxValue() ;
+	//int radius = frame->GetControlPanel()->GetSliderValue() ;
+	//bool check = frame->GetControlPanel()->GetCheckBoxValue() ;
 
 	// then paint
 	wxPaintDC dc(this);	
-		
-	dc.DrawLine(m_mousePoint, m_onePoint) ;
-	dc.DrawRectangle(wxPoint(m_onePoint.x-radius/2, m_onePoint.y-radius/2), wxSize(radius,radius)) ;
-	dc.DrawCircle(wxPoint(m_mousePoint), radius/2) ;
-	
+
+
+	//dc.DrawLine(m_mousePoint, m_onePoint) ;
+	dc.DrawRectangle(wxPoint(m_oneRect.GetX(), m_oneRect.GetY()), wxSize(m_oneRect.GetWidth(),m_oneRect.GetHeight())) ;
+	//dc.DrawCircle(wxPoint(m_mousePoint), radius/2) ;
+	/*
 	if (check)
 	{
 		wxString coordinates ;
 		coordinates.sprintf(wxT("(%d,%d)"), m_mousePoint.x, m_mousePoint.y) ;
 		dc.DrawText(coordinates, wxPoint(m_mousePoint.x, m_mousePoint.y+20)) ;
 	}
+*/
 }
 
 //------------------------------------------------------------------------
@@ -284,6 +315,14 @@ void MyDrawingPanel::SaveFile(wxString fileName)
 		fclose(f) ;
 	}
 }
+
+//------------------------------------------------------------------------
+void MyDrawingPanel::SetOneRect(const wxRect & rectToCopy)
+//------------------------------------------------------------------------
+{
+	m_oneRect = rectToCopy ;
+}
+
 
 //************************************************************************
 //************************************************************************
