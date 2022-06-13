@@ -152,7 +152,7 @@ MyControlPanel::MyControlPanel(wxWindow *parent) : wxPanel(parent)
 	wxStaticText* text1 = new wxStaticText(this, wxID_ANY, wxT("Radius"), wxPoint(10, y)) ;
 	
 	y+= 15 ;
-	m_slider = new wxSlider(this, ID_SLIDER1, 10, 2, 100, wxPoint(10, y), wxSize(100,20)) ;
+	m_slider = new wxSlider(this, ID_SLIDER1, 10, 2, 100, wxPoint(10, y), wxSize(100,20), wxSL_LABELS) ;
 	Bind(wxEVT_SCROLL_THUMBTRACK, &MyControlPanel::OnSlider, this, ID_SLIDER1) ;	
 	
 	y+= WIDGET_Y_STEP ;
