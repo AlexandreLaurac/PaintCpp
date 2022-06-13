@@ -28,3 +28,9 @@ CMakeFiles/skeleton.dir/flags.make
 CMakeFiles/skeleton.dir/link.txt
 CMakeFiles/skeleton.dir/progress.make
 CMakeFiles/skeleton.dir/src/skeleton.cpp.o
+src/model/test/Forme.o
+src/model/test/main
+src/model/test/main.o
+src/model/test/Makefile.bak
+src/model/test/Point.o
+src/model/test/Rectangle.o
