@@ -11,7 +11,7 @@
 // Web http://www.gipsa-lab.inpg.fr/~pascal.bertolino/
 //
 // tested with xWidget 3.0.2 under Linux and Windows 10
-// Under Linux, compile then link as follows (with g++):
+// Under Linux, dcompile then link as follows (with g++):
 // g++ -c `wx-config --cxxflags` skeleton.cpp
 // g++ -o skeleton skeleton.o `wx-config --libs`
 //************************************************************************
