@@ -10,13 +10,11 @@
 class Rectangle : public Forme
 //-------------------------------------------
 {
-public:                                     
+public:          
+    Rectangle();                           
     Rectangle(int x, int y, int w, int h, const std::string label); // constructeur
-    Rectangle(const Point& p, int w, int h, const std::string label);  // constructeur
-    ~Rectangle(); // destructeur
 
     // Setters
-    void setCorner(const Point& p);
     void setWidth(int w);
     void setHeight(int h);
 
@@ -25,10 +23,13 @@ public:
     int getWidth() const;
     int getHeight() const;
 
+    // Méthode additionnel
+	void display() const;
+
 	// Méthodes virtuelles
     virtual float surface() const override;
     virtual float perimeter() const override;
-	virtual void move(int offsetX, int offsetY) override;
+	virtual void move(int offsetX, int offsetY);
 
 
 private: 

@@ -6,11 +6,11 @@ using namespace std;
 Forme::Forme(){}
 
 Forme::Forme(const string label) {
-    this.label = label;
+    this->label = label;
 }
 
 Forme::Forme(const Forme& forme) {
-    this.label = other.m_label;
+    this->label = forme.label;
 }
 
 // virtual
@@ -18,13 +18,13 @@ Forme::~Forme(){}
 
 Forme& Forme::operator=(const Forme& forme) {
     // La Forme ne contient qu'un attribut, le label, on peut utiliser SetLabel
-    SetLabel(forme.m_label);
+    setLabel(forme.label);
 
     return *(this);
 }
 
 void Forme::setLabel(const std::string label) {
-	this.label = label;
+	this->label = label;
 }
 
 std::string Forme::getLabel() const {

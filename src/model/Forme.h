@@ -7,7 +7,7 @@
 class Forme {
 public:
     Forme();
-    Forme(const std::string& label);    // Avec une string
+    Forme(const std::string label);    // Avec une string
     Forme(const Forme& forme);          // Construction par recopie
     virtual ~Forme();
 
@@ -22,9 +22,10 @@ public:
     virtual float perimeter() const { return 0.0f; }
 
 	// Fonctions utilitaires
-	virtual void translation(int offsetX, int offsetY) {};
-	virtual void zoom(int percentage) {};
-	virtual void rotation(int angle) {};
+	virtual void translation(int , int) {};
+
+	virtual void zoom(int ) {};
+	virtual void rotation(int ) {};
 
 
 protected: 
