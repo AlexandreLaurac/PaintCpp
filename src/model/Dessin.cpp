@@ -26,7 +26,8 @@ void Dessin::deleteForme(Forme* formeToDelete){
 		if (formeToDelete == listFormes.at(i)){
 			listFormes.erase(listFormes.begin()+i);
 			findForme = true;
-			//delete formeToDelete;
+			
+			delete formeToDelete;
 		}
 		i++;
 	}	

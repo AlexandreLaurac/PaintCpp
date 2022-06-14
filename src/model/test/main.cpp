@@ -74,14 +74,15 @@ int main()
     d1.displayList();
     cout << endl;
 
-    Rectangle r3(0,0,1,8,"r3");
-    d1.addForme(&r3);
+    //Rectangle r3(0,0,1,8,"r3");
+    Rectangle *r3 = new Rectangle(0,0,1,8,"r3");
+    d1.addForme(r3);
     assert(d1.getList().size() == 2);
     d1.displayList();
     cout << endl;
 
     cout << "******** Test des méthodes de suppressions de forme" << endl;
-    d1.deleteForme(&r2);
+    d1.deleteForme(r3);
     assert(d1.getList().size() == 1);
     d1.displayList();
     cout << endl;
