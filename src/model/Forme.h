@@ -22,7 +22,7 @@ public:
     virtual float perimeter() const { return 0.0f; }
 
 	// Fonctions utilitaires
-	virtual void translation(int , int) {};
+	virtual void move(int , int) {};
 
 	virtual void zoom(int ) {};
 	virtual void rotation(int ) {};
