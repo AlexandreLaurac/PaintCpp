@@ -34,3 +34,4 @@ src/model/test/main.o
 src/model/test/Makefile.bak
 src/model/test/Point.o
 src/model/test/Rectangle.o
+src/model/test/Dessin.o
