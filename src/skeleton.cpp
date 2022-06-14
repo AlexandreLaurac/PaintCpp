@@ -5,7 +5,7 @@
 // How to:
 // - use 2 panels (one for controls, one for drawings)
 // - manage basic events (so that controls impact drawings)
-// with wxWidgets (3.0.2) 
+// with wxWidgets (3.0.2)
 // Author: Pascal Bertolino, UGA - GIPSA-lab laboratory, Grenoble - France
 // Email pascal.bertolino@gipsa-lab.fr
 // Web http://www.gipsa-lab.inpg.fr/~pascal.bertolino/
@@ -35,12 +35,13 @@
 #include <wx/image.h>
 #include <wx/file.h>
 #include <wx/bitmap.h>
+#include <vector>
 
 //------------------------------------------------------------------------
 // Some constants
 //------------------------------------------------------------------------
 #define APPLICATION_WIDTH	1000
-#define APPLICATION_HEIGHT	800 
+#define APPLICATION_HEIGHT	800
 #define WIDGET_PANEL_WIDTH	150
 #define WIDGET_Y0			30
 #define WIDGET_Y_STEP		50
@@ -77,40 +78,42 @@ class MyApp: public wxApp
 class MyDrawingPanel: public wxPanel
 //------------------------------------------------------------------------
 {
-public:
-	MyDrawingPanel( wxWindow *parent ) ;
-	void OpenFile(wxString fileName) ;
-	void SaveFile(wxString fileName) ;
-	wxRect GetOneRect () ;
-	void SetOneRect (const wxRect & rectToCopy) ; 
+	public:
+		MyDrawingPanel( wxWindow *parent ) ;
+		void OpenFile(wxString fileName) ;
+		void SaveFile(wxString fileName) ;
+		wxRect GetOneRect () ;
+		void SetOneRect (const wxRect & rectToCopy) ;
 
-private:
-	void OnMouseMove(wxMouseEvent &event) ;
-	void OnMouseLeftDown(wxMouseEvent &event) ;
-	void OnPaint(wxPaintEvent &event) ;
-	wxPoint m_mousePoint ;
-	wxPoint m_onePoint ;
-	wxRect m_oneRect ;
+	private:
+		void OnMouseMove(wxMouseEvent &event) ;
+		void OnMouseLeftDown(wxMouseEvent &event) ;
+		void OnMouseLeftUp(wxMouseEvent &event) ;
+		void OnPaint(wxPaintEvent &event) ;
+		wxPoint m_mousePoint ;
+		wxPoint m_onePoint ;
+		wxRect m_oneRect ;
+		std::vector <wxRect> m_Rect ;
 };
 
 //------------------------------------------------------------------------
 class MyControlPanel: public wxPanel
 //------------------------------------------------------------------------
 {
-public:
-	MyControlPanel( wxWindow *parent ) ;
-	int GetSliderValue() {return m_slider->GetValue() ;} ;
-	bool GetCheckBoxValue() {return m_checkBox->GetValue() ;} ;
+	public:
+		MyControlPanel( wxWindow *parent ) ;
+		int GetSliderValue() {return m_slider->GetValue() ;} ;
+		bool GetCheckBoxValue() {return m_checkBox->GetValue() ;} ;
 
-private:
-	void OnButton(wxCommandEvent &event) ;
-	void OnSlider(wxScrollEvent &event) ;
-	void OnCheckBox(wxCommandEvent &event) ;
-	void OnButtonRectangle(wxCommandEvent &event) ;
-	wxButton* m_button ;
-	wxSlider* m_slider ;
-	wxCheckBox* m_checkBox ;
-	wxButton* m_buttonRectangle ;
+	private:
+		void OnButton(wxCommandEvent &event) ;
+		void OnSlider(wxScrollEvent &event) ;
+		void OnCheckBox(wxCommandEvent &event) ;
+		void OnButtonRectangle(wxCommandEvent &event) ;
+		wxButton* m_button ;
+		wxSlider* m_slider ;
+		wxCheckBox* m_checkBox ;
+		wxButton* m_buttonRectangle ;
 };
 
 //------------------------------------------------------------------------
@@ -154,14 +157,14 @@ MyControlPanel::MyControlPanel(wxWindow *parent) : wxPanel(parent)
 	y = WIDGET_Y0 ;
 	m_button = new wxButton(this, ID_BUTTON1, wxT("Click me"), wxPoint(10, y)) ;
 	Bind(wxEVT_BUTTON, &MyControlPanel::OnButton, this, ID_BUTTON1) ;
-	
+
 	y+= WIDGET_Y_STEP ;
 	wxStaticText* text1 = new wxStaticText(this, wxID_ANY, wxT("Radius"), wxPoint(10, y)) ;
-	
+
 	y+= 15 ;
 	m_slider = new wxSlider(this, ID_SLIDER1, 10, 2, 100, wxPoint(10, y), wxSize(100,20), wxSL_LABELS) ;
-	Bind(wxEVT_SCROLL_THUMBTRACK, &MyControlPanel::OnSlider, this, ID_SLIDER1) ;	
-	
+	Bind(wxEVT_SCROLL_THUMBTRACK, &MyControlPanel::OnSlider, this, ID_SLIDER1) ;
+
 	y+= WIDGET_Y_STEP ;
 	m_checkBox = new wxCheckBox(this, ID_CHECKBOX1, "Show (x,y)", wxPoint(10, y), wxSize(100,20)) ;
 	Bind(wxEVT_CHECKBOX, &MyControlPanel::OnCheckBox, this, ID_CHECKBOX1) ;
@@ -205,7 +208,7 @@ void MyControlPanel::OnButtonRectangle(wxCommandEvent &event)
 	MyFrame* frame = (MyFrame*) GetParent() ;
 	MyDrawingPanel* drawingPanel = (MyDrawingPanel *)frame->GetDrawingPanel() ;
 	wxRect rectangle ;
-	drawingPanel->SetOneRect(rectangle) ;  // vraiment utile ?? m_oneRect n'a pas déjà été instancié ?
+	drawingPanel->SetOneRect(rectangle) ;
 	*/
 }
 
@@ -228,9 +231,20 @@ MyDrawingPanel::MyDrawingPanel(wxWindow *parent) : wxPanel(parent)
 	Bind(wxEVT_MOTION, &MyDrawingPanel::OnMouseMove, this);
 	Bind(wxEVT_LEFT_DOWN, &MyDrawingPanel::OnMouseLeftDown, this);
 	Bind(wxEVT_PAINT, &MyDrawingPanel::OnPaint, this) ;
+	Bind(wxEVT_LEFT_UP, &MyDrawingPanel::OnMouseLeftUp, this);
 	m_onePoint.x = (w-WIDGET_PANEL_WIDTH)/2 ;
 	m_onePoint.y = h/2 ;
 	m_mousePoint = m_onePoint ;
+}
+
+//------------------------------------------------------------------------
+void MyDrawingPanel::OnMouseLeftDown(wxMouseEvent &event)
+//------------------------------------------------------------------------
+// called when the mouse left button is pressed
+{
+	//m_oneRect = new wxRect() ;
+	m_oneRect.SetX(event.m_x) ;
+ 	m_oneRect.SetY(event.m_y) ;
 }
 
 //------------------------------------------------------------------------
@@ -238,7 +252,8 @@ void MyDrawingPanel::OnMouseMove(wxMouseEvent &event)
 //------------------------------------------------------------------------
 // called when the mouse is moved
 {
-	if (event.ButtonDown()) {
+
+	if (event.LeftIsDown()) {
 		//m_mousePoint.x = event.m_x ;
 		//m_mousePoint.y = event.m_y ;
 		wxPoint point (event.m_x, event.m_y) ;
@@ -248,14 +263,10 @@ void MyDrawingPanel::OnMouseMove(wxMouseEvent &event)
 }
 
 //------------------------------------------------------------------------
-void MyDrawingPanel::OnMouseLeftDown(wxMouseEvent &event)
+void MyDrawingPanel::OnMouseLeftUp(wxMouseEvent &event)
 //------------------------------------------------------------------------
-// called when the mouse left button is pressed
 {
-	//m_onePoint.x = event.m_x ;
-	//m_onePoint.y = event.m_y ;
-	m_oneRect.SetX(event.m_x) ;
- 	m_oneRect.SetY(event.m_y) ;
+  	m_Rect.push_back(m_oneRect) ;
 }
 
 //------------------------------------------------------------------------
@@ -271,12 +282,22 @@ void MyDrawingPanel::OnPaint(wxPaintEvent &event)
 	//bool check = frame->GetControlPanel()->GetCheckBoxValue() ;
 
 	// then paint
-	wxPaintDC dc(this);	
+	wxPaintDC dc(this);
 
-
+	// On repaint toutes les figures...
+	//size_t nbFormes = m_Rect.size() ;
+	for (wxRect rect : m_Rect)
+	{
+		dc.DrawRectangle(wxPoint(rect.GetX(), rect.GetY()), wxSize(rect.GetWidth(),rect.GetHeight())) ;
+		//std::cout << 
+	}
+	//if (&m_oneRect != nullptr)  {
+		dc.DrawRectangle(wxPoint(m_oneRect.GetX(), m_oneRect.GetY()), wxSize(m_oneRect.GetWidth(),m_oneRect.GetHeight())) ;
+	//}
 	//dc.DrawLine(m_mousePoint, m_onePoint) ;
-	dc.DrawRectangle(wxPoint(m_oneRect.GetX(), m_oneRect.GetY()), wxSize(m_oneRect.GetWidth(),m_oneRect.GetHeight())) ;
 	//dc.DrawCircle(wxPoint(m_mousePoint), radius/2) ;
+
+
 	/*
 	if (check)
 	{
@@ -291,7 +312,7 @@ void MyDrawingPanel::OnPaint(wxPaintEvent &event)
 void MyDrawingPanel::OpenFile(wxString fileName)
 //------------------------------------------------------------------------
 {
-	// just to open (and close) any file 
+	// just to open (and close) any file
 	FILE* f = fopen(fileName, "r") ;
 	if (f)
 	{
@@ -314,13 +335,6 @@ void MyDrawingPanel::SaveFile(wxString fileName)
 		wxMessageBox(wxT("The file was saved")) ;
 		fclose(f) ;
 	}
-}
-
-//------------------------------------------------------------------------
-void MyDrawingPanel::SetOneRect(const wxRect & rectToCopy)
-//------------------------------------------------------------------------
-{
-	m_oneRect = rectToCopy ;
 }
 
 
@@ -412,7 +426,7 @@ void MyFrame::OnSize(wxSizeEvent &event)
 // Called when you resize the frame
 {
 	int w, h ;
-	GetSize(&w,&h) ;	
+	GetSize(&w,&h) ;
 	m_controlPanel->SetSize(wxRect(wxPoint(0,0), wxPoint(WIDGET_PANEL_WIDTH, h))) ;
 	m_drawingPanel->SetSize(wxRect(wxPoint(WIDGET_PANEL_WIDTH,0), wxPoint(w, h))) ;
 }
