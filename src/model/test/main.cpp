@@ -54,12 +54,6 @@ int main()
     assert(r1.perimeter() == 600);
     cout << "Périmètre r1 -> " << r1.perimeter() << endl;
 
-    assert(r1.getId() == 1);
-    cout << "id r1 -> " << r1.getId() << endl;
-
-    assert(r2.getId() == 2);
-    cout << "id r2 -> " << r2.getId() << endl;
-
     r1.move(10,5);
     assert(r1.getCorner().x == 10);
     assert(r1.getCorner().y == 5);
@@ -86,7 +80,7 @@ int main()
     d1.displayList();
     cout << endl;
 
-    cout << "******** Test des méthodes de suppression de forme" << endl;
+    cout << "******** Test des méthodes de suppressions de forme" << endl;
     d1.deleteForme(&r2);
     assert(d1.getList().size() == 1);
     d1.displayList();

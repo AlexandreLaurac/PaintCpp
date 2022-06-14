@@ -26,6 +26,7 @@ void Dessin::deleteForme(Forme* formeToDelete){
 		if (formeToDelete == listFormes.at(i)){
 			listFormes.erase(listFormes.begin()+i);
 			findForme = true;
+			//delete formeToDelete;
 		}
 		i++;
 	}	
@@ -44,15 +45,10 @@ void Dessin::displayList() const {
 	cout << "listFormes={";
 	for (size_t i = 0; i < listFormes.size(); i++){
 		if (i == (listFormes.size() - 1)){
-			cout << "(";
-			cout << listFormes.at(i)->getLabel() << ",";
-			cout << listFormes.at(i)->getId();
-			cout << ")";
+			cout << listFormes.at(i)->getLabel();
+
 		} else {
-			cout << "(";
-			cout << listFormes.at(i)->getLabel() << ",";
-			cout << listFormes.at(i)->getId();
-			cout << ") ; ";
+			cout << listFormes.at(i)->getLabel() << ";" ;
 		}
 	}
 	cout << "}";

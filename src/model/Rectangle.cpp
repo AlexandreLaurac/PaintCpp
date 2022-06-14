@@ -14,16 +14,14 @@ Rectangle::Rectangle(const int x, const int y, const int w, const int h, const s
 	height = h;
 }
 
+
 Rectangle::Rectangle(const Rectangle& rectangle) : Forme(rectangle.label){
     topLeftCorner.x = rectangle.getCorner().x;
 	topLeftCorner.y = rectangle.getCorner().y;
 	width = rectangle.getWidth();
 	height = rectangle.getHeight();
-
-    id = rectangle.getId();
 }
 
-Rectangle::~Rectangle(){};
 
 
 void Rectangle::setWidth(int w) {

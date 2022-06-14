@@ -10,13 +10,13 @@ class Rectangle : public Forme
 {
     
 public:          
-    Rectangle();                           
+    Rectangle(){};                           
     Rectangle(const int x, const int y, const int w, const int h, const std::string& label); // constructeur
     Rectangle(const Rectangle& rectangle);
 
     Rectangle& operator=(const Rectangle& rectangleToCopy);
 
-    virtual ~Rectangle();
+    virtual ~Rectangle(){};
 
     // Setters
     void setWidth(int w);
