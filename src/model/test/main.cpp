@@ -1,16 +1,19 @@
 #include <cassert>
+#include <string>
+#include <iostream>
 
 using namespace std;
 
 #include "Forme.h"
 #include "Rectangle.h"
+#include "Dessin.h"
 
 
 int main()
 {
 
     cout << endl;
-    cout << "******** Test de la classe Point\n";
+    cout << "******** Test de la classe Point" << endl;
     Point p1;
     assert(p1.x == 0);
     assert(p1.y == 0);
@@ -34,15 +37,28 @@ int main()
 
 
     cout << endl;
-    cout << "******** Test de la classe Rectangle\n";
+    cout << "******** Test de la classe Rectangle" << endl;
+    
     Rectangle r1( 0, 0, 100, 200, "r1" );
     r1.display();
     cout << endl;
-    cout << "******** Test des méthodes virtuelles\n";
+
+    Rectangle r2( 0, 8, 10, 2, "r2" );
+    r1.display();
+    cout << endl;
+
+    cout << "******** Test des méthodes virtuelles" << endl;
     assert(r1.surface() == 20000);
     cout << "Surface r1 -> " << r1.surface() << endl;
+
     assert(r1.perimeter() == 600);
     cout << "Périmètre r1 -> " << r1.perimeter() << endl;
+
+    assert(r1.getId() == 1);
+    cout << "id r1 -> " << r1.getId() << endl;
+
+    assert(r2.getId() == 2);
+    cout << "id r2 -> " << r2.getId() << endl;
 
     r1.move(10,5);
     assert(r1.getCorner().x == 10);
@@ -50,7 +66,36 @@ int main()
     cout << "Move r1 de (10,5) -> ";
     r1.display();
     cout << endl;
+
     cout << endl;
+    cout << "******** Test de la classe Dessin" << endl;
+    Dessin d1;
+    assert(d1.getList().size() == 0);
+    d1.displayList();
+    cout << endl;
+
+    cout << "******** Test des méthodes d'ajouts de forme" << endl;
+    d1.addForme(&r2);
+    assert(d1.getList().size() == 1);
+    d1.displayList();
+    cout << endl;
+
+    Rectangle r3(0,0,1,8,"r3");
+    d1.addForme(&r3);
+    assert(d1.getList().size() == 2);
+    d1.displayList();
+    cout << endl;
+
+    cout << "******** Test des méthodes de suppression de forme" << endl;
+    d1.deleteForme(&r2);
+    assert(d1.getList().size() == 1);
+    d1.displayList();
+    cout << endl;
+
+
+    
+
+
 
 
 
