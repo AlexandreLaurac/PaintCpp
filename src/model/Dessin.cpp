@@ -61,7 +61,7 @@ void Dessin::deleteList() {
 	}
 }
 
-void Dessin::drawAllFormes(){
+void Dessin::drawAllFormes() const {
 	for (Forme* forme : listFormes){
 		forme -> draw();
 	}
