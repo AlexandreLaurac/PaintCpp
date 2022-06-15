@@ -61,6 +61,12 @@ void Dessin::deleteList() {
 	}
 }
 
+void Dessin::drawAllFormes(){
+	for (Forme* forme : listFormes){
+		forme -> draw();
+	}
+}
+
 void Dessin::saveSVG(const char* path){
 	try{
 		FILE* f = fopen(path, "w") ;
