@@ -66,14 +66,14 @@ void MyControlPanel::OnCheckBox(wxCommandEvent &event)
 //------------------------------------------------------------------------
 void MyControlPanel::OnButtonRectangle(wxCommandEvent &event)
 {
-	m_selectedForm = ID_RECT ;  // voir si c'est à garder
+	//m_selectedForm = ID_RECT ;  // voir si c'est à garder
 	m_parentFrame->GetControler()->SetFormId(ID_RECT) ;
 }
 
 //------------------------------------------------------------------------
 void MyControlPanel::OnButtonOval(wxCommandEvent &event)
 {
-	m_selectedForm = ID_OVAL ;
+	//m_selectedForm = ID_OVAL ;
 	m_parentFrame->GetControler()->SetFormId(ID_OVAL) ;
 }
 
@@ -106,9 +106,10 @@ void MyDrawingPanel::OnMouseLeftDown(wxMouseEvent &event)
 {
 	//int selectedForm = (m_parentFrame->GetControlPanel())->GetSelectedForm() ;
 	//m_oneRect = new wxRect() ;
+	/*
 	m_oneRect.SetX(event.m_x) ;
  	m_oneRect.SetY(event.m_y) ;
-
+*/
 	m_parentFrame->GetControler()->FormCreation(event.m_x, event.m_y) ;
 	m_parentFrame->GetControler()->SetMouseId(ID_MOUSELEFTDOWN) ;
 }
@@ -117,33 +118,24 @@ void MyDrawingPanel::OnMouseLeftDown(wxMouseEvent &event)
 void MyDrawingPanel::OnMouseMove(wxMouseEvent &event)
 // called when the mouse is moved
 {
-	//int selectedForm = (m_parentFrame->GetControlPanel())->GetSelectedForm() ;
+	// if (event.LeftIsDown()) {
+		// wxPoint point (event.m_x, event.m_y) ;
+		// m_oneRect.SetBottomRight(point) ;
+		// Refresh() ;
+		m_parentFrame->GetControler()->FormModification(event.m_x, event.m_y) ;
+		Refresh() ;	// send an event that calls the OnPaint method
 
-	// switch (selectedForm)
-	// {
-	// 	case ID_RECT :
-			if (event.LeftIsDown()) {
-				//m_mousePoint.x = event.m_x ;
-				//m_mousePoint.y = event.m_y ;
-				wxPoint point (event.m_x, event.m_y) ;
-				m_oneRect.SetBottomRight(point) ;
-				Refresh() ;	// send an event that calls the OnPaint method
-
-				m_parentFrame->GetControler()->FormModification(event.m_x, event.m_y) ;
-
-			}
-	// 		break ;
-	// 	case ID_OVAL :
 	// }
 }
 
 //------------------------------------------------------------------------
 void MyDrawingPanel::OnMouseLeftUp(wxMouseEvent &event)
 {
+	/*
 	int selectedForm = (m_parentFrame->GetControlPanel())->GetSelectedForm() ;
   	m_Rect.push_back(m_oneRect) ;
 	m_Forme.push_back(selectedForm) ;
-
+*/
 	m_parentFrame->GetControler()->SetMouseId(ID_MOUSELEFTUP) ;
 }
 
@@ -158,11 +150,13 @@ void MyDrawingPanel::OnPaint(wxPaintEvent &event)
 	//int radius = frame->GetControlPanel()->GetSliderValue() ;
 	//bool check = frame->GetControlPanel()->GetCheckBoxValue() ;
 
-	int selectedForm = (m_parentFrame->GetControlPanel())->GetSelectedForm() ;
+	//int selectedForm = (m_parentFrame->GetControlPanel())->GetSelectedForm() ;
 
-	// then paint
 	wxPaintDC dc(this);
 
+	m_parentFrame->GetControler()->GetDessin().drawAllFormes(dc) ;
+
+/*
 	// On repaint toutes les figures...
 	//size_t nbFormes = m_Rect.size() ;
 	int i ;
@@ -188,7 +182,7 @@ void MyDrawingPanel::OnPaint(wxPaintEvent &event)
 		dc.DrawEllipse(wxPoint(m_oneRect.GetX(), m_oneRect.GetY()), wxSize(m_oneRect.GetWidth(),m_oneRect.GetHeight())) ;
 	}
 	
-
+*/
 
 	/*
 	if (check)
@@ -274,6 +268,7 @@ void MyFrame::SetControler (Controler * controler)
 //------------------------------------------------------------------------
 void MyFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
 {
+	GetControler()->GetDessin().saveSVG("fichier.svg") ;
 	Close(true) ;
 }
 

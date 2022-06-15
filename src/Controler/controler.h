@@ -17,7 +17,8 @@ class Controler
         void SetFormId (int formId) ;
         void SetMouseId (int mouseId) ;
         Dessin GetDessin () { return m_dessin ;} ;
-        void CreationForme (int x, int y) ;
+        void FormCreation (int x, int y) ;
+        void FormModification (int x, int y) ;
 } ;
 
 

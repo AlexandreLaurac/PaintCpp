@@ -38,8 +38,12 @@ void Controler::FormModification (int xRightBottomCorner, int yRightBottomCorner
 {
     switch (m_formId) {
         case ID_RECT :
-            Rectangle * rectangle = m_dessin.getList().back() ;
-            rectangle->setWidth(xRightBottomCorner-rectangle->getCorner().x, yRightBottomCorner-rectangle->getCorner().y)
-            break ;
+            if (m_mouseId == ID_MOUSELEFTDOWN)
+            {
+                Rectangle * rectangle = (Rectangle *) m_dessin.getList().back() ;
+                rectangle->setWidth(xRightBottomCorner-rectangle->getCorner().x) ;
+                rectangle->setHeight(yRightBottomCorner-rectangle->getCorner().y) ;
+            }
+            break ;    
     }
 }
