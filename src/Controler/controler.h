@@ -1,17 +1,23 @@
 #ifndef __CONTROLER_H__
 #define __CONTROLER_H__
 
+#include "Dessin.h"
 
 class MyFrame ;
 
 class Controler
 {
     private :
-        int m_idForme ;
+        int m_formId ;
+        int m_mouseId ;
         MyFrame * m_appFrame ;
+        Dessin m_dessin ;
     public :
         Controler (MyFrame * frame) ;
-        void SetIdForme (int idForme) ;
+        void SetFormId (int formId) ;
+        void SetMouseId (int mouseId) ;
+        Dessin GetDessin () { return m_dessin ;} ;
+        void CreationForme (int x, int y) ;
 } ;
 
 

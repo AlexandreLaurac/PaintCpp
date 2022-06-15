@@ -36,7 +36,9 @@ enum
 	ID_BUTTON2,    // Bouton rectangle du panneau de contrôle
 	ID_BUTTON3,    // Bouton ovale du panneau de contrôle
 	ID_RECT,
-	ID_OVAL
+	ID_OVAL,
+	ID_MOUSELEFTUP,
+	ID_MOUSELEFTDOWN
 } ;
 
 
@@ -109,6 +111,7 @@ class MyFrame : public wxFrame
         MyFrame (const wxString& title, const wxPoint& pos, const wxSize& size) ;
         MyControlPanel* GetControlPanel() {return m_controlPanel ;} ;
         MyDrawingPanel* GetDrawingPanel() {return m_drawingPanel ;} ;
+		Controler * GetControler() {return m_controler ;} ;
         void RefreshDrawing(){m_drawingPanel->Refresh() ;} ;
 		void SetControler(Controler * controler) ;
 

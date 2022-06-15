@@ -66,19 +66,15 @@ void MyControlPanel::OnCheckBox(wxCommandEvent &event)
 //------------------------------------------------------------------------
 void MyControlPanel::OnButtonRectangle(wxCommandEvent &event)
 {
-	/*
-	MyFrame* frame = (MyFrame*) GetParent() ;
-	MyDrawingPanel* drawingPanel = (MyDrawingPanel *)frame->GetDrawingPanel() ;
-	wxRect rectangle ;
-	drawingPanel->SetOneRect(rectangle) ;
-	*/
-	m_selectedForm = ID_RECT ;
+	m_selectedForm = ID_RECT ;  // voir si c'est à garder
+	m_parentFrame->GetControler()->SetFormId(ID_RECT) ;
 }
 
 //------------------------------------------------------------------------
 void MyControlPanel::OnButtonOval(wxCommandEvent &event)
 {
 	m_selectedForm = ID_OVAL ;
+	m_parentFrame->GetControler()->SetFormId(ID_OVAL) ;
 }
 
 
@@ -112,6 +108,9 @@ void MyDrawingPanel::OnMouseLeftDown(wxMouseEvent &event)
 	//m_oneRect = new wxRect() ;
 	m_oneRect.SetX(event.m_x) ;
  	m_oneRect.SetY(event.m_y) ;
+
+	m_parentFrame->GetControler()->FormCreation(event.m_x, event.m_y) ;
+	m_parentFrame->GetControler()->SetMouseId(ID_MOUSELEFTDOWN) ;
 }
 
 //------------------------------------------------------------------------
@@ -129,6 +128,9 @@ void MyDrawingPanel::OnMouseMove(wxMouseEvent &event)
 				wxPoint point (event.m_x, event.m_y) ;
 				m_oneRect.SetBottomRight(point) ;
 				Refresh() ;	// send an event that calls the OnPaint method
+
+				m_parentFrame->GetControler()->FormModification(event.m_x, event.m_y) ;
+
 			}
 	// 		break ;
 	// 	case ID_OVAL :
@@ -141,6 +143,8 @@ void MyDrawingPanel::OnMouseLeftUp(wxMouseEvent &event)
 	int selectedForm = (m_parentFrame->GetControlPanel())->GetSelectedForm() ;
   	m_Rect.push_back(m_oneRect) ;
 	m_Forme.push_back(selectedForm) ;
+
+	m_parentFrame->GetControler()->SetMouseId(ID_MOUSELEFTUP) ;
 }
 
 //------------------------------------------------------------------------
