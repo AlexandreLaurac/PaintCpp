@@ -28,7 +28,7 @@ public:
 	// Fonctions utilitaires
 	virtual void move(int , int) = 0;
     virtual void draw(wxPaintDC& dc) = 0;
-    //virtual std::string saveSVG() = 0;
+    virtual std::string toSVG() = 0;
 
 /*
 	virtual void zoom(int ) {};

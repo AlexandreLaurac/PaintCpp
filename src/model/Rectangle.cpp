@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <cmath>
+#include <string>
 
 #include "Rectangle.h"
 
@@ -69,11 +70,13 @@ void Rectangle::draw(wxPaintDC& dc){
 	dc.DrawRectangle(wxPoint(topLeftCorner.x, topLeftCorner.y), wxSize(width,height)) ;
 }
 
-
-/*
-string Rectangle::saveSVG(){
-
+string Rectangle::toSVG(){
+	string xStr = to_string(topLeftCorner.x);
+	string yStr = to_string(topLeftCorner.y);
+	string wStr = to_string(width);
+	string hStr = to_string(height);
+	return "<rect x='"+xStr+"' y='"+yStr+"' width='"+wStr+"' height='"+hStr+"'/>";	
 }
-*/
+
 
 
