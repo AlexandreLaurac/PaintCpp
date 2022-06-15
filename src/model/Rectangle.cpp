@@ -86,7 +86,12 @@ string Rectangle::toSVG(){
 	string outline = colorOutline;
 	string fill = colorFill;
 
-	return "<rect x='"+xStr+"' y='"+yStr+"' width='"+wStr+"' height='"+hStr+"' stroke='"+outline+"' fill='"+colorFill+"'/>";	
+
+	if (fill.compare("TransparentColour") == 0){
+		fill = "transparent";
+	}
+
+	return "<rect x=\""+xStr+"\" y=\""+yStr+"\" width=\""+wStr+"\" height=\""+hStr+"\" stroke=\""+outline+"\" fill=\""+fill+"\"/>";	
 }
 
 
