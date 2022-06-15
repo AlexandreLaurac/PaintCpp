@@ -5,7 +5,7 @@ using namespace std;
 
 Forme::Forme(){}
 
-Forme::Forme(const string label) {
+Forme::Forme(const string& label) {
     this->label = label;
 }
 
@@ -23,10 +23,10 @@ Forme& Forme::operator=(const Forme& forme) {
     return *(this);
 }
 
-void Forme::setLabel(const std::string label) {
+void Forme::setLabel(const string& label) {
 	this->label = label;
 }
 
-std::string Forme::getLabel() const {
+string Forme::getLabel() const {
     return label;
 }

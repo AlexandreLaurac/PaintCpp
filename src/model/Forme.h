@@ -7,7 +7,7 @@
 class Forme {
 public:
     Forme();
-    Forme(const std::string label);    // Avec une string
+    Forme(const std::string& label);    // Avec une string
     Forme(const Forme& forme);          // Construction par recopie
     virtual ~Forme();
 
@@ -15,14 +15,14 @@ public:
     Forme& operator=(const Forme& forme);
 
     // Accesseur
-    void setLabel(const std::string str);
+    void setLabel(const std::string& str);
     std::string getLabel() const;
 
     virtual float surface() const { return 0.0f; }
     virtual float perimeter() const { return 0.0f; }
 
 	// Fonctions utilitaires
-	virtual void move(int , int) {};
+	virtual void move(int , int) = 0;
 
 	virtual void zoom(int ) {};
 	virtual void rotation(int ) {};

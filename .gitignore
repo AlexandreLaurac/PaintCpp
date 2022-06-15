@@ -34,5 +34,6 @@ src/model/test/main.o
 src/model/test/Makefile.bak
 src/model/test/Point.o
 src/model/test/Rectangle.o
+src/model/test/Dessin.o
 src/skeletonORIG.cpp
 CMakeFiles/skeleton.dir/src/View/view.cpp.o

@@ -7,12 +7,21 @@
 using namespace std;
 
 
-Rectangle::Rectangle(int x, int y, int w, int h, const std::string label) : Forme(label) {
+Rectangle::Rectangle(const int x, const int y, const int w, const int h, const string& label) : Forme(label) {
 	topLeftCorner.x = x;
 	topLeftCorner.y = y;
 	width = w;
 	height = h;
 }
+
+
+Rectangle::Rectangle(const Rectangle& rectangle) : Forme(rectangle.label){
+    topLeftCorner.x = rectangle.getCorner().x;
+	topLeftCorner.y = rectangle.getCorner().y;
+	width = rectangle.getWidth();
+	height = rectangle.getHeight();
+}
+
 
 
 void Rectangle::setWidth(int w) {

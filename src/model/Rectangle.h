@@ -1,8 +1,6 @@
 #ifndef __RECTANGLE_H__
 #define __RECTANGLE_H__
 
-#include <string>
-
 #include "Forme.h"
 #include "Point.h"
 
@@ -10,9 +8,15 @@
 class Rectangle : public Forme
 //-------------------------------------------
 {
+    
 public:          
-    Rectangle();                           
-    Rectangle(int x, int y, int w, int h, const std::string label); // constructeur
+    Rectangle(){};                           
+    Rectangle(const int x, const int y, const int w, const int h, const std::string& label); // constructeur
+    Rectangle(const Rectangle& rectangle);
+
+    Rectangle& operator=(const Rectangle& rectangleToCopy);
+
+    virtual ~Rectangle(){};
 
     // Setters
     void setWidth(int w);
