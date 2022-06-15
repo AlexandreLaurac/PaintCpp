@@ -21,9 +21,10 @@ public:
     std::vector<Forme*> getList() const;
 
     // Additional methods
+    void deleteList();
     void displayList() const;
-    void saveSVG(std::string path); // Encode a vector<Forme> to an SVG file
-    std::vector<Forme*> openSVG(std::string path); // Decode an SVG file to a vector<Forme> 
+    void saveSVG(std::string path); // Encode a vector<Forme*> to an SVG file
+    std::vector<Forme*> openSVG(std::string path); // Decode an SVG file to a vector<Forme*> 
 
 
 private: 
