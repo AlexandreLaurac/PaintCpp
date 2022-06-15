@@ -1,23 +1,25 @@
-#ifndef __RECTANGLE_H__
-#define __RECTANGLE_H__
+#ifndef __OVAL_H__
+#define __OVAL_H__
 
 #include "Forme.h"
 #include "Point.h"
 
+#include <cmath>
+
 //-------------------------------------------
-class Rectangle : public Forme
+class Oval : public Forme
 //-------------------------------------------
 {
     
 public:          
-    Rectangle(){};                           
-    Rectangle(const int x, const int y, const int w, const int h, const std::string& label, const std::string& colorOutline, const std::string& colorFill); // constructeur avec couleurs perso
-    Rectangle(const int x, const int y, const int w, const int h, const std::string& label); // constructeur avec couleurs par défauts
-    Rectangle(const Rectangle& rectangle);
+    Oval(){};                           
+    Oval(const int x, const int y, const int w, const int h, const std::string& label, const std::string& colorOutline, const std::string& colorFill); // constructeur avec couleurs perso
+    Oval(const int x, const int y, const int w, const int h, const std::string& label); // constructeur avec couleurs par défauts
+    Oval(const Oval& oval);
 
-    Rectangle& operator=(const Rectangle& rectangleToCopy);
+    Oval& operator=(const Oval& ovalToCopy);
 
-    virtual ~Rectangle(){};
+    virtual ~Oval(){};
 
     // Setters
     void setWidth(int w);

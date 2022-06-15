@@ -54,3 +54,9 @@ void Dessin::displayList() const {
 	}
 	cout << "}";
 }
+
+void Dessin::deleteList() {
+	for (Forme* forme : listFormes){
+		deleteForme(forme);
+	}
+}

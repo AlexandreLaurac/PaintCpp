@@ -7,6 +7,7 @@ using namespace std;
 #include "Forme.h"
 #include "Rectangle.h"
 #include "Dessin.h"
+#include "Oval.h"
 
 
 int main()
@@ -37,29 +38,51 @@ int main()
 
 
     cout << endl;
-    cout << "******** Test de la classe Rectangle" << endl;
-    
-    Rectangle r1( 0, 0, 100, 200, "r1" );
-    r1.display();
+    cout << "******** Test de la classe Oval" << endl;
+
+    Oval *o1 = new Oval(0,0,10,20, "o1");
+    assert(o1->getcolorOutline().compare("BLACK") == 0); 
+    assert(o1->getcolorFill().compare("TransparentColour") == 0); 
+    o1->display();
     cout << endl;
 
-    Rectangle r2( 0, 8, 10, 2, "r2" );
-    r1.display();
+    assert(o1->toSVG().compare("<ellipse cx='0' cy='0' rx='5' ry='10' stroke='BLACK' fill='TransparentCoulour'/>"));
+
+
+
+    cout << endl;
+    cout << "******** Test de la classe Rectangle" << endl;
+    
+    Rectangle *r1 = new Rectangle( 0, 0, 100, 200, "r1");
+    assert(r1->getcolorOutline().compare("BLACK") == 0);
+    assert(r1->getcolorFill().compare("TransparentColour") == 0);
+    r1->display();
+    cout << endl;
+
+
+    Rectangle *r2 = new Rectangle( 0, 8, 10, 2, "r2", "GREEN", "WHITE");
+    cout << r2->getcolorOutline() << endl;
+    assert(r2->getcolorOutline().compare("GREEN") == 0);
+    assert(r2->getcolorFill().compare("WHITE") == 0);
+    r2->display();
     cout << endl;
 
     cout << "******** Test des méthodes virtuelles" << endl;
-    assert(r1.surface() == 20000);
-    cout << "Surface r1 -> " << r1.surface() << endl;
+    assert(r1->surface() == 20000);
+    cout << "Surface r1 -> " << r1->surface() << endl;
 
-    assert(r1.perimeter() == 600);
-    cout << "Périmètre r1 -> " << r1.perimeter() << endl;
+    assert(r1->perimeter() == 600);
+    cout << "Périmètre r1 -> " << r1->perimeter() << endl;
 
-    r1.move(10,5);
-    assert(r1.getCorner().x == 10);
-    assert(r1.getCorner().y == 5);
+    r1->move(10,5);
+    assert(r1->getCorner().x == 10);
+    assert(r1->getCorner().y == 5);
     cout << "Move r1 de (10,5) -> ";
-    r1.display();
+    r1->display();
     cout << endl;
+
+    assert(r1->toSVG().compare("<rect x='10' y='5' width='100' height='200' stroke='BLACK' fill='TransparentColour'/>") == 0);
+    cout << r1->toSVG() << endl;
 
     cout << endl;
     cout << "******** Test de la classe Dessin" << endl;
@@ -69,23 +92,29 @@ int main()
     cout << endl;
 
     cout << "******** Test des méthodes d'ajouts de forme" << endl;
-    d1.addForme(&r2);
+    d1.addForme(o1);
     assert(d1.getList().size() == 1);
     d1.displayList();
     cout << endl;
 
-    //Rectangle r3(0,0,1,8,"r3");
     Rectangle *r3 = new Rectangle(0,0,1,8,"r3");
     d1.addForme(r3);
     assert(d1.getList().size() == 2);
     d1.displayList();
     cout << endl;
 
-    cout << "******** Test des méthodes de suppressions de forme" << endl;
+    cout << "******** Test de la méthode de suppression de forme" << endl;
     d1.deleteForme(r3);
     assert(d1.getList().size() == 1);
     d1.displayList();
     cout << endl;
+
+    cout << "******** Test de la méthode de suppression de la liste" << endl;
+    d1.deleteList();
+    assert(d1.getList().size() == 0);
+    d1.displayList();
+    cout << endl;
+
 
 
     
