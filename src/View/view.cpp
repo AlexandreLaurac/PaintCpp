@@ -43,9 +43,6 @@ MyControlPanel::MyControlPanel(wxWindow *parent) : wxPanel(parent)
 //------------------------------------------------------------------------
 void MyControlPanel::OnButton(wxCommandEvent &event)
 {
-//	char* s = GetCString() ;
-//	wxMessageBox(wxString::FromAscii(s)) ; // call a C function located in the sample.cp module
-//	free(s) ;
 	wxMessageBox(wxT("You just pressed the button!")) ;
 }
 
@@ -66,14 +63,12 @@ void MyControlPanel::OnCheckBox(wxCommandEvent &event)
 //------------------------------------------------------------------------
 void MyControlPanel::OnButtonRectangle(wxCommandEvent &event)
 {
-	//m_selectedForm = ID_RECT ;  // voir si c'est à garder
 	m_parentFrame->GetControler()->SetFormId(ID_RECT) ;
 }
 
 //------------------------------------------------------------------------
 void MyControlPanel::OnButtonOval(wxCommandEvent &event)
 {
-	//m_selectedForm = ID_OVAL ;
 	m_parentFrame->GetControler()->SetFormId(ID_OVAL) ;
 }
 
@@ -104,12 +99,6 @@ MyDrawingPanel::MyDrawingPanel(wxWindow *parent) : wxPanel(parent)
 void MyDrawingPanel::OnMouseLeftDown(wxMouseEvent &event)
 // called when the mouse left button is pressed
 {
-	//int selectedForm = (m_parentFrame->GetControlPanel())->GetSelectedForm() ;
-	//m_oneRect = new wxRect() ;
-	/*
-	m_oneRect.SetX(event.m_x) ;
- 	m_oneRect.SetY(event.m_y) ;
-*/
 	m_parentFrame->GetControler()->FormCreation(event.m_x, event.m_y) ;
 	m_parentFrame->GetControler()->SetMouseId(ID_MOUSELEFTDOWN) ;
 }
@@ -118,24 +107,13 @@ void MyDrawingPanel::OnMouseLeftDown(wxMouseEvent &event)
 void MyDrawingPanel::OnMouseMove(wxMouseEvent &event)
 // called when the mouse is moved
 {
-	// if (event.LeftIsDown()) {
-		// wxPoint point (event.m_x, event.m_y) ;
-		// m_oneRect.SetBottomRight(point) ;
-		// Refresh() ;
-		m_parentFrame->GetControler()->FormModification(event.m_x, event.m_y) ;
-		Refresh() ;	// send an event that calls the OnPaint method
-
-	// }
+	m_parentFrame->GetControler()->FormModification(event.m_x, event.m_y) ;
+	Refresh() ;	// send an event that calls the OnPaint method
 }
 
 //------------------------------------------------------------------------
 void MyDrawingPanel::OnMouseLeftUp(wxMouseEvent &event)
 {
-	/*
-	int selectedForm = (m_parentFrame->GetControlPanel())->GetSelectedForm() ;
-  	m_Rect.push_back(m_oneRect) ;
-	m_Forme.push_back(selectedForm) ;
-*/
 	m_parentFrame->GetControler()->SetMouseId(ID_MOUSELEFTUP) ;
 }
 
@@ -145,53 +123,8 @@ void MyDrawingPanel::OnPaint(wxPaintEvent &event)
 // when the panel is resized
 // You have to call OnPaint with Refresh() when you need to update the panel content
 {
-	// read the control values
-	//MyFrame* frame =  (MyFrame*)GetParent() ;
-	//int radius = frame->GetControlPanel()->GetSliderValue() ;
-	//bool check = frame->GetControlPanel()->GetCheckBoxValue() ;
-
-	//int selectedForm = (m_parentFrame->GetControlPanel())->GetSelectedForm() ;
-
 	wxPaintDC dc(this);
-
 	m_parentFrame->GetControler()->GetDessin().drawAllFormes(dc) ;
-
-/*
-	// On repaint toutes les figures...
-	//size_t nbFormes = m_Rect.size() ;
-	int i ;
-	size_t taille = m_Rect.size() ;
-	for (i=0 ; i<taille ; i++)
-	{
-		wxRect rect = m_Rect.at(i) ;
-		int typeForme = m_Forme.at(i) ;
-		if (typeForme == ID_RECT) {
-			dc.DrawRectangle(wxPoint(rect.GetX(), rect.GetY()), wxSize(rect.GetWidth(),rect.GetHeight())) ;
-		//std::cout << 
-		}
-		else if (typeForme == ID_OVAL)
-		{
-			dc.DrawEllipse(wxPoint(rect.GetX(), rect.GetY()), wxSize(rect.GetWidth(),rect.GetHeight())) ;
-		}
-	}
-
-	if (selectedForm == ID_RECT)
-	{
-		dc.DrawRectangle(wxPoint(m_oneRect.GetX(), m_oneRect.GetY()), wxSize(m_oneRect.GetWidth(),m_oneRect.GetHeight())) ;
-	} else if (selectedForm == ID_OVAL) {
-		dc.DrawEllipse(wxPoint(m_oneRect.GetX(), m_oneRect.GetY()), wxSize(m_oneRect.GetWidth(),m_oneRect.GetHeight())) ;
-	}
-	
-*/
-
-	/*
-	if (check)
-	{
-		wxString coordinates ;
-		coordinates.sprintf(wxT("(%d,%d)"), m_mousePoint.x, m_mousePoint.y) ;
-		dc.DrawText(coordinates, wxPoint(m_mousePoint.x, m_mousePoint.y+20)) ;
-	}
-*/
 }
 
 //------------------------------------------------------------------------
