@@ -61,9 +61,9 @@ void Dessin::deleteList() {
 	}
 }
 
-void Dessin::drawAllFormes() const {
+void Dessin::drawAllFormes(wxPaintDC& dc) const {
 	for (Forme* forme : listFormes){
-		forme -> draw();
+		forme -> draw(wxPaintDC& dc);
 	}
 }
 

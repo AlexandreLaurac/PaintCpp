@@ -23,7 +23,7 @@ public:
     // Additional methods
     void deleteList();
     void displayList() const;
-    void drawAllFormes() const;
+    void drawAllFormes(wxPaintDC& dc) const;
     void saveSVG(const char* path); // Encode a vector<Forme*> to an SVG file
     std::vector<Forme*> openSVG(const char* path); // Decode an SVG file to a vector<Forme*> 
 
