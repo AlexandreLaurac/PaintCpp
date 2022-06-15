@@ -61,6 +61,9 @@ int main()
     r1->display();
     cout << endl;
 
+    assert(r1->toSVG().compare("<rect x='10' y='5' width='100' height='200'/>") == 0);
+    cout << r1->toSVG() << endl;
+
     cout << endl;
     cout << "******** Test de la classe Dessin" << endl;
     Dessin d1;
