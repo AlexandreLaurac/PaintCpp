@@ -7,6 +7,7 @@ using namespace std;
 #include "Forme.h"
 #include "Rectangle.h"
 #include "Dessin.h"
+#include "Oval.h"
 
 
 int main()
@@ -34,6 +35,19 @@ int main()
     cout << "Move de p2 de (2,3) -> ";
     p2.display();
     cout << endl;
+
+
+    cout << endl;
+    cout << "******** Test de la classe Oval" << endl;
+
+    Oval *o1 = new Oval(0,0,10,20, "o1");
+    assert(o1->getcolorOutline().compare("BLACK") == 0); 
+    assert(o1->getcolorFill().compare("TransparentColour") == 0); 
+    o1->display();
+    cout << endl;
+
+    assert(o1->toSVG().compare("<ellipse cx='0' cy='0' rx='5' ry='10' stroke='BLACK' fill='TransparentCoulour'/>"));
+
 
 
     cout << endl;
@@ -78,7 +92,7 @@ int main()
     cout << endl;
 
     cout << "******** Test des méthodes d'ajouts de forme" << endl;
-    d1.addForme(r2);
+    d1.addForme(o1);
     assert(d1.getList().size() == 1);
     d1.displayList();
     cout << endl;
