@@ -46,7 +46,7 @@ int main()
     o1->display();
     cout << endl;
 
-    assert(o1->toSVG().compare("<ellipse cx='0' cy='0' rx='5' ry='10' stroke='BLACK' fill='TransparentCoulour'/>"));
+    assert(o1->toSVG().compare("<ellipse cx=\"0\" cy=\"0\" rx=\"5\" ry=\"10\" stroke=\"BLACK\" fill=\"transparent\"/>"));
 
 
 
@@ -81,7 +81,7 @@ int main()
     r1->display();
     cout << endl;
 
-    assert(r1->toSVG().compare("<rect x='10' y='5' width='100' height='200' stroke='BLACK' fill='TransparentColour'/>") == 0);
+    assert(r1->toSVG().compare("<rect x=\"10\" y=\"5\" width=\"100\" height=\"200\" stroke=\"BLACK\" fill=\"transparent\"/>") == 0);
     cout << r1->toSVG() << endl;
 
     cout << endl;
@@ -91,7 +91,7 @@ int main()
     d1.displayList();
     cout << endl;
 
-    cout << "******** Test des méthodes d'ajouts de forme" << endl;
+    cout << "******** Test des méthodes d\"ajouts de forme" << endl;
     d1.addForme(o1);
     assert(d1.getList().size() == 1);
     d1.displayList();
@@ -114,6 +114,18 @@ int main()
     assert(d1.getList().size() == 0);
     d1.displayList();
     cout << endl;
+
+
+    cout << "******** Test de l\"exportation de dessin en svg" << endl;
+    Dessin d2;
+    o1 = new Oval(0,0,10,10,"oval");
+    d2.addForme(o1);
+    d2.addForme(r1);
+    d2.addForme(r2);
+    d2.displayList();
+    cout << endl;
+
+    d2.saveSVG("test.svg");
 
 
 
