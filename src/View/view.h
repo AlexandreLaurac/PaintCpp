@@ -35,8 +35,10 @@ enum
 	ID_CHECKBOX1,
 	ID_BUTTON2,    // Bouton rectangle du panneau de contrôle
 	ID_BUTTON3,    // Bouton ovale du panneau de contrôle
+	ID_BUTTON4,    // Bouton ligne du panneau de contrôle
 	ID_RECT,
 	ID_OVAL,
+	ID_LINE,
 	ID_MOUSELEFTUP,
 	ID_MOUSELEFTDOWN
 } ;
@@ -54,7 +56,6 @@ class MyControlPanel : public wxPanel
 		MyControlPanel (wxWindow * parent) ;
 		int GetSliderValue() { return m_slider->GetValue() ; } ;
 		bool GetCheckBoxValue() { return m_checkBox->GetValue() ; } ;
-		int GetSelectedForm() { return m_selectedForm ; } ;
 
 	private :
 		void OnButton (wxCommandEvent &event) ;
@@ -62,13 +63,15 @@ class MyControlPanel : public wxPanel
 		void OnCheckBox (wxCommandEvent &event) ;
 		void OnButtonRectangle (wxCommandEvent &event) ;
 		void OnButtonOval (wxCommandEvent &event) ;
+		void OnButtonLine (wxCommandEvent &event) ;
+
 		MyFrame * m_parentFrame ;
 		wxButton * m_button ;
 		wxSlider * m_slider ;
 		wxCheckBox * m_checkBox ;
 		wxButton * m_buttonRectangle ;		
 		wxButton * m_buttonOval ;
-		int m_selectedForm ;
+		wxButton * m_buttonLine ;
 } ;
 
 
@@ -83,8 +86,6 @@ class MyDrawingPanel : public wxPanel
 		MyDrawingPanel (wxWindow * parent) ;
 		void OpenFile (wxString fileName) ;
 		void SaveFile (wxString fileName) ;
-		wxRect GetOneRect () ;
-		void SetOneRect (const wxRect & rectToCopy) ;
 
 	private :
 		void OnMouseMove (wxMouseEvent &event) ;
@@ -92,13 +93,7 @@ class MyDrawingPanel : public wxPanel
 		void OnMouseLeftUp (wxMouseEvent &event) ;
 		void OnPaint(wxPaintEvent &event) ;
 		MyFrame * m_parentFrame ;
-		wxPoint m_mousePoint ;
-		wxPoint m_onePoint ;
-		wxRect m_oneRect ;
-		std::vector <wxRect> m_Rect ;
-		std::vector <int> m_Forme ;
 } ;
-
 
 
 //************************************************************************
@@ -122,7 +117,6 @@ class MyFrame : public wxFrame
         void OnSaveFile(wxCommandEvent & WXUNUSED(event)) ;
         void OnClose(wxCloseEvent& event) ;
         void OnSize(wxSizeEvent &event) ;
-
         MyControlPanel * m_controlPanel; // the panel with controls
         MyDrawingPanel * m_drawingPanel; // the panel in which we draw
 		Controler * m_controler ;

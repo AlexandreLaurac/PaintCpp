@@ -38,6 +38,10 @@ MyControlPanel::MyControlPanel(wxWindow *parent) : wxPanel(parent)
 	y+= WIDGET_Y_STEP ;
 	m_buttonOval = new wxButton(this, ID_BUTTON3, wxT("Ovale"), wxPoint(10, y)) ;
 	Bind(wxEVT_BUTTON, &MyControlPanel::OnButtonOval, this, ID_BUTTON3) ;
+
+	y+= WIDGET_Y_STEP ;
+	m_buttonLine = new wxButton(this, ID_BUTTON4, wxT("Ligne"), wxPoint(10, y)) ;
+	Bind(wxEVT_BUTTON, &MyControlPanel::OnButtonLine, this, ID_BUTTON4) ;
 }
 
 //------------------------------------------------------------------------
@@ -72,6 +76,12 @@ void MyControlPanel::OnButtonOval(wxCommandEvent &event)
 	m_parentFrame->GetControler()->SetFormId(ID_OVAL) ;
 }
 
+//------------------------------------------------------------------------
+void MyControlPanel::OnButtonLine(wxCommandEvent &event)
+{
+	m_parentFrame->GetControler()->SetFormId(ID_LINE) ;
+}
+
 
 //************************************************************************
 //************************* class MyDrawingPanel *************************
@@ -89,9 +99,6 @@ MyDrawingPanel::MyDrawingPanel(wxWindow *parent) : wxPanel(parent)
 	Bind(wxEVT_LEFT_DOWN, &MyDrawingPanel::OnMouseLeftDown, this);
 	Bind(wxEVT_PAINT, &MyDrawingPanel::OnPaint, this) ;
 	Bind(wxEVT_LEFT_UP, &MyDrawingPanel::OnMouseLeftUp, this);
-	m_onePoint.x = (w-WIDGET_PANEL_WIDTH)/2 ;
-	m_onePoint.y = h/2 ;
-	m_mousePoint = m_onePoint ;
 	m_parentFrame = (MyFrame *) parent ;
 }
 
@@ -99,8 +106,8 @@ MyDrawingPanel::MyDrawingPanel(wxWindow *parent) : wxPanel(parent)
 void MyDrawingPanel::OnMouseLeftDown(wxMouseEvent &event)
 // called when the mouse left button is pressed
 {
-	m_parentFrame->GetControler()->FormCreation(event.m_x, event.m_y) ;
 	m_parentFrame->GetControler()->SetMouseId(ID_MOUSELEFTDOWN) ;
+	m_parentFrame->GetControler()->FormCreation(event.m_x, event.m_y) ;
 }
 
 //------------------------------------------------------------------------

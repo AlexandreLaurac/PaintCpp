@@ -44,11 +44,11 @@ void Ligne::setPointEnd(const int x, const int y){
 	pointEnd.y = y;
 }
 
-Point& Ligne::getPointStart() const {
+const Point& Ligne::getPointStart() const {
 	return pointStart;
 }
 
-Point& Ligne::getPointEnd() const {
+const Point& Ligne::getPointEnd() const {
 	return pointEnd;
 }
 
@@ -74,7 +74,7 @@ void Ligne::move(int offsetX, int offsetY) {
 
 
 void Ligne::draw(wxPaintDC& dc){
-	dc.DrawLigne(pointStart.x, pointStart.y, pointEnd.x, pointEnd.y) ;
+	dc.DrawLine(pointStart.x, pointStart.y, pointEnd.x, pointEnd.y) ;
 }
 
 string Ligne::toSVG(){
@@ -85,7 +85,7 @@ string Ligne::toSVG(){
 	string outline = colorOutline;
 
 
-	return "<rect x1=\""+x1+"\" y1=\""+y1+"\" x2=\""+x2+"\" y2=\""+y2+"\" stroke=\""+outline+"\" />";	
+	return "<line x1=\""+x1+"\" y1=\""+y1+"\" x2=\""+x2+"\" y2=\""+y2+"\" stroke=\""+outline+"\" />";	
 }
 
 
