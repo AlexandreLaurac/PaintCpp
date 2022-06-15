@@ -30,10 +30,8 @@ public:
     int getWidth() const;
     int getHeight() const;
 
-    // Méthode additionnel
-	void display() const;
-
 	// Méthodes virtuelles
+	virtual void display() const;
     virtual float surface() const override;
     virtual float perimeter() const override;
 	virtual void move(int offsetX, int offsetY);

@@ -13,7 +13,7 @@ void Dessin::addForme(Forme* formeToAdd){
 		listFormes.push_back(formeToAdd);
 	} catch (bad_alloc& ex) {
 		cerr << "Impossible d'allouer au vector" << endl;
-		throw; //
+		throw;
 	}
 }
 
@@ -26,7 +26,7 @@ void Dessin::deleteForme(Forme* formeToDelete){
 		if (formeToDelete == listFormes.at(i)){
 			listFormes.erase(listFormes.begin()+i);
 			findForme = true;
-			
+
 			delete formeToDelete;
 		}
 		i++;
@@ -59,4 +59,31 @@ void Dessin::deleteList() {
 	for (Forme* forme : listFormes){
 		deleteForme(forme);
 	}
+}
+
+void Dessin::drawAllFormes(){
+	for (Forme* forme : listFormes){
+		forme -> draw();
+	}
+}
+
+void Dessin::saveSVG(const char* path){
+	try{
+		FILE* f = fopen(path, "w") ;
+
+		fprintf(f,"<svg xmlns=\"http://www.w3.org/2000/svg\">\n");
+		for (Forme* forme : listFormes){
+			fprintf(f,"\t");
+			fprintf(f,forme->toSVG().c_str());
+			fprintf(f,"\n");
+		}
+		fprintf(f,"</svg>");
+
+		fclose(f);
+	} catch(const exception& e){
+		cout << "Erreur dans l'ouverture du fichier" << endl;
+		cout << e.what() << endl;
+		throw;
+	}
+
 }

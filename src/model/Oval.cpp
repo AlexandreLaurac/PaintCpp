@@ -86,7 +86,11 @@ string Oval::toSVG(){
 	string outline = colorOutline;
 	string fill = colorFill;
 
-	return "<ellipse cx='"+cx+"' cy='"+cy+"' rx='"+rx+"' ry='"+ry+"' stroke='"+outline+"' fill='"+colorFill+"'/>";	
+	if (fill.compare("TransparentColour") == 0){
+		fill = "transparent";
+	}
+
+	return "<ellipse cx=\""+cx+"\" cy=\""+cy+"\" rx=\""+rx+"\" ry=\""+ry+"\" stroke=\""+outline+"\" fill=\""+fill+"\"/>";	
 }
 
 

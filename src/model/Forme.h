@@ -33,6 +33,7 @@ public:
     virtual float perimeter() const { return 0.0f; }
 
 	// Fonctions utilitaires
+    virtual void display() const = 0;
 	virtual void move(int , int) = 0;
     virtual void draw(wxPaintDC& dc) = 0;
     virtual std::string toSVG() = 0;
