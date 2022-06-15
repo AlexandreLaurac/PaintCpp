@@ -40,11 +40,17 @@ int main()
     cout << "******** Test de la classe Rectangle" << endl;
     
     Rectangle *r1 = new Rectangle( 0, 0, 100, 200, "r1");
+    assert(r1->getcolorOutline().compare("BLACK") == 0);
+    assert(r1->getcolorFill().compare("TransparentColour") == 0);
     r1->display();
     cout << endl;
 
-    Rectangle *r2 = new Rectangle( 0, 8, 10, 2, "r2");
-    r1->display();
+
+    Rectangle *r2 = new Rectangle( 0, 8, 10, 2, "r2", "GREEN", "WHITE");
+    cout << r2->getcolorOutline() << endl;
+    assert(r2->getcolorOutline().compare("GREEN") == 0);
+    assert(r2->getcolorFill().compare("WHITE") == 0);
+    r2->display();
     cout << endl;
 
     cout << "******** Test des méthodes virtuelles" << endl;
@@ -61,7 +67,7 @@ int main()
     r1->display();
     cout << endl;
 
-    assert(r1->toSVG().compare("<rect x='10' y='5' width='100' height='200'/>") == 0);
+    assert(r1->toSVG().compare("<rect x='10' y='5' width='100' height='200' stroke='BLACK' fill='TransparentColour'/>") == 0);
     cout << r1->toSVG() << endl;
 
     cout << endl;
