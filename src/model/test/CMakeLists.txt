@@ -10,7 +10,7 @@ find_package(wxWidgets REQUIRED COMPONENTS net core base)
 include(${wxWidgets_USE_FILE})
 
 # add the executable
-add_executable(test ./main.cpp  ../Dessin.cpp ../Forme.cpp ../Point.cpp ../Rectangle.cpp)
+add_executable(test ./main.cpp  ../Dessin.cpp ../Forme.cpp ../Point.cpp ../Rectangle.cpp ../Oval.cpp)
 target_link_libraries(test ${wxWidgets_LIBRARIES})
 
 include_directories(..)
