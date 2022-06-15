@@ -1,8 +1,12 @@
 #ifndef __FORME_H__
 #define __FORME_H__
 
-#include <string>
-#include <iostream>
+#include <wx/wxprec.h>
+
+#ifndef WX_PRECOMP
+    #include <wx/wx.h>
+#endif
+
 
 class Forme {
 public:
@@ -23,9 +27,13 @@ public:
 
 	// Fonctions utilitaires
 	virtual void move(int , int) = 0;
+    virtual void draw(wxPaintDC& dc) = 0;
+    //virtual std::string saveSVG() = 0;
 
+/*
 	virtual void zoom(int ) {};
 	virtual void rotation(int ) {};
+*/
 
 
 protected: 
