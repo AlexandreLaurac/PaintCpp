@@ -11,8 +11,8 @@ class Rectangle : public Forme
     
 public:          
     Rectangle(){};                           
-    Rectangle(const int x, const int y, const int w, const int h, const std::string& label, const std::string& colorOutline, const std::string& colorFill); // constructeur avec couleurs
-    Rectangle(const int x, const int y, const int w, const int h, const std::string& label); // constructeur sans couleurs
+    Rectangle(const int x, const int y, const int w, const int h, const std::string& label, const std::string& colorOutline, const std::string& colorFill); // constructeur avec couleurs perso
+    Rectangle(const int x, const int y, const int w, const int h, const std::string& label); // constructeur avec couleurs par défauts
     Rectangle(const Rectangle& rectangle);
 
     Rectangle& operator=(const Rectangle& rectangleToCopy);
@@ -46,4 +46,4 @@ private:
 
 };
 
-#endif // __RECTANGLE_H__
+#endif
