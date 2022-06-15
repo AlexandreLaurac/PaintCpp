@@ -34,6 +34,8 @@ public:
     virtual float surface() const override;
     virtual float perimeter() const override;
 	virtual void move(int offsetX, int offsetY);
+    virtual void draw(wxPaintDC& dc);
+    //virtual std::string saveSVG();
 
 
 private: 
