@@ -23,8 +23,8 @@ public:
     // Additional methods
     void deleteList();
     void displayList() const;
-    void saveSVG(std::string path); // Encode a vector<Forme*> to an SVG file
-    std::vector<Forme*> openSVG(std::string path); // Decode an SVG file to a vector<Forme*> 
+    void saveSVG(const char* path); // Encode a vector<Forme*> to an SVG file
+    std::vector<Forme*> openSVG(const char* path); // Decode an SVG file to a vector<Forme*> 
 
 
 private: 
