@@ -28,9 +28,14 @@ enum
 	ID_BUTTON1,
 	ID_SLIDER1,
 	ID_CHECKBOX1,
-	ID_BUTTON2
+	ID_BUTTON2,    // Bouton rectangle du panneau de contrôle
+	ID_BUTTON3,    // Bouton ovale du panneau de contrôle
+	ID_RECT,
+	ID_OVAL
 } ;
 
+
+class MyFrame ;
 
 //************************************************************************
 //************************* class MyControlPanel *************************
@@ -42,16 +47,21 @@ class MyControlPanel : public wxPanel
 		MyControlPanel (wxWindow * parent) ;
 		int GetSliderValue() { return m_slider->GetValue() ; } ;
 		bool GetCheckBoxValue() { return m_checkBox->GetValue() ; } ;
+		int GetSelectedForm() { return m_selectedForm ; } ;
 
 	private :
 		void OnButton (wxCommandEvent &event) ;
 		void OnSlider (wxScrollEvent &event) ;
 		void OnCheckBox (wxCommandEvent &event) ;
-		void OnButtonRectangle  (wxCommandEvent &event) ;
+		void OnButtonRectangle (wxCommandEvent &event) ;
+		void OnButtonOval (wxCommandEvent &event) ;
+		MyFrame * m_parentFrame ;
 		wxButton * m_button ;
 		wxSlider * m_slider ;
 		wxCheckBox * m_checkBox ;
-		wxButton * m_buttonRectangle ;
+		wxButton * m_buttonRectangle ;		
+		wxButton * m_buttonOval ;
+		int m_selectedForm ;
 } ;
 
 
@@ -74,10 +84,12 @@ class MyDrawingPanel : public wxPanel
 		void OnMouseLeftDown (wxMouseEvent &event) ;
 		void OnMouseLeftUp (wxMouseEvent &event) ;
 		void OnPaint(wxPaintEvent &event) ;
+		MyFrame * m_parentFrame ;
 		wxPoint m_mousePoint ;
 		wxPoint m_onePoint ;
 		wxRect m_oneRect ;
 		std::vector <wxRect> m_Rect ;
+		std::vector <int> m_Forme ;
 } ;
 
 

@@ -13,6 +13,8 @@ MyControlPanel::MyControlPanel(wxWindow *parent) : wxPanel(parent)
 	SetSize(wxRect(wxPoint(0,0), wxPoint(WIDGET_PANEL_WIDTH, h))) ;
 	SetBackgroundColour(*wxLIGHT_GREY) ;
 
+	m_parentFrame = (MyFrame *) parent ;
+
 	y = WIDGET_Y0 ;
 	m_button = new wxButton(this, ID_BUTTON1, wxT("Click me"), wxPoint(10, y)) ;
 	Bind(wxEVT_BUTTON, &MyControlPanel::OnButton, this, ID_BUTTON1) ;
@@ -31,6 +33,10 @@ MyControlPanel::MyControlPanel(wxWindow *parent) : wxPanel(parent)
 	y+= WIDGET_Y_STEP ;
 	m_buttonRectangle = new wxButton(this, ID_BUTTON2, wxT("Rectangle"), wxPoint(10, y)) ;
 	Bind(wxEVT_BUTTON, &MyControlPanel::OnButtonRectangle, this, ID_BUTTON2) ;
+
+	y+= WIDGET_Y_STEP ;
+	m_buttonOval = new wxButton(this, ID_BUTTON3, wxT("Ovale"), wxPoint(10, y)) ;
+	Bind(wxEVT_BUTTON, &MyControlPanel::OnButtonOval, this, ID_BUTTON3) ;
 }
 
 //------------------------------------------------------------------------
@@ -65,6 +71,13 @@ void MyControlPanel::OnButtonRectangle(wxCommandEvent &event)
 	wxRect rectangle ;
 	drawingPanel->SetOneRect(rectangle) ;
 	*/
+	m_selectedForm = ID_RECT ;
+}
+
+//------------------------------------------------------------------------
+void MyControlPanel::OnButtonOval(wxCommandEvent &event)
+{
+	m_selectedForm = ID_OVAL ;
 }
 
 
@@ -87,12 +100,14 @@ MyDrawingPanel::MyDrawingPanel(wxWindow *parent) : wxPanel(parent)
 	m_onePoint.x = (w-WIDGET_PANEL_WIDTH)/2 ;
 	m_onePoint.y = h/2 ;
 	m_mousePoint = m_onePoint ;
+	m_parentFrame = (MyFrame *) parent ;
 }
 
 //------------------------------------------------------------------------
 void MyDrawingPanel::OnMouseLeftDown(wxMouseEvent &event)
 // called when the mouse left button is pressed
 {
+	//int selectedForm = (m_parentFrame->GetControlPanel())->GetSelectedForm() ;
 	//m_oneRect = new wxRect() ;
 	m_oneRect.SetX(event.m_x) ;
  	m_oneRect.SetY(event.m_y) ;
@@ -102,20 +117,29 @@ void MyDrawingPanel::OnMouseLeftDown(wxMouseEvent &event)
 void MyDrawingPanel::OnMouseMove(wxMouseEvent &event)
 // called when the mouse is moved
 {
+	//int selectedForm = (m_parentFrame->GetControlPanel())->GetSelectedForm() ;
 
-	if (event.LeftIsDown()) {
-		//m_mousePoint.x = event.m_x ;
-		//m_mousePoint.y = event.m_y ;
-		wxPoint point (event.m_x, event.m_y) ;
-		m_oneRect.SetBottomRight(point) ;
-		Refresh() ;	// send an event that calls the OnPaint method
-	}
+	// switch (selectedForm)
+	// {
+	// 	case ID_RECT :
+			if (event.LeftIsDown()) {
+				//m_mousePoint.x = event.m_x ;
+				//m_mousePoint.y = event.m_y ;
+				wxPoint point (event.m_x, event.m_y) ;
+				m_oneRect.SetBottomRight(point) ;
+				Refresh() ;	// send an event that calls the OnPaint method
+			}
+	// 		break ;
+	// 	case ID_OVAL :
+	// }
 }
 
 //------------------------------------------------------------------------
 void MyDrawingPanel::OnMouseLeftUp(wxMouseEvent &event)
 {
+	int selectedForm = (m_parentFrame->GetControlPanel())->GetSelectedForm() ;
   	m_Rect.push_back(m_oneRect) ;
+	m_Forme.push_back(selectedForm) ;
 }
 
 //------------------------------------------------------------------------
@@ -125,25 +149,39 @@ void MyDrawingPanel::OnPaint(wxPaintEvent &event)
 // You have to call OnPaint with Refresh() when you need to update the panel content
 {
 	// read the control values
-	MyFrame* frame =  (MyFrame*)GetParent() ;
+	//MyFrame* frame =  (MyFrame*)GetParent() ;
 	//int radius = frame->GetControlPanel()->GetSliderValue() ;
 	//bool check = frame->GetControlPanel()->GetCheckBoxValue() ;
+
+	int selectedForm = (m_parentFrame->GetControlPanel())->GetSelectedForm() ;
 
 	// then paint
 	wxPaintDC dc(this);
 
 	// On repaint toutes les figures...
 	//size_t nbFormes = m_Rect.size() ;
-	for (wxRect rect : m_Rect)
+	int i ;
+	size_t taille = m_Rect.size() ;
+	for (i=0 ; i<taille ; i++)
 	{
-		dc.DrawRectangle(wxPoint(rect.GetX(), rect.GetY()), wxSize(rect.GetWidth(),rect.GetHeight())) ;
+		wxRect rect = m_Rect.at(i) ;
+		int typeForme = m_Forme.at(i) ;
+		if (typeForme == ID_RECT) {
+			dc.DrawRectangle(wxPoint(rect.GetX(), rect.GetY()), wxSize(rect.GetWidth(),rect.GetHeight())) ;
 		//std::cout << 
+		}
+		else if (typeForme == ID_OVAL)
+		{
+			dc.DrawEllipse(wxPoint(rect.GetX(), rect.GetY()), wxSize(rect.GetWidth(),rect.GetHeight())) ;
+		}
 	}
-	//if (&m_oneRect != nullptr)  {
+	if (selectedForm == ID_RECT)
+	{
 		dc.DrawRectangle(wxPoint(m_oneRect.GetX(), m_oneRect.GetY()), wxSize(m_oneRect.GetWidth(),m_oneRect.GetHeight())) ;
-	//}
-	//dc.DrawLine(m_mousePoint, m_onePoint) ;
-	//dc.DrawCircle(wxPoint(m_mousePoint), radius/2) ;
+	} else if (selectedForm == ID_OVAL) {
+		dc.DrawEllipse(wxPoint(m_oneRect.GetX(), m_oneRect.GetY()), wxSize(m_oneRect.GetWidth(),m_oneRect.GetHeight())) ;
+	}
+	
 
 
 	/*
