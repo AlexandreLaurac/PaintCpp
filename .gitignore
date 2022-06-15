@@ -37,3 +37,4 @@ src/model/test/Rectangle.o
 src/model/test/Dessin.o
 src/skeletonORIG.cpp
 CMakeFiles/skeleton.dir/src/View/view.cpp.o
+CMakeFiles/skeleton.dir/src/Controler/controler.cpp.o

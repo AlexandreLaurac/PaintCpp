@@ -35,7 +35,10 @@
 #include <wx/image.h>
 #include <wx/file.h>
 #include <wx/bitmap.h>
+
 #include "view.h"
+
+#include "controler.h"
 
 //************************************************************************
 // Application class
@@ -56,6 +59,9 @@ bool MyApp::OnInit()
 	MyFrame *frame = new MyFrame(wxT(APP_NAME), wxDefaultPosition, wxSize(APPLICATION_WIDTH,APPLICATION_HEIGHT)) ;
 	frame->Show(true) ;
 	SetTopWindow(frame) ;
+
+	Controler * controler = new Controler (frame) ;
+
 	return true ;
 }
 

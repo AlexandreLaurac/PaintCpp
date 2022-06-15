@@ -1,3 +1,6 @@
+#ifndef __VIEW_H__
+#define __VIEW_H__
+
 #include "wx/wxprec.h"
 
 #ifndef WX_PRECOMP
@@ -6,6 +9,8 @@
 
 #include <vector>
 
+
+class Controler ;
 
 //------------------------------------------------------------------------
 // Some constants
@@ -105,6 +110,7 @@ class MyFrame : public wxFrame
         MyControlPanel* GetControlPanel() {return m_controlPanel ;} ;
         MyDrawingPanel* GetDrawingPanel() {return m_drawingPanel ;} ;
         void RefreshDrawing(){m_drawingPanel->Refresh() ;} ;
+		void SetControler(Controler * controler) ;
 
     protected:
         void OnQuit(wxCommandEvent& event);
@@ -116,4 +122,8 @@ class MyFrame : public wxFrame
 
         MyControlPanel * m_controlPanel; // the panel with controls
         MyDrawingPanel * m_drawingPanel; // the panel in which we draw
+		Controler * m_controler ;
 } ;
+
+
+#endif

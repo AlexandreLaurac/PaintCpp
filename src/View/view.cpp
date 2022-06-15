@@ -1,4 +1,5 @@
 #include "view.h"
+#include "controler.h"
 
 //************************************************************************
 //************************* class MyControlPanel *************************
@@ -175,6 +176,7 @@ void MyDrawingPanel::OnPaint(wxPaintEvent &event)
 			dc.DrawEllipse(wxPoint(rect.GetX(), rect.GetY()), wxSize(rect.GetWidth(),rect.GetHeight())) ;
 		}
 	}
+
 	if (selectedForm == ID_RECT)
 	{
 		dc.DrawRectangle(wxPoint(m_oneRect.GetX(), m_oneRect.GetY()), wxSize(m_oneRect.GetWidth(),m_oneRect.GetHeight())) ;
@@ -258,6 +260,11 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 	CreateStatusBar() ;
 	SetStatusText(wxT("click in the right panel and tune the controls of the left panel. Visit the File menu!")) ;
 	Centre() ; // Guess what it does ;-)
+}
+
+void MyFrame::SetControler (Controler * controler)
+{
+	m_controler = controler ;
 }
 
 //------------------------------------------------------------------------
