@@ -39,26 +39,26 @@ int main()
     cout << endl;
     cout << "******** Test de la classe Rectangle" << endl;
     
-    Rectangle r1( 0, 0, 100, 200, "r1" );
-    r1.display();
+    Rectangle *r1 = new Rectangle( 0, 0, 100, 200, "r1");
+    r1->display();
     cout << endl;
 
-    Rectangle r2( 0, 8, 10, 2, "r2" );
-    r1.display();
+    Rectangle *r2 = new Rectangle( 0, 8, 10, 2, "r2");
+    r1->display();
     cout << endl;
 
     cout << "******** Test des méthodes virtuelles" << endl;
-    assert(r1.surface() == 20000);
-    cout << "Surface r1 -> " << r1.surface() << endl;
+    assert(r1->surface() == 20000);
+    cout << "Surface r1 -> " << r1->surface() << endl;
 
-    assert(r1.perimeter() == 600);
-    cout << "Périmètre r1 -> " << r1.perimeter() << endl;
+    assert(r1->perimeter() == 600);
+    cout << "Périmètre r1 -> " << r1->perimeter() << endl;
 
-    r1.move(10,5);
-    assert(r1.getCorner().x == 10);
-    assert(r1.getCorner().y == 5);
+    r1->move(10,5);
+    assert(r1->getCorner().x == 10);
+    assert(r1->getCorner().y == 5);
     cout << "Move r1 de (10,5) -> ";
-    r1.display();
+    r1->display();
     cout << endl;
 
     cout << endl;
@@ -69,23 +69,29 @@ int main()
     cout << endl;
 
     cout << "******** Test des méthodes d'ajouts de forme" << endl;
-    d1.addForme(&r2);
+    d1.addForme(r2);
     assert(d1.getList().size() == 1);
     d1.displayList();
     cout << endl;
 
-    //Rectangle r3(0,0,1,8,"r3");
     Rectangle *r3 = new Rectangle(0,0,1,8,"r3");
     d1.addForme(r3);
     assert(d1.getList().size() == 2);
     d1.displayList();
     cout << endl;
 
-    cout << "******** Test des méthodes de suppressions de forme" << endl;
+    cout << "******** Test de la méthode de suppression de forme" << endl;
     d1.deleteForme(r3);
     assert(d1.getList().size() == 1);
     d1.displayList();
     cout << endl;
+
+    cout << "******** Test de la méthode de suppression de la liste" << endl;
+    d1.deleteList();
+    assert(d1.getList().size() == 0);
+    d1.displayList();
+    cout << endl;
+
 
 
     
