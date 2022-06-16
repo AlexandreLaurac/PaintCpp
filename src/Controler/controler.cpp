@@ -59,6 +59,7 @@ void Controler::FormCreation(int x, int y)
         case ID_RECT :
         {
             Rectangle * rectangle = new Rectangle (x, y, 0, 0, "rectangle") ;
+            rectangle->setPivotCorner(x,y);
             m_dessin.addForme(rectangle) ;
             break ;
         }
@@ -86,8 +87,25 @@ void Controler::FormModification (int x, int y)
             if (m_mouseId == ID_MOUSELEFTDOWN)
             {
                 Rectangle * rectangle = (Rectangle *) m_dessin.getList().back() ;
-                rectangle->setWidth(x-rectangle->getCorner().x) ;
-                rectangle->setHeight(y-rectangle->getCorner().y) ;
+
+                // Conditions to move dynamically the topLeftCorner
+
+                if ((x - rectangle->getPivotCorner().x) < 0 && (y - rectangle->getPivotCorner().y) > 0){
+
+                    rectangle->setTopLeftCorner(rectangle->getPivotCorner().x - rectangle->getWidth(), rectangle->getPivotCorner().y);
+
+                } else if ((x - rectangle->getPivotCorner().x) < 0 && (y - rectangle->getPivotCorner().y) < 0){
+
+                    rectangle->setTopLeftCorner(rectangle->getPivotCorner().x - rectangle->getWidth(), rectangle->getPivotCorner().y - rectangle->getHeight());
+
+                } else if ((x - rectangle->getPivotCorner().x) > 0 && (y - rectangle->getPivotCorner().y) < 0){
+
+                    rectangle->setTopLeftCorner(rectangle->getPivotCorner().x, rectangle->getPivotCorner().y - rectangle->getHeight());
+
+                }
+
+                rectangle->setWidth(abs(x-rectangle->getPivotCorner().x)) ;
+                rectangle->setHeight(abs(y-rectangle->getPivotCorner().y)) ;
             }
             break ;
         case ID_OVAL :
