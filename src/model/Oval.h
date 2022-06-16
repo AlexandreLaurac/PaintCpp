@@ -24,9 +24,12 @@ public:
     // Setters
     void setWidth(int w);
     void setHeight(int h);
+    void setCornerTopLeft(const int x, const int y);
+    void setPivotCorner(const int x, const int y);
 
     // Getters
-    const Point& getCorner() const;    
+    const Point& getCornerTopLeft() const;    
+    const Point& getPivotCorner() const;    
     int getWidth() const;
     int getHeight() const;
 
@@ -42,7 +45,8 @@ public:
     //virtual double getDistancePoint(const Point & point) const ;
 
 private: 
-    Point topLeftCorner;         
+    Point topLeftCorner;        
+    Point pivotCorner; 
     int width;               
     int height;               
 

@@ -24,8 +24,12 @@ Oval::Oval(const int x, const int y, const int w, const int h, const string& lab
 
 
 Oval::Oval(const Oval& Oval) : Forme(Oval.label){
-    topLeftCorner.x = Oval.getCorner().x;
-	topLeftCorner.y = Oval.getCorner().y;
+    topLeftCorner.x = Oval.getCornerTopLeft().x;
+	topLeftCorner.y = Oval.getCornerTopLeft().y;
+
+	pivotCorner.x = Oval.getPivotCorner().x;
+	pivotCorner.y = Oval.getPivotCorner().y;
+
 	width = Oval.getWidth();
 	height = Oval.getHeight();
 }
@@ -40,8 +44,20 @@ void Oval::setHeight(int h) {
     height = h;
 }
 
-const Point& Oval::getCorner() const {
+void Oval::setCornerTopLeft(const int x, const int y){
+	topLeftCorner.x = x;
+	topLeftCorner.y = y;
+}
+const Point& Oval::getCornerTopLeft() const {
     return topLeftCorner;
+}
+
+void Oval::setPivotCorner(const int x, const int y){
+	pivotCorner.x = x;
+	pivotCorner.y = y;
+}
+const Point& Oval::getPivotCorner() const {
+    return pivotCorner;
 }
 
 int Oval::getWidth() const {
@@ -76,7 +92,7 @@ float Oval::perimeter() const {
 
 
 void Oval::draw(wxPaintDC& dc){
-	dc.DrawEllipse(wxPoint(topLeftCorner.x, topLeftCorner.y), wxSize(width,height)) ;
+	dc.DrawEllipse(topLeftCorner.x, topLeftCorner.y, width,height) ;
 }
 
 string Oval::toSVG(){
@@ -94,7 +110,7 @@ string Oval::toSVG(){
 
 Point Oval::getCentre() const
 {
-	int x = (int) (getCorner().x + getWidth()/2) ;
-	int y = (int) (getCorner().y + getHeight()/2) ;
+	int x = (int) (getCornerTopLeft().x + getWidth()/2) ;
+	int y = (int) (getCornerTopLeft().y + getHeight()/2) ;
 	return Point(x,y) ;
 }
