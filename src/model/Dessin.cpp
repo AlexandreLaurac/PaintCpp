@@ -42,6 +42,23 @@ vector<Forme*> Dessin::getList() const{
 }
 
 
+Forme * Dessin::getCurrentForm() const
+{
+	return currentForm ;
+}
+
+Couleur Dessin::getSavedColor() const
+{
+	return savedColor ;
+}
+
+void Dessin::SetSavedColor (Couleur color)
+{
+	savedColor = color ;
+}
+
+
+
 void Dessin::SetCurrentForm(Forme * form)
 {
 	currentForm = form ;

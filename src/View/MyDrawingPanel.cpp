@@ -3,6 +3,9 @@
 #include "MyFrame.h"
 #include "controler.h"
 
+#include <vector>
+#include <algorithm>
+
 //------------------------------------------------------------------------
 MyDrawingPanel::MyDrawingPanel(wxWindow *parent) : wxPanel(parent)
 // In this constructor, bind some mouse events and the paint event with the appropriate methods

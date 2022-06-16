@@ -11,7 +11,7 @@ class Dessin
 {
 
 public:          
-    Dessin(){ currentForm = nullptr ; };                           
+    Dessin(){ currentForm = nullptr ; };                         
 
     // Setters
     void addForme(Forme* formeToAdd);
@@ -19,9 +19,12 @@ public:
 
     // Getters
     std::vector<Forme*> getList() const;
+    Forme * getCurrentForm() const ;
+    Couleur getSavedColor() const ;
 
     // Setters
     void SetCurrentForm(Forme * form) ;
+    void SetSavedColor (Couleur color) ;
 
     // Additional methods
     void deleteList();
@@ -34,6 +37,7 @@ public:
 private: 
     std::vector<Forme*> listFormes;
     Forme * currentForm ;
+    Couleur savedColor ;
 };
 
 #endif
