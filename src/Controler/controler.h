@@ -15,6 +15,9 @@ class Controler
         Dessin m_dessin ;
     public :
         Controler (MyFrame * frame) ;
+        int GetModeId () const ;
+        int GetFormId () const ;
+        int GetMouseId () const ;
         void SetModeId (int modeId) ;
         void SetFormId (int formId) ;
         void SetMouseId (int mouseId) ;

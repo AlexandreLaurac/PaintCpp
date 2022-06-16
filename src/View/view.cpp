@@ -71,24 +71,29 @@ void MyControlPanel::OnCheckBox(wxCommandEvent &event)
 //------------------------------------------------------------------------
 void MyControlPanel::OnButtonRectangle(wxCommandEvent &event)
 {
+	m_parentFrame->GetControler()->SetModeId(ID_MODE_FORM) ;
 	m_parentFrame->GetControler()->SetFormId(ID_RECT) ;
 }
 
 //------------------------------------------------------------------------
 void MyControlPanel::OnButtonOval(wxCommandEvent &event)
 {
+	m_parentFrame->GetControler()->SetModeId(ID_MODE_FORM) ;
 	m_parentFrame->GetControler()->SetFormId(ID_OVAL) ;
 }
 
 //------------------------------------------------------------------------
 void MyControlPanel::OnButtonLine(wxCommandEvent &event)
 {
+	m_parentFrame->GetControler()->SetModeId(ID_MODE_FORM) ;
 	m_parentFrame->GetControler()->SetFormId(ID_LINE) ;
 }
 
 void MyControlPanel::OnButtonSelection(wxCommandEvent &event)
 {
-	//m_parentFrame->GetControler()->SetFormId(ID_LINE) ;
+	m_parentFrame->GetControler()->SetModeId(ID_MODE_SELECTION) ;
+	m_parentFrame->GetControler()->SetFormId(ID_FORM_NONE) ;
+
 }
 
 
@@ -116,7 +121,20 @@ void MyDrawingPanel::OnMouseLeftDown(wxMouseEvent &event)
 // called when the mouse left button is pressed
 {
 	m_parentFrame->GetControler()->SetMouseId(ID_MOUSELEFTDOWN) ;
-	m_parentFrame->GetControler()->FormCreation(event.m_x, event.m_y) ;
+	int mode = m_parentFrame->GetControler()->GetModeId() ;
+	switch (mode)
+	{
+		case ID_MODE_SELECTION :
+		{
+			m_parentFrame->GetControler()->SelectionForm(event.m_x, event.m_y) ;
+			break ;
+		}
+		case ID_MODE_FORM :
+		{
+			m_parentFrame->GetControler()->FormCreation(event.m_x, event.m_y) ;
+			break ;
+		}
+	}
 }
 
 //------------------------------------------------------------------------

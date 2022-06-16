@@ -13,6 +13,21 @@ Controler::Controler(MyFrame * frame)
     frame->SetControler (this) ;
 }
 
+int Controler::GetModeId () const
+{
+    return m_modeId ;
+}
+
+int Controler::GetFormId () const
+{
+    return m_formId ;
+}
+
+int Controler::GetMouseId () const
+{
+    return m_mouseId ;
+}
+
 void Controler::SetModeId(int modeId)
 {
     m_modeId = modeId ;
