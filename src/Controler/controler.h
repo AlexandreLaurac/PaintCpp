@@ -11,6 +11,7 @@ class Controler
         int m_modeId ;
         int m_formId ;
         int m_mouseId ;
+        Couleur m_couleurCourante;
         MyFrame * m_appFrame ;
         Dessin m_dessin ;
 
@@ -19,6 +20,8 @@ class Controler
         int GetModeId () const ;
         int GetFormId () const ;
         int GetMouseId () const ;
+        Couleur GetCouleurCourante() const {return m_couleurCourante;};
+        void SetCouleurCourante(int r, int g, int b, int a);
         void SetModeId (int modeId) ;
         void SetFormId (int formId) ;
         void SetMouseId (int mouseId) ;

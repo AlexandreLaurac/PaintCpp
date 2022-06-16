@@ -51,6 +51,13 @@ void Controler::SetMouseId(int mouseId)
     m_mouseId = mouseId ;
 }
 
+void Controler::SetCouleurCourante(int r, int g, int b, int a){
+    m_couleurCourante.r = r;
+    m_couleurCourante.g = g;
+    m_couleurCourante.b = b;
+    m_couleurCourante.a = a/(255); // Pour être cohérent avec le modele
+}
+
 
 void Controler::FormCreation(int x, int y)
 {
@@ -58,21 +65,21 @@ void Controler::FormCreation(int x, int y)
     {
         case ID_RECT :
         {
-            Rectangle * rectangle = new Rectangle (x, y, 0, 0, "rectangle") ;
+            Rectangle * rectangle = new Rectangle (x, y, 0, 0, "rectangle", m_couleurCourante, m_couleurCourante) ;
             rectangle->setPivotCorner(x,y);
             m_dessin.addForme(rectangle) ;
             break ;
         }
         case ID_OVAL :
         {
-            Oval * oval = new Oval (x, y, 0, 0, "oval") ;
+            Oval * oval = new Oval (x, y, 0, 0, "oval", m_couleurCourante, m_couleurCourante) ;
             oval->setPivotCorner(x,y);
             m_dessin.addForme(oval) ;
             break ;
         }
         case ID_LINE :
         {
-            Ligne * line = new Ligne (x, y, x, y, "ligne") ;
+            Ligne * line = new Ligne (x, y, x, y, "ligne",  m_couleurCourante, m_couleurCourante) ;
             m_dessin.addForme(line) ;
             break ;
         }
