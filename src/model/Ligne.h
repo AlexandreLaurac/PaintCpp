@@ -11,7 +11,7 @@ class Ligne : public Forme
     
 public:          
     Ligne(){};                           
-    Ligne(const int x1, const int y2, const int x2, const int y2, const std::string& label, const std::string& colorOutline, const std::string& colorFill); // constructeur avec couleurs perso
+    Ligne(const int x1, const int y2, const int x2, const int y2, const std::string& label, const Couleur colorOutline, const Couleur colorFill); // constructeur avec couleurs perso
     Ligne(const int x1, const int y1, const int x2, const int y2, const std::string& label); // constructeur avec couleurs par défauts
     Ligne(const Ligne& Ligne);
 
