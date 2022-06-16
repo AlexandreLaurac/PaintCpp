@@ -54,6 +54,21 @@ void Controler::SetMouseId(int mouseId)
     m_mouseId = mouseId ;
 }
 
+void Controler::SetOutlineColor(int r, int g, int b, int a){
+    m_couleurCouranteOutline.r = r;
+    m_couleurCouranteOutline.g = g;
+    m_couleurCouranteOutline.b = b;
+    m_couleurCouranteOutline.a = a/(255); // Pour être cohérent avec le modele
+}
+
+void Controler::SetFillColor(int r, int g, int b, int a){
+    m_couleurCouranteFill.r = r;
+    m_couleurCouranteFill.g = g;
+    m_couleurCouranteFill.b = b;
+    m_couleurCouranteFill.a = a/(255); // Pour être cohérent avec le modele
+}
+
+
 
 void Controler::FormCreation(int x, int y)
 {
@@ -61,21 +76,21 @@ void Controler::FormCreation(int x, int y)
     {
         case ID_RECT :
         {
-            Rectangle * rectangle = new Rectangle (x, y, 0, 0, "rectangle") ;
+            Rectangle * rectangle = new Rectangle (x, y, 0, 0, "rectangle", m_couleurCouranteOutline, m_couleurCouranteFill) ;
             rectangle->setPivotCorner(x,y);
             m_dessin.addForme(rectangle) ;
             break ;
         }
         case ID_OVAL :
         {
-            Oval * oval = new Oval (x, y, 0, 0, "oval") ;
+            Oval * oval = new Oval (x, y, 0, 0, "oval", m_couleurCouranteOutline, m_couleurCouranteFill) ;
             oval->setPivotCorner(x,y);
             m_dessin.addForme(oval) ;
             break ;
         }
         case ID_LINE :
         {
-            Ligne * line = new Ligne (x, y, x, y, "ligne") ;
+            Ligne * line = new Ligne (x, y, x, y, "ligne",  m_couleurCouranteOutline, m_couleurCouranteFill) ;
             m_dessin.addForme(line) ;
             break ;
         }

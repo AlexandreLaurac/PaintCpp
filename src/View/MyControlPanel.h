@@ -1,6 +1,7 @@
 #ifndef __MYCONTROLPANEL_H__
 #define __MYCONTROLPANEL_H__
 
+#include <wx/clrpicker.h>
 #include "wx/wxprec.h"
 
 #ifndef WX_PRECOMP
@@ -25,6 +26,9 @@ class MyControlPanel : public wxPanel
 		void OnButtonLine (wxCommandEvent &event) ;
 		void OnButtonSelection (wxCommandEvent &event) ;
 
+		void OnColorPickerOutline (wxColourPickerEvent &event) ;
+		void OnColorPickerFill (wxColourPickerEvent &event) ;
+
 		MyFrame * m_parentFrame ;
 		wxButton * m_button ;
 		wxSlider * m_slider ;
@@ -33,6 +37,9 @@ class MyControlPanel : public wxPanel
 		wxButton * m_buttonOval ;
 		wxButton * m_buttonLine ;
 		wxButton * m_buttonSelection ;
+
+		wxColourPickerCtrl * m_colourPickerOutline;
+		wxColourPickerCtrl * m_colourPickerFill;
 } ;
 
 

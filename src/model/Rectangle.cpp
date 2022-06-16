@@ -8,7 +8,7 @@
 using namespace std;
 
 
-Rectangle::Rectangle(const int x, const int y, const int w, const int h, const string& label,  const Couleur colorOutline,  const Couleur colorFill) : Forme(label, colorOutline, colorFill) {
+Rectangle::Rectangle(const int x, const int y, const int w, const int h, const string& label, Couleur colorOutline, Couleur colorFill) : Forme(label, colorOutline, colorFill) {
 	topLeftCorner.x = x;
 	topLeftCorner.y = y;
 	width = w;

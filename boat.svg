@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+	<rect x="1" y="4" width="844" height="371" stroke="rgba(53,132,228,65025)" fill="rgba(53,132,228,65025)"/>
+	<rect x="2" y="375" width="845" height="358" stroke="rgba(248,228,92,65025)" fill="rgba(248,228,92,65025)"/>
+	<line x1="111" y1="335" x2="144" y2="376" stroke="rgba(0,0,0,65025)" />
+	<line x1="146" y1="378" x2="259" y2="377" stroke="rgba(0,0,0,65025)" />
+	<line x1="259" y1="377" x2="297" y2="323" stroke="rgba(0,0,0,65025)" />
+	<line x1="297" y1="323" x2="104" y2="327" stroke="rgba(0,0,0,65025)" />
+	<line x1="104" y1="327" x2="117" y2="339" stroke="rgba(0,0,0,65025)" />
+	<line x1="188" y1="326" x2="184" y2="162" stroke="rgba(0,0,0,65025)" />
+	<line x1="184" y1="162" x2="260" y2="226" stroke="rgba(0,0,0,65025)" />
+	<line x1="260" y1="226" x2="185" y2="226" stroke="rgba(0,0,0,65025)" />
+	<ellipse cx="277" cy="288" rx="6" ry="5" stroke="rgba(0,0,0,65025)" fill="rgba(0,0,0,65025)"/>
+	<rect x="272" y="316" width="6" height="7" stroke="rgba(0,0,0,65025)" fill="rgba(0,0,0,65025)"/>
+	<line x1="275" y1="324" x2="277" y2="314" stroke="rgba(0,0,0,65025)" />
+	<line x1="277" y1="314" x2="289" y2="325" stroke="rgba(0,0,0,65025)" />
+	<line x1="279" y1="316" x2="278" y2="294" stroke="rgba(0,0,0,65025)" />
+	<line x1="276" y1="307" x2="287" y2="306" stroke="rgba(0,0,0,65025)" />
+	<line x1="351" y1="374" x2="328" y2="299" stroke="rgba(0,0,0,65025)" />
+	<ellipse cx="327" cy="298" rx="2" ry="1" stroke="rgba(0,0,0,65025)" fill="rgba(0,0,0,65025)"/>
+	<line x1="287" y1="306" x2="327" y2="298" stroke="rgba(0,0,0,65025)" />
+	<ellipse cx="351" cy="375" rx="1" ry="2" stroke="rgba(87,227,137,65025)" fill="rgba(87,227,137,65025)"/>
+</svg>
