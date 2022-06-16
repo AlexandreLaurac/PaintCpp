@@ -4,6 +4,7 @@
 #include "MyFrame.h"
 #include "controler.h"
 
+using namespace std;
 
 //------------------------------------------------------------------------
 MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
@@ -33,8 +34,9 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 	m_controlPanel = new MyControlPanel(this);
 // create the panel that will display the graphics
 	m_drawingPanel = new MyDrawingPanel(this);
+
 	CreateStatusBar() ;
-	SetStatusText(wxT("click in the right panel and tune the controls of the left panel. Visit the File menu!")) ;
+	SetStatusText(wxT("Appuyer sur une des boutons de l'interface à droite pour commencer à utiliser l'application")) ;
 	Centre() ; // Guess what it does ;-)
 }
 
@@ -63,6 +65,7 @@ void MyFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
 {
 	wxMessageBox(wxT("How to .. \n\n- use 2 panels (one for controls, one for drawings)\n- manage basic events (so that controls impact drawings)\n\n... with wxWidgets (3.0.2)\n\nPascal Bertolino UGA - GIPSA-lab, Grenoble - France\npascal.bertolino@gipsa-lab.fr"),
                   wxT(APP_NAME), wxOK | wxICON_INFORMATION ) ;
+
 }
 
 //------------------------------------------------------------------------

@@ -35,11 +35,12 @@ public:
 
 	// Méthodes virtuelles
 	virtual void display() const;
-    virtual float surface() const override;
-    virtual float perimeter() const override;
+    virtual float getSurface() const override;
+    virtual float getPerimeter() const override;
 	virtual void move(int offsetX, int offsetY);
     virtual void draw(wxPaintDC& dc);
     virtual std::string toSVG();
+    virtual std::string toString();
 
     virtual Point getCentre() const ;
     //virtual double getDistancePoint(const Point & point) const ;

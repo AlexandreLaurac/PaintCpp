@@ -23,6 +23,12 @@ Controler::Controler(MyFrame * frame)
     frame->SetControler (this) ;
 }
 
+void Controler::SetInformations(Forme* forme) {
+    string buffer = forme->toString();
+    cout << buffer << endl;
+    m_appFrame->SetStatusText(buffer);
+}
+
 int Controler::GetModeId () const
 {
     return m_modeId ;
@@ -78,6 +84,7 @@ void Controler::FormCreation(int x, int y)
         {
             Rectangle * rectangle = new Rectangle (x, y, 0, 0, "rectangle", m_couleurCouranteOutline, m_couleurCouranteFill) ;
             rectangle->setPivotCorner(x,y);
+            SetInformations(rectangle);
             m_dessin.addForme(rectangle) ;
             break ;
         }
@@ -85,12 +92,14 @@ void Controler::FormCreation(int x, int y)
         {
             Oval * oval = new Oval (x, y, 0, 0, "oval", m_couleurCouranteOutline, m_couleurCouranteFill) ;
             oval->setPivotCorner(x,y);
+            SetInformations(oval);
             m_dessin.addForme(oval) ;
             break ;
         }
         case ID_LINE :
         {
             Ligne * line = new Ligne (x, y, x, y, "ligne",  m_couleurCouranteOutline, m_couleurCouranteFill) ;
+            SetInformations(line);
             m_dessin.addForme(line) ;
             break ;
         }
@@ -124,6 +133,8 @@ void Controler::FormModification (int x, int y)
 
                 rectangle->setWidth(abs(x-rectangle->getPivotCorner().x)) ;
                 rectangle->setHeight(abs(y-rectangle->getPivotCorner().y)) ;
+
+                SetInformations(rectangle);
             }
             break ;
         case ID_OVAL :
@@ -149,6 +160,7 @@ void Controler::FormModification (int x, int y)
 
                 oval->setWidth(abs(x-oval->getPivotCorner().x)) ;
                 oval->setHeight(abs(y-oval->getPivotCorner().y)) ;
+                SetInformations(oval);
             }
             break ;
         case ID_LINE :
@@ -156,6 +168,7 @@ void Controler::FormModification (int x, int y)
             {
                 Ligne * line = (Ligne *) m_dessin.getList().back() ;
                 line->setPointEnd(x,y) ;
+                SetInformations(line);
             }
     }
 }

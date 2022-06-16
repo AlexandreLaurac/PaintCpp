@@ -83,11 +83,11 @@ void Oval::move(int offsetX, int offsetY) {
     topLeftCorner.move(offsetX, offsetY);
 }
 
-float Oval::surface() const {
+float Oval::getSurface() const {
     return (float)(M_PI * (width/2) * (height/2));
 }
 
-float Oval::perimeter() const {
+float Oval::getPerimeter() const {
     return (float)(M_PI * (3 * ( (width+height) / 2) - sqrt( (3 * (width/2) + height/2) * ((width/2)+3*(height/2))) ) ); // Formule de Ramanujan avaec précision de 0.01%
 }
 
@@ -106,6 +106,16 @@ string Oval::toSVG(){
 	string fill = colorFill.toString();
 
 	return "<ellipse cx=\""+cx+"\" cy=\""+cy+"\" rx=\""+rx+"\" ry=\""+ry+"\" stroke=\""+outline+"\" fill=\""+fill+"\"/>";	
+}
+
+string Oval::toString(){
+	string perimetre = to_string(getPerimeter());
+	string surface = to_string(getSurface());
+
+	string outline = colorOutline.toString();
+	string fill = colorFill.toString();
+
+	return "Dessin d'un oval | Couleur contour "+outline+" & remplissage "+fill+"  |  Perimetre = "+perimetre+"  Surface = "+surface;	
 }
 
 

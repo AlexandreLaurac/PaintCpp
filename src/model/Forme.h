@@ -33,8 +33,8 @@ public:
     const Couleur getColorOutline() const;
     const Couleur getColorFill() const;
 
-    virtual float surface() const { return 0.0f; }
-    virtual float perimeter() const { return 0.0f; }
+    virtual float getSurface() const { return 0.0f; }
+    virtual float getPerimeter() const { return 0.0f; }
 
     virtual Point getCentre() const = 0 ;
     double getDistancePoint(int x, int y) const ;
@@ -46,7 +46,7 @@ public:
 	virtual void move(int , int) = 0;
     virtual void draw(wxPaintDC& dc) = 0;
     virtual std::string toSVG() = 0;
-
+    virtual std::string toString() = 0;
 /*
 	virtual void zoom(int ) {};
 	virtual void rotation(int ) {};

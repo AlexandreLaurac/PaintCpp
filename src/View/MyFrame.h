@@ -19,7 +19,10 @@ class MyFrame : public wxFrame
         MyDrawingPanel* GetDrawingPanel() {return m_drawingPanel ;} ;
 		Controler * GetControler() {return m_controler ;} ;
         void RefreshDrawing() ;
+
+        // Setter
 		void SetControler(Controler * controler) ;
+
 
     protected:
         void OnQuit(wxCommandEvent& event);
@@ -31,6 +34,9 @@ class MyFrame : public wxFrame
         MyControlPanel * m_controlPanel; // the panel with controls
         MyDrawingPanel * m_drawingPanel; // the panel in which we draw
 		Controler * m_controler ;
+
+        // wxString * m_statut;
+        std::string m_statut;
 } ;
 
 

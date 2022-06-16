@@ -83,9 +83,19 @@ string Ligne::toSVG(){
 	string x2 = to_string(pointEnd.x);
 	string y2 = to_string(pointEnd.y);
 	string outline = colorOutline.toString();
-
-
+	
 	return "<line x1=\""+x1+"\" y1=\""+y1+"\" x2=\""+x2+"\" y2=\""+y2+"\" stroke=\""+outline+"\" />";	
+}
+
+string Ligne::toString(){
+	string x1 = to_string(pointStart.x);
+	string y1 = to_string(pointStart.y);
+	string x2 = to_string(pointEnd.x);
+	string y2 = to_string(pointEnd.y);
+	string outline = colorOutline.toString();
+	string length = to_string(getLength());
+
+	return "Dessin d'une ligne  |  Couleur "+outline+"  |  A=("+x1+","+y1+") & B=("+x2+","+y2+")  |  Longueur = "+length; 
 }
 
 

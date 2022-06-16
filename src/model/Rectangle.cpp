@@ -83,11 +83,11 @@ void Rectangle::move(int offsetX, int offsetY) {
     topLeftCorner.move(offsetX, offsetY);
 }
 
-float Rectangle::surface() const {
+float Rectangle::getSurface() const {
     return (float)(width * height);
 }
 
-float Rectangle::perimeter() const {
+float Rectangle::getPerimeter() const {
     return (float)(2*width + 2*height);
 }
 
@@ -107,6 +107,20 @@ string Rectangle::toSVG(){
 
 	return "<rect x=\""+xStr+"\" y=\""+yStr+"\" width=\""+wStr+"\" height=\""+hStr+"\" stroke=\""+outline+"\" fill=\""+fill+"\"/>";	
 }
+
+string Rectangle::toString(){
+	string w = to_string(width);
+	string h = to_string(height);
+
+	string perimetre = to_string(getPerimeter());
+	string surface = to_string(getSurface());
+
+	string outline = colorOutline.toString();
+	string fill = colorFill.toString();
+
+	return "Dessin d'un rectangle | Couleur contour "+outline+" & remplissage "+fill+"  |  Perimetre = "+perimetre+"  Surface = "+surface;	
+}
+
 
 
 
