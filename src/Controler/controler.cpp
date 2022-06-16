@@ -3,14 +3,20 @@
 
 #include "Rectangle.h"
 #include "Oval.h"
+#include "Ligne.h"
 
 Controler::Controler(MyFrame * frame)
 {
-    m_formId = 0 ; // aucune forme sélectionnée par défaut
+    m_modeId = ID_MODE_NONE ; // aucun mode de fonctionnement par défaut
+    m_formId = ID_FORM_NONE ; // aucune forme sélectionnée par défaut
     m_appFrame = frame ;
     frame->SetControler (this) ;
 }
 
+void Controler::SetModeId(int modeId)
+{
+    m_modeId = modeId ;
+}
 
 void Controler::SetFormId(int formId)
 {
@@ -40,10 +46,16 @@ void Controler::FormCreation(int x, int y)
             m_dessin.addForme(oval) ;
             break ;
         }
+        case ID_LINE :
+        {
+            Ligne * line = new Ligne (x, y, x, y, "ligne") ;
+            m_dessin.addForme(line) ;
+            break ;
+        }
     }
 }
 
-void Controler::FormModification (int xRightBottomCorner, int yRightBottomCorner)
+void Controler::FormModification (int x, int y)
 {
     switch (m_formId)
     {
@@ -51,17 +63,23 @@ void Controler::FormModification (int xRightBottomCorner, int yRightBottomCorner
             if (m_mouseId == ID_MOUSELEFTDOWN)
             {
                 Rectangle * rectangle = (Rectangle *) m_dessin.getList().back() ;
-                rectangle->setWidth(xRightBottomCorner-rectangle->getCorner().x) ;
-                rectangle->setHeight(yRightBottomCorner-rectangle->getCorner().y) ;
+                rectangle->setWidth(x-rectangle->getCorner().x) ;
+                rectangle->setHeight(y-rectangle->getCorner().y) ;
             }
             break ;
         case ID_OVAL :
             if (m_mouseId == ID_MOUSELEFTDOWN)
             {
                 Oval * oval = (Oval *) m_dessin.getList().back() ;
-                oval->setWidth(xRightBottomCorner-oval->getCorner().x) ;
-                oval->setHeight(yRightBottomCorner-oval->getCorner().y) ;
+                oval->setWidth(x-oval->getCorner().x) ;
+                oval->setHeight(y-oval->getCorner().y) ;
             }
-
+            break ;
+        case ID_LINE :
+            if (m_mouseId == ID_MOUSELEFTDOWN)
+            {
+                Ligne * line = (Ligne *) m_dessin.getList().back() ;
+                line->setPointEnd(x,y) ;
+            }
     }
 }

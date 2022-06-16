@@ -10,6 +10,7 @@
 #include <array>
 #include <Couleur.h>
 
+#include "Point.h"
 
 class Forme {
 public:
@@ -34,6 +35,10 @@ public:
 
     virtual float surface() const { return 0.0f; }
     virtual float perimeter() const { return 0.0f; }
+
+    virtual Point getCentre() const = 0 ;
+    double getDistancePoint(int x, int y) const ;
+
 
 	// Fonctions utilitaires
     virtual void display() const = 0;

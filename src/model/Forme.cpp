@@ -55,3 +55,9 @@ void Forme::setColorFill(const Couleur colorFill) {
 const Couleur Forme::getColorFill() const {
     return colorFill;
 }
+
+
+double Forme::getDistancePoint(int x, int y) const
+{
+	return getCentre().distancePoint(x,y) ;
+}

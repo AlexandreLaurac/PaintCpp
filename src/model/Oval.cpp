@@ -92,6 +92,9 @@ string Oval::toSVG(){
 }
 
 
-
-
-
+Point Oval::getCentre() const
+{
+	int x = (int) (getCorner().x + getWidth()/2) ;
+	int y = (int) (getCorner().y + getHeight()/2) ;
+	return Point(x,y) ;
+}

@@ -11,7 +11,7 @@ class Ligne : public Forme
     
 public:          
     Ligne(){};                           
-    Ligne(const int x1, const int y2, const int x2, const int y2, const std::string& label, const Couleur colorOutline, const Couleur colorFill); // constructeur avec couleurs perso
+    Ligne(const int x1, const int y1, const int x2, const int y2, const std::string& label, const Couleur colorOutline, const Couleur colorFill); // constructeur avec couleurs perso
     Ligne(const int x1, const int y1, const int x2, const int y2, const std::string& label); // constructeur avec couleurs par défauts
     Ligne(const Ligne& Ligne);
 
@@ -24,8 +24,8 @@ public:
     void setPointEnd(const int x, const int y);
 
     // Getters
-    Point& getPointStart() const;    
-    Point& getPointEnd() const;  
+    const Point& getPointStart() const;    
+    const Point& getPointEnd() const;  
 	int getLength() const;  
 
 	// Méthodes virtuelles
@@ -34,6 +34,9 @@ public:
 	virtual void move(int offsetX, int offsetY);
     virtual void draw(wxPaintDC& dc);
     virtual std::string toSVG();
+    
+    virtual Point getCentre() const ;
+    //virtual double getDistancePoint(int x, int y) const ;
 
 
 private: 
