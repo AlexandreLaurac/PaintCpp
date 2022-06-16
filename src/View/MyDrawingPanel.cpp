@@ -3,6 +3,8 @@
 #include "MyFrame.h"
 #include "controler.h"
 
+#include "Forme.h"
+
 #include <vector>
 #include <algorithm>
 
@@ -18,6 +20,7 @@ MyDrawingPanel::MyDrawingPanel(wxWindow *parent) : wxPanel(parent)
 	Bind(wxEVT_LEFT_DOWN, &MyDrawingPanel::OnMouseLeftDown, this);
 	Bind(wxEVT_PAINT, &MyDrawingPanel::OnPaint, this) ;
 	Bind(wxEVT_LEFT_UP, &MyDrawingPanel::OnMouseLeftUp, this);
+	Bind(wxEVT_KEY_DOWN, &MyDrawingPanel::OnDelete, this);
 	m_parentFrame = (MyFrame *) parent ;
 }
 
@@ -54,7 +57,34 @@ void MyDrawingPanel::OnMouseMove(wxMouseEvent &event)
 //------------------------------------------------------------------------
 void MyDrawingPanel::OnMouseLeftUp(wxMouseEvent &event)
 {
+	std::cout << "entrée callback MouseLeftUp" << std::endl ;
 	m_parentFrame->GetControler()->SetMouseId(ID_MOUSELEFTUP) ;
+}
+
+//------------------------------------------------------------------------
+void MyDrawingPanel::OnDelete (wxKeyEvent &event)
+{
+	std::cout << "entrée callback OnDelete" << std::endl ;
+	if (m_parentFrame->GetControler()->GetModeId() == ID_MODE_SELECTION && event.GetKeyCode() == WXK_BACK)
+	{
+		std::cout << "entrée if du callback" << std::endl ;
+		Forme * currentForm = m_parentFrame->GetControler()->GetDessin().getCurrentForm() ;
+		if (currentForm != nullptr)
+		{
+			auto listFormes = m_parentFrame->GetControler()->GetDessin().getList() ;
+			int i = 0 ;
+			for (Forme * form : listFormes)
+			{
+				if (form == currentForm)
+				{
+					break ;
+				}
+				i++ ;
+			}
+			listFormes.erase(listFormes.begin()+i) ;
+			Refresh() ;
+		}
+	}
 }
 
 //------------------------------------------------------------------------
