@@ -34,6 +34,7 @@ void MyDrawingPanel::OnMouseLeftDown(wxMouseEvent &event)
 		case ID_MODE_FORM :
 		{
 			m_parentFrame->GetControler()->FormCreation(event.m_x, event.m_y) ;
+			//string test = m_parentFrame->GetControler()->GetInformations();
 			break ;
 		}
 	}

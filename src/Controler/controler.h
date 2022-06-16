@@ -22,6 +22,8 @@ class Controler
         int GetFormId () const ;
         int GetMouseId () const ;
 
+        //std::string GetInformations() const;
+
         Couleur GetOutlineColor() const {return m_couleurCouranteOutline;};
         Couleur GetFillColor() const {return m_couleurCouranteFill;};
         void SetOutlineColor(int r, int g, int b, int a);
