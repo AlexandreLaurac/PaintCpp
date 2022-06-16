@@ -1,9 +1,13 @@
 #include "controler.h"
 #include "view.h"
 
+#include <cmath>
+
 #include "Rectangle.h"
 #include "Oval.h"
 #include "Ligne.h"
+
+using namespace std;
 
 Controler::Controler(MyFrame * frame)
 {
@@ -58,6 +62,7 @@ void Controler::FormCreation(int x, int y)
         case ID_OVAL :
         {
             Oval * oval = new Oval (x, y, 0, 0, "oval") ;
+            oval->setPivotCorner(x,y);
             m_dessin.addForme(oval) ;
             break ;
         }
@@ -86,8 +91,23 @@ void Controler::FormModification (int x, int y)
             if (m_mouseId == ID_MOUSELEFTDOWN)
             {
                 Oval * oval = (Oval *) m_dessin.getList().back() ;
-                oval->setWidth(x-oval->getCorner().x) ;
-                oval->setHeight(y-oval->getCorner().y) ;
+
+                if ((x - oval->getPivotCorner().x) < 0 && (y - oval->getPivotCorner().y) > 0){
+
+                    oval->setCornerTopLeft(oval->getPivotCorner().x - oval->getWidth(), oval->getPivotCorner().y);
+
+                } else if ((x - oval->getPivotCorner().x) < 0 && (y - oval->getPivotCorner().y) < 0){
+
+                    oval->setCornerTopLeft(oval->getPivotCorner().x - oval->getWidth(), oval->getPivotCorner().y - oval->getHeight());
+
+                } else if ((x - oval->getPivotCorner().x) > 0 && (y - oval->getPivotCorner().y) < 0){
+
+                    oval->setCornerTopLeft(oval->getPivotCorner().x, oval->getPivotCorner().y - oval->getHeight());
+
+                }
+
+                oval->setWidth(abs(x-oval->getPivotCorner().x)) ;
+                oval->setHeight(abs(y-oval->getPivotCorner().y)) ;
             }
             break ;
         case ID_LINE :
