@@ -76,7 +76,7 @@ void MyFrame::OnOpenFile(wxCommandEvent& WXUNUSED(event) )
 //------------------------------------------------------------------------
 void MyFrame::OnSaveFile(wxCommandEvent & WXUNUSED(event))
 {
-	wxString filename = wxSaveFileSelector(wxT("Save file as"), wxT("*.txt"), wxT("data"));
+	wxString filename = wxSaveFileSelector(wxT("Save file as"), wxT("*.svg"), wxT("data"));
 	if ( !filename.empty() )
 		m_drawingPanel->SaveFile(filename) ;
 }
