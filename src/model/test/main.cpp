@@ -8,10 +8,12 @@ using namespace std;
 #include "Rectangle.h"
 #include "Dessin.h"
 #include "Oval.h"
+#include "Couleur.h"
 
 
 int main()
 {
+    Couleur bufferColor;
 
     cout << endl;
     cout << "******** Test de la classe Point" << endl;
@@ -41,12 +43,14 @@ int main()
     cout << "******** Test de la classe Oval" << endl;
 
     Oval *o1 = new Oval(0,0,10,20, "o1");
-    assert(o1->getcolorOutline().compare("BLACK") == 0); 
-    assert(o1->getcolorFill().compare("TransparentColour") == 0); 
+    bufferColor = Couleur(255,255,255,1);
+    assert(o1->getColorFill() == bufferColor);
+    bufferColor = Couleur(0,0,0,1);
+    assert(o1->getColorOutline() == bufferColor);
     o1->display();
     cout << endl;
 
-    assert(o1->toSVG().compare("<ellipse cx=\"0\" cy=\"0\" rx=\"5\" ry=\"10\" stroke=\"BLACK\" fill=\"transparent\"/>"));
+    assert(o1->toSVG().compare("<ellipse cx=\"0\" cy=\"0\" rx=\"5\" ry=\"10\" stroke=\"rgba(0,0,0,1)\" fill=\"rgba(255,255,255,1)\"/>"));
 
 
 
@@ -54,16 +58,11 @@ int main()
     cout << "******** Test de la classe Rectangle" << endl;
     
     Rectangle *r1 = new Rectangle( 0, 0, 100, 200, "r1");
-    assert(r1->getcolorOutline().compare("BLACK") == 0);
-    assert(r1->getcolorFill().compare("TransparentColour") == 0);
     r1->display();
     cout << endl;
 
 
-    Rectangle *r2 = new Rectangle( 0, 8, 10, 2, "r2", "GREEN", "WHITE");
-    cout << r2->getcolorOutline() << endl;
-    assert(r2->getcolorOutline().compare("GREEN") == 0);
-    assert(r2->getcolorFill().compare("WHITE") == 0);
+    Rectangle *r2 = new Rectangle( 0, 8, 10, 2, "r2");
     r2->display();
     cout << endl;
 
@@ -81,7 +80,7 @@ int main()
     r1->display();
     cout << endl;
 
-    assert(r1->toSVG().compare("<rect x=\"10\" y=\"5\" width=\"100\" height=\"200\" stroke=\"BLACK\" fill=\"transparent\"/>") == 0);
+    assert(r1->toSVG().compare("<rect x=\"10\" y=\"5\" width=\"100\" height=\"200\" stroke=\"rgba(0,0,0,1)\" fill=\"rgba(255,255,255,1)\"/>") == 0);
     cout << r1->toSVG() << endl;
 
     cout << endl;

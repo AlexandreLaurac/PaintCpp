@@ -8,7 +8,7 @@
 using namespace std;
 
 
-Ligne::Ligne(const int x1, const int y1, const int x2, const int y2, const string& label, const string& colorOutline, const string& colorFill) : Forme(label, colorOutline, colorFill) {
+Ligne::Ligne(const int x1, const int y1, const int x2, const int y2, const string& label, const Couleur colorOutline, const Couleur colorFill) : Forme(label, colorOutline, colorFill) {
 	pointStart.x = x1;
 	pointStart.y = y1;
 
@@ -62,7 +62,7 @@ void Ligne::display() const {
 	pointStart.display();
 	cout << " et de fin ";
 	pointEnd.display();
-	cout << " ****Couleur outline:" << colorOutline;
+	cout << " **** Couleur outline:" << colorOutline.toString();
 }
 
 // Méthodes virtuelles
@@ -82,7 +82,7 @@ string Ligne::toSVG(){
 	string y1 = to_string(pointStart.y);
 	string x2 = to_string(pointEnd.x);
 	string y2 = to_string(pointEnd.y);
-	string outline = colorOutline;
+	string outline = colorOutline.toString();
 
 
 	return "<line x1=\""+x1+"\" y1=\""+y1+"\" x2=\""+x2+"\" y2=\""+y2+"\" stroke=\""+outline+"\" />";	

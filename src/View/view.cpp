@@ -176,16 +176,9 @@ void MyDrawingPanel::OpenFile(wxString fileName)
 //------------------------------------------------------------------------
 void MyDrawingPanel::SaveFile(wxString fileName)
 {
-	// just to create a tiny file
-	FILE* f = fopen(fileName, "w") ;
-	if (!f)
-		wxMessageBox(wxT("Cannot save file"));
-	else
-	{
-		fprintf(f, "S1102 software can create and write a file") ;
-		wxMessageBox(wxT("The file was saved")) ;
-		fclose(f) ;
-	}
+	m_parentFrame->GetControler()->GetDessin().saveSVG(fileName.mb_str());
+	wxMessageBox(wxT("The file was saved")) ;
+
 }
 
 

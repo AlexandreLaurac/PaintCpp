@@ -13,7 +13,7 @@ class Oval : public Forme
     
 public:          
     Oval(){};                           
-    Oval(const int x, const int y, const int w, const int h, const std::string& label, const std::string& colorOutline, const std::string& colorFill); // constructeur avec couleurs perso
+    Oval(const int x, const int y, const int w, const int h, const std::string& label, const Couleur colorOutline, const Couleur colorFill); // constructeur avec couleurs perso
     Oval(const int x, const int y, const int w, const int h, const std::string& label); // constructeur avec couleurs par défauts
     Oval(const Oval& oval);
 

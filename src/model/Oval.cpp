@@ -8,7 +8,7 @@
 using namespace std;
 
 
-Oval::Oval(const int x, const int y, const int w, const int h, const string& label, const string& colorOutline, const string& colorFill) : Forme(label, colorOutline, colorFill) {
+Oval::Oval(const int x, const int y, const int w, const int h, const string& label, const Couleur colorOutline, const Couleur colorFill) : Forme(label, colorOutline, colorFill) {
 	topLeftCorner.x = x;
 	topLeftCorner.y = y;
 	width = w;
@@ -56,7 +56,8 @@ void Oval::display() const {
 	cout << label << " de coin ";
 	topLeftCorner.display();
 	cout << " de largeur=" << width << " et de hauteur=" << height;
-	cout << " *** Outline : " << colorOutline << " & Fill : " << colorFill;
+	cout << " *** Outline : " << colorOutline.toString();
+	cout << " & Fill : " << colorFill.toString();
 }
 
 // Méthodes virtuelles
@@ -83,12 +84,9 @@ string Oval::toSVG(){
 	string cy = to_string(topLeftCorner.y + height/2);
 	string rx = to_string(width/2);
 	string ry = to_string(height/2);
-	string outline = colorOutline;
-	string fill = colorFill;
 
-	if (fill.compare("TransparentColour") == 0){
-		fill = "transparent";
-	}
+	string outline = colorOutline.toString();
+	string fill = colorFill.toString();
 
 	return "<ellipse cx=\""+cx+"\" cy=\""+cy+"\" rx=\""+rx+"\" ry=\""+ry+"\" stroke=\""+outline+"\" fill=\""+fill+"\"/>";	
 }
