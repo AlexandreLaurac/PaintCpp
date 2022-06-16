@@ -120,7 +120,7 @@ class MyFrame : public wxFrame
         void RefreshDrawing(){m_drawingPanel->Refresh() ;} ;
 		void SetControler(Controler * controler) ;
 
-    protected:
+    protected :
         void OnQuit(wxCommandEvent& event);
         void OnAbout(wxCommandEvent& event);
         void OnOpenFile(wxCommandEvent& WXUNUSED(event) ) ;

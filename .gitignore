@@ -79,3 +79,8 @@ CMakeFiles/skeleton.dir/src/model/Oval.cpp.o
 src/model/test/CMakeFiles/test.dir/users/info/etu-as/auffroyt/S2301/projet_gui_c++/projet_GUI/src/model/Couleur.cpp.o
 fichier.svg
 CMakeFiles/skeleton.dir/src/model/Ligne.cpp.o
+CMakeLists.txt
+CMakeFiles/skeleton.dir/src/View/MyFrame.cpp.o
+CMakeFiles/skeleton.dir/src/View/MyDrawingPanel.cpp.o
+CMakeFiles/skeleton.dir/src/View/MyControlPanel.cpp.o
+CMakeFiles/skeleton.dir/src/model/Couleur.cpp.o

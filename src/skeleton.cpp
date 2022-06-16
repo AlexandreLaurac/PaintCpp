@@ -36,9 +36,13 @@
 #include <wx/file.h>
 #include <wx/bitmap.h>
 
-#include "view.h"
+#include "constants.h"
+#include "MyFrame.h"
+#include "MyControlPanel.h"
+#include "MyDrawingPanel.h"
 
 #include "controler.h"
+
 
 //************************************************************************
 // Application class
