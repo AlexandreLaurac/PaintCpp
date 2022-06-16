@@ -38,6 +38,7 @@ public:
 
     virtual Point getCentre() const = 0 ;
     double getDistancePoint(int x, int y) const ;
+    virtual bool Contains(int x, int y) const = 0 ;
 
 
 	// Fonctions utilitaires

@@ -37,6 +37,7 @@ public:
     
     virtual Point getCentre() const ;
     //virtual double getDistancePoint(int x, int y) const ;
+    virtual bool Contains(int x, int y) const {return false ;} ; // TEMPORAIRE
 
 
 private: 

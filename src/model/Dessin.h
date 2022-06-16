@@ -11,7 +11,7 @@ class Dessin
 {
 
 public:          
-    Dessin(){};                           
+    Dessin(){ currentForm = nullptr ; };                           
 
     // Setters
     void addForme(Forme* formeToAdd);
@@ -19,6 +19,9 @@ public:
 
     // Getters
     std::vector<Forme*> getList() const;
+
+    // Setters
+    void SetCurrentForm(Forme * form) ;
 
     // Additional methods
     void deleteList();
@@ -30,7 +33,7 @@ public:
 
 private: 
     std::vector<Forme*> listFormes;
-
+    Forme * currentForm ;
 };
 
 #endif

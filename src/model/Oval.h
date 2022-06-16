@@ -43,6 +43,8 @@ public:
 
     virtual Point getCentre() const ;
     //virtual double getDistancePoint(const Point & point) const ;
+    bool Contains(int x, int y) const ;
+
 
 private: 
     Point topLeftCorner;        

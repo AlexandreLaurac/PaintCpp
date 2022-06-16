@@ -3,7 +3,6 @@
 #include "MyFrame.h"
 #include "controler.h"
 
-
 //------------------------------------------------------------------------
 MyDrawingPanel::MyDrawingPanel(wxWindow *parent) : wxPanel(parent)
 // In this constructor, bind some mouse events and the paint event with the appropriate methods
@@ -29,7 +28,7 @@ void MyDrawingPanel::OnMouseLeftDown(wxMouseEvent &event)
 	{
 		case ID_MODE_SELECTION :
 		{
-//			m_parentFrame->GetControler()->SelectionForm(event.m_x, event.m_y) ;
+			m_parentFrame->GetControler()->FormSelection(event.m_x, event.m_y) ;
 			break ;
 		}
 		case ID_MODE_FORM :

@@ -1,5 +1,8 @@
 #include "controler.h"
-#include "view.h"
+#include "constants.h"
+#include "MyFrame.h"
+#include "MyControlPanel.h"
+
 
 #include <cmath>
 
@@ -119,4 +122,17 @@ void Controler::FormModification (int x, int y)
                 line->setPointEnd(x,y) ;
             }
     }
+}
+
+void Controler::FormSelection (int x, int y)
+{
+    for (Forme * form : m_dessin.getList())
+    {
+        if (form->Contains(x,y))
+        {
+            m_dessin.SetCurrentForm(form) ;
+            form->setColorOutline(Couleur(255,0,0,1)) ;
+            return ;
+        }
+    }    
 }
