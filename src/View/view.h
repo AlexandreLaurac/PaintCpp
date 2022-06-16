@@ -33,12 +33,20 @@ enum
 	ID_BUTTON1,
 	ID_SLIDER1,
 	ID_CHECKBOX1,
-	ID_BUTTON2,    // Bouton rectangle du panneau de contrôle
-	ID_BUTTON3,    // Bouton ovale du panneau de contrôle
-	ID_BUTTON4,    // Bouton ligne du panneau de contrôle
+	ID_BUTTON_RECT,    // Bouton rectangle du panneau de contrôle
+	ID_BUTTON_OVAL,    // Bouton ovale du panneau de contrôle
+	ID_BUTTON_LINE,    // Bouton ligne du panneau de contrôle
+	ID_BUTTON_SELECT,  // Bouton pour la sélection d'une forme
+	// ID de mode
+	ID_MODE_NONE,
+	ID_MODE_FORM,
+	ID_MODE_SELECTION,
+	// ID de Formes
+	ID_FORM_NONE,
 	ID_RECT,
 	ID_OVAL,
 	ID_LINE,
+	// ID de souris
 	ID_MOUSELEFTUP,
 	ID_MOUSELEFTDOWN
 } ;
@@ -64,6 +72,7 @@ class MyControlPanel : public wxPanel
 		void OnButtonRectangle (wxCommandEvent &event) ;
 		void OnButtonOval (wxCommandEvent &event) ;
 		void OnButtonLine (wxCommandEvent &event) ;
+		void OnButtonSelection (wxCommandEvent &event) ;
 
 		MyFrame * m_parentFrame ;
 		wxButton * m_button ;
@@ -72,6 +81,7 @@ class MyControlPanel : public wxPanel
 		wxButton * m_buttonRectangle ;		
 		wxButton * m_buttonOval ;
 		wxButton * m_buttonLine ;
+		wxButton * m_buttonSelection ;
 } ;
 
 

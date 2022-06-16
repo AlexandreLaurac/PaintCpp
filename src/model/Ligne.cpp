@@ -89,4 +89,9 @@ string Ligne::toSVG(){
 }
 
 
-
+Point Ligne::getCentre() const
+{
+	int x = (int) (getPointStart().x + getPointEnd().x) / 2 ;
+	int y = (int) (getPointStart().y + getPointEnd().y) / 2 ;
+	return Point(x,y) ;
+}

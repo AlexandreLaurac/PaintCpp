@@ -15,6 +15,8 @@ public :
 
 	void display() const;
 
+	double distancePoint (int x, int y) const ;
+
 	int x;
 	int y;
 };

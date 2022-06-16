@@ -32,16 +32,20 @@ MyControlPanel::MyControlPanel(wxWindow *parent) : wxPanel(parent)
 	Bind(wxEVT_CHECKBOX, &MyControlPanel::OnCheckBox, this, ID_CHECKBOX1) ;
 
 	y+= WIDGET_Y_STEP ;
-	m_buttonRectangle = new wxButton(this, ID_BUTTON2, wxT("Rectangle"), wxPoint(10, y)) ;
-	Bind(wxEVT_BUTTON, &MyControlPanel::OnButtonRectangle, this, ID_BUTTON2) ;
+	m_buttonRectangle = new wxButton(this, ID_BUTTON_RECT, wxT("Rectangle"), wxPoint(10, y)) ;
+	Bind(wxEVT_BUTTON, &MyControlPanel::OnButtonRectangle, this, ID_BUTTON_RECT) ;
 
 	y+= WIDGET_Y_STEP ;
-	m_buttonOval = new wxButton(this, ID_BUTTON3, wxT("Ovale"), wxPoint(10, y)) ;
-	Bind(wxEVT_BUTTON, &MyControlPanel::OnButtonOval, this, ID_BUTTON3) ;
+	m_buttonOval = new wxButton(this, ID_BUTTON_OVAL, wxT("Ovale"), wxPoint(10, y)) ;
+	Bind(wxEVT_BUTTON, &MyControlPanel::OnButtonOval, this, ID_BUTTON_OVAL) ;
 
 	y+= WIDGET_Y_STEP ;
-	m_buttonLine = new wxButton(this, ID_BUTTON4, wxT("Ligne"), wxPoint(10, y)) ;
-	Bind(wxEVT_BUTTON, &MyControlPanel::OnButtonLine, this, ID_BUTTON4) ;
+	m_buttonLine = new wxButton(this, ID_BUTTON_LINE, wxT("Ligne"), wxPoint(10, y)) ;
+	Bind(wxEVT_BUTTON, &MyControlPanel::OnButtonLine, this, ID_BUTTON_LINE) ;
+
+	y+= WIDGET_Y_STEP + 10 ;
+	m_buttonLine = new wxButton(this, ID_BUTTON_SELECT, wxT("Sélection"), wxPoint(10, y)) ;
+	Bind(wxEVT_BUTTON, &MyControlPanel::OnButtonSelection, this, ID_BUTTON_SELECT) ;
 }
 
 //------------------------------------------------------------------------
@@ -80,6 +84,11 @@ void MyControlPanel::OnButtonOval(wxCommandEvent &event)
 void MyControlPanel::OnButtonLine(wxCommandEvent &event)
 {
 	m_parentFrame->GetControler()->SetFormId(ID_LINE) ;
+}
+
+void MyControlPanel::OnButtonSelection(wxCommandEvent &event)
+{
+	//m_parentFrame->GetControler()->SetFormId(ID_LINE) ;
 }
 
 

@@ -1,5 +1,8 @@
 #include <iostream>
+#include <cmath>
+
 #include "Point.h"
+
 
 using namespace std;
 
@@ -23,3 +26,8 @@ void Point::display() const{
 	cout << "(" << x << "," << y << ")";
 }
 
+
+double Point::distancePoint(int x, int y) const
+{
+	return sqrt ((this->x-x)*(this->x-x)+(this->y-y)*(this->y-y)) ;
+}

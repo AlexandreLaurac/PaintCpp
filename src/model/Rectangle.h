@@ -24,7 +24,7 @@ public:
     void setHeight(int h);
 
     // Getters
-    const Point& getCorner() const;    
+    const Point& getCorner() const;
     int getWidth() const;
     int getHeight() const;
 
@@ -35,6 +35,9 @@ public:
 	virtual void move(int offsetX, int offsetY);
     virtual void draw(wxPaintDC& dc);
     virtual std::string toSVG();
+    
+    virtual Point getCentre() const ;
+    //virtual double getDistancePoint(int x, int y) const ;
 
 
 private: 

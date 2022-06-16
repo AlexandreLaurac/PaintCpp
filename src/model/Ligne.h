@@ -34,6 +34,9 @@ public:
 	virtual void move(int offsetX, int offsetY);
     virtual void draw(wxPaintDC& dc);
     virtual std::string toSVG();
+    
+    virtual Point getCentre() const ;
+    //virtual double getDistancePoint(int x, int y) const ;
 
 
 private: 

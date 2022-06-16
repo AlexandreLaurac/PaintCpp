@@ -7,11 +7,16 @@
 
 Controler::Controler(MyFrame * frame)
 {
-    m_formId = 0 ; // aucune forme sélectionnée par défaut
+    m_modeId = ID_MODE_NONE ; // aucun mode de fonctionnement par défaut
+    m_formId = ID_FORM_NONE ; // aucune forme sélectionnée par défaut
     m_appFrame = frame ;
     frame->SetControler (this) ;
 }
 
+void Controler::SetModeId(int modeId)
+{
+    m_modeId = modeId ;
+}
 
 void Controler::SetFormId(int formId)
 {

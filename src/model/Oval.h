@@ -38,6 +38,8 @@ public:
     virtual void draw(wxPaintDC& dc);
     virtual std::string toSVG();
 
+    virtual Point getCentre() const ;
+    //virtual double getDistancePoint(const Point & point) const ;
 
 private: 
     Point topLeftCorner;         
