@@ -25,7 +25,9 @@ class MyControlPanel : public wxPanel
 		void OnButtonOval (wxCommandEvent &event) ;
 		void OnButtonLine (wxCommandEvent &event) ;
 		void OnButtonSelection (wxCommandEvent &event) ;
-		void OnColorPicker (wxColourPickerEvent &event) ;
+
+		void OnColorPickerOutline (wxColourPickerEvent &event) ;
+		void OnColorPickerFill (wxColourPickerEvent &event) ;
 
 		MyFrame * m_parentFrame ;
 		wxButton * m_button ;
@@ -35,7 +37,9 @@ class MyControlPanel : public wxPanel
 		wxButton * m_buttonOval ;
 		wxButton * m_buttonLine ;
 		wxButton * m_buttonSelection ;
-		wxColourPickerCtrl * m_colourPicker;
+
+		wxColourPickerCtrl * m_colourPickerOutline;
+		wxColourPickerCtrl * m_colourPickerFill;
 } ;
 
 

@@ -48,8 +48,13 @@ MyControlPanel::MyControlPanel(wxWindow *parent) : wxPanel(parent)
 
 
 	y+= WIDGET_Y_STEP + 10 ;
-	m_colourPicker= new wxColourPickerCtrl(this, ID_COLOURPICKER, wxColour(0,0,0,255), wxPoint(10, y), wxDefaultSize, 0, wxDefaultValidator, wxT("Sélection")) ;
-	Bind(wxEVT_COLOURPICKER_CHANGED, &MyControlPanel::OnColorPicker, this, ID_COLOURPICKER) ;
+	m_colourPickerOutline = new wxColourPickerCtrl(this, ID_COLOURPICKER_OUTLINE, wxColour(0,0,0,255), wxPoint(10, y), wxDefaultSize, 0, wxDefaultValidator, wxT("Couleur des contours")) ;
+	Bind(wxEVT_COLOURPICKER_CHANGED, &MyControlPanel::OnColorPickerOutline, this, ID_COLOURPICKER_OUTLINE) ;
+
+
+	y+= WIDGET_Y_STEP + 10 ;
+	m_colourPickerFill = new wxColourPickerCtrl(this, ID_COLOURPICKER_FILL, wxColour(0,0,0,255), wxPoint(10, y), wxDefaultSize, 0, wxDefaultValidator, wxT("Couleur de remplissage")) ;
+	Bind(wxEVT_COLOURPICKER_CHANGED, &MyControlPanel::OnColorPickerFill, this, ID_COLOURPICKER_FILL) ;
 }
 
 //------------------------------------------------------------------------
@@ -100,9 +105,14 @@ void MyControlPanel::OnButtonSelection(wxCommandEvent &event)
 
 }
 
-void MyControlPanel::OnColorPicker(wxColourPickerEvent &event)
+void MyControlPanel::OnColorPickerOutline(wxColourPickerEvent &event)
 {
 	wxColour color = event.GetColour();
-	std::cout << (int) color.Red() << std::endl;
-	m_parentFrame->GetControler()->SetCouleurCourante((int)color.Red(), (int)color.Green(), (int)color.Blue(), (int)color.Alpha());
+	m_parentFrame->GetControler()->SetOutlineColor((int)color.Red(), (int)color.Green(), (int)color.Blue(), (int)color.Alpha());
+}
+
+void MyControlPanel::OnColorPickerFill(wxColourPickerEvent &event)
+{
+	wxColour color = event.GetColour();
+	m_parentFrame->GetControler()->SetFillColor((int)color.Red(), (int)color.Green(), (int)color.Blue(), (int)color.Alpha());
 }
