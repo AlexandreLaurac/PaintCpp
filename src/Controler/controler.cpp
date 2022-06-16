@@ -189,3 +189,5 @@ void Controler::FormSelection (int x, int y)
         currentForm->setColorOutline(m_dessin.getSavedColor()) ;
     }
 }
+
+// Commentaire à la con
