@@ -8,12 +8,13 @@
 using namespace std;
 
 
-Rectangle::Rectangle(const int x, const int y, const int w, const int h, const string& label, const string& colorOutline, const string& colorFill) : Forme(label, colorOutline, colorFill) {
+Rectangle::Rectangle(const int x, const int y, const int w, const int h, const string& label,  const Couleur colorOutline,  const Couleur colorFill) : Forme(label, colorOutline, colorFill) {
 	topLeftCorner.x = x;
 	topLeftCorner.y = y;
 	width = w;
 	height = h;
 }
+
 
 Rectangle::Rectangle(const int x, const int y, const int w, const int h, const string& label) : Forme(label) {
 	topLeftCorner.x = x;
@@ -56,7 +57,8 @@ void Rectangle::display() const {
 	cout << label << " de coin ";
 	topLeftCorner.display();
 	cout << " de largeur=" << width << " et de hauteur=" << height;
-	cout << " *** Outline : " << colorOutline << " & Fill : " << colorFill;
+	cout << " *** Outline : " << colorOutline.toString();
+	cout << " & Fill : " << colorFill.toString();
 }
 
 // Méthodes virtuelles
@@ -75,6 +77,12 @@ float Rectangle::perimeter() const {
 
 
 void Rectangle::draw(wxPaintDC& dc){
+	wxPen pen = wxPen(*(wxBLUE));
+	dc.SetPen(pen);
+
+	wxBrush brush = wxBrush(*(wxBLUE_BRUSH));
+	dc.SetBrush(brush);
+	
 	dc.DrawRectangle(wxPoint(topLeftCorner.x, topLeftCorner.y), wxSize(width,height)) ;
 }
 
@@ -83,13 +91,9 @@ string Rectangle::toSVG(){
 	string yStr = to_string(topLeftCorner.y);
 	string wStr = to_string(width);
 	string hStr = to_string(height);
-	string outline = colorOutline;
-	string fill = colorFill;
 
-
-	if (fill.compare("TransparentColour") == 0){
-		fill = "transparent";
-	}
+	string outline = colorOutline.toString();
+	string fill = colorFill.toString();
 
 	return "<rect x=\""+xStr+"\" y=\""+yStr+"\" width=\""+wStr+"\" height=\""+hStr+"\" stroke=\""+outline+"\" fill=\""+fill+"\"/>";	
 }
