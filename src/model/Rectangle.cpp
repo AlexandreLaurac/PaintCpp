@@ -25,8 +25,12 @@ Rectangle::Rectangle(const int x, const int y, const int w, const int h, const s
 
 
 Rectangle::Rectangle(const Rectangle& rectangle) : Forme(rectangle.label){
-    topLeftCorner.x = rectangle.getCorner().x;
-	topLeftCorner.y = rectangle.getCorner().y;
+    topLeftCorner.x = rectangle.getTopLeftCorner().x;
+	topLeftCorner.y = rectangle.getTopLeftCorner().y;
+
+	pivotCorner.x = rectangle.getPivotCorner().x;
+	pivotCorner.y = rectangle.getPivotCorner().y;
+
 	width = rectangle.getWidth();
 	height = rectangle.getHeight();
 }
@@ -41,8 +45,20 @@ void Rectangle::setHeight(int h) {
     height = h;
 }
 
-const Point& Rectangle::getCorner() const {
+void Rectangle::setTopLeftCorner(const int x, const int y){
+	topLeftCorner.x = x;
+	topLeftCorner.y = y;
+}
+const Point& Rectangle::getTopLeftCorner() const {
     return topLeftCorner;
+}
+
+void Rectangle::setPivotCorner(const int x, const int y){
+	pivotCorner.x = x;
+	pivotCorner.y = y;
+}
+const Point& Rectangle::getPivotCorner() const {
+    return pivotCorner;
 }
 
 int Rectangle::getWidth() const {
@@ -96,12 +112,12 @@ string Rectangle::toSVG(){
 
 Point Rectangle::getCentre() const
 {
-	int x = (int) (getCorner().x + getWidth()/2) ;
-	int y = (int) (getCorner().y + getHeight()/2) ;
+	int x = (int) (getTopLeftCorner().x + getWidth()/2) ;
+	int y = (int) (getTopLeftCorner().y + getHeight()/2) ;
 	return Point(x,y) ;
 }
 
 bool Rectangle::Contains(int x, int y) const
 {
-	return ( (getCorner().x <= x && x <= getCorner().x+getWidth()) && (getCorner().y <= y && y <= getCorner().y+getHeight())) ;
+	return ( (getTopLeftCorner().x <= x && x <= getTopLeftCorner().x+getWidth()) && (getTopLeftCorner().y <= y && y <= getTopLeftCorner().y+getHeight())) ;
 }

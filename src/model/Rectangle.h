@@ -20,11 +20,14 @@ public:
     virtual ~Rectangle(){};
 
     // Setters
+    void setTopLeftCorner(const int x, const int y);
+    void setPivotCorner(const int x, const int y);
     void setWidth(int w);
     void setHeight(int h);
 
     // Getters
-    const Point& getCorner() const;
+    const Point& getTopLeftCorner() const;
+    const Point& getPivotCorner() const;
     int getWidth() const;
     int getHeight() const;
 
@@ -41,7 +44,8 @@ public:
     virtual bool Contains (int x, int y) const ;
 
 private: 
-    Point topLeftCorner;         
+    Point topLeftCorner;
+    Point pivotCorner;         
     int width;               
     int height;               
 
