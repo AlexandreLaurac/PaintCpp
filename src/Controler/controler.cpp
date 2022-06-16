@@ -1,16 +1,19 @@
+#include <cmath>
+#include <vector>
+#include <algorithm>
+
 #include "controler.h"
 #include "constants.h"
 #include "MyFrame.h"
 #include "MyControlPanel.h"
 
-
-#include <cmath>
-
 #include "Rectangle.h"
 #include "Oval.h"
 #include "Ligne.h"
 
+
 using namespace std;
+
 
 Controler::Controler(MyFrame * frame)
 {
@@ -144,16 +147,30 @@ void Controler::FormModification (int x, int y)
 
 void Controler::FormSelection (int x, int y)
 {
-    std::cout << "bonjour" << std::endl ;
-    //for (Forme * form : m_dessin.getList())
-    for (auto it = m_dessin.getList().rbegin() ; it != m_dessin.getList().rend() ; it++)
+    Forme * form ;
+    Forme * currentForm = m_dessin.getCurrentForm() ;
+
+    auto listeTemp = m_dessin.getList() ;
+    reverse(listeTemp.begin(), listeTemp.end());
+
+    for (Forme * form : listeTemp)
+    //for (auto it = m_dessin.getList().rbegin() ; it != m_dessin.getList().rend() ; ++it, i++)
     {
-        Forme * form = (*it) ;
+        //form = (*it) ;
         if (form->Contains(x,y))
         {
+            if (currentForm != nullptr)
+            {
+                currentForm->setColorOutline(m_dessin.getSavedColor()) ;
+            }
             m_dessin.SetCurrentForm(form) ;
+            m_dessin.SetSavedColor(form->getColorOutline()) ;
             form->setColorOutline(Couleur(255,0,0,1)) ;
             return ;
         }
-    }    
+    }
+    if (currentForm != nullptr)
+    {
+        currentForm->setColorOutline(m_dessin.getSavedColor()) ;
+    }
 }

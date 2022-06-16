@@ -118,5 +118,5 @@ Point Oval::getCentre() const
 
 bool Oval::Contains(int x, int y) const
 {
-	return ( (getCorner().x <= x && x <= getCorner().x+getWidth()) && (getCorner().y <= y && y <= getCorner().y+getHeight())) ;
+	return ( (getCornerTopLeft().x <= x && x <= getCornerTopLeft().x+getWidth()) && (getCornerTopLeft().y <= y && y <= getCornerTopLeft().y+getHeight())) ;
 }
