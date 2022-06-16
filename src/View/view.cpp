@@ -178,7 +178,6 @@ void MyDrawingPanel::SaveFile(wxString fileName)
 {
 	m_parentFrame->GetControler()->GetDessin().saveSVG(fileName.mb_str());
 	wxMessageBox(wxT("The file was saved")) ;
-
 }
 
 
