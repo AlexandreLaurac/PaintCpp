@@ -92,6 +92,8 @@ void Controler::FormModification (int x, int y)
             {
                 Oval * oval = (Oval *) m_dessin.getList().back() ;
 
+                // Conditions to move dynamically the topLeftCorner
+
                 if ((x - oval->getPivotCorner().x) < 0 && (y - oval->getPivotCorner().y) > 0){
 
                     oval->setCornerTopLeft(oval->getPivotCorner().x - oval->getWidth(), oval->getPivotCorner().y);
