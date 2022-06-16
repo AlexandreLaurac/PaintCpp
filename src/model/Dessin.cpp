@@ -63,6 +63,15 @@ void Dessin::deleteList() {
 
 void Dessin::drawAllFormes(wxPaintDC& dc) const {
 	for (Forme* forme : listFormes){
+
+		array<unsigned int,4> colorOutline = forme->getColorOutline().toArray(); 
+		array<unsigned int,4> colorFill = forme->getColorFill().toArray(); 
+
+		wxColour c1 = wxColour(colorOutline[0], colorOutline[1], colorOutline[2], (int) colorOutline[3]*255);
+		wxColour c2 = wxColour(colorFill[0], colorFill[1], colorFill[2], (int) colorFill[3]*255);
+
+		dc.SetPen(c1);
+		dc.SetBrush(c2);
 		forme -> draw(dc);
 	}
 }
