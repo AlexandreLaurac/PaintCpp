@@ -13,6 +13,7 @@ class Controler
         int m_mouseId ;
         MyFrame * m_appFrame ;
         Dessin m_dessin ;
+
     public :
         Controler (MyFrame * frame) ;
         int GetModeId () const ;
@@ -24,6 +25,7 @@ class Controler
         Dessin GetDessin () { return m_dessin ;} ;
         void FormCreation (int x, int y) ;
         void FormModification (int x, int y) ;
+        void FormSelection (int x, int y) ;
 } ;
 
 

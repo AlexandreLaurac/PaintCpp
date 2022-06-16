@@ -5,6 +5,7 @@
 
 #include "Oval.h"
 
+
 using namespace std;
 
 
@@ -97,4 +98,9 @@ Point Oval::getCentre() const
 	int x = (int) (getCorner().x + getWidth()/2) ;
 	int y = (int) (getCorner().y + getHeight()/2) ;
 	return Point(x,y) ;
+}
+
+bool Oval::Contains(int x, int y) const
+{
+	return ( (getCorner().x <= x && x <= getCorner().x+getWidth()) && (getCorner().y <= y && y <= getCorner().y+getHeight())) ;
 }

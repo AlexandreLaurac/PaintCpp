@@ -100,3 +100,8 @@ Point Rectangle::getCentre() const
 	int y = (int) (getCorner().y + getHeight()/2) ;
 	return Point(x,y) ;
 }
+
+bool Rectangle::Contains(int x, int y) const
+{
+	return ( (getCorner().x <= x && x <= getCorner().x+getWidth()) && (getCorner().y <= y && y <= getCorner().y+getHeight())) ;
+}

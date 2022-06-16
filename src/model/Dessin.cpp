@@ -42,6 +42,12 @@ vector<Forme*> Dessin::getList() const{
 }
 
 
+void Dessin::SetCurrentForm(Forme * form)
+{
+	currentForm = form ;
+}
+
+
 void Dessin::displayList() const {
 	cout << "listFormes={";
 	for (size_t i = 0; i < listFormes.size(); i++){
