@@ -77,7 +77,7 @@ float Rectangle::perimeter() const {
 
 
 void Rectangle::draw(wxPaintDC& dc){
-	dc.DrawRectangle(wxPoint(topLeftCorner.x, topLeftCorner.y), wxSize(width,height)) ;
+	dc.DrawRectangle(topLeftCorner.x, topLeftCorner.y, width, height) ;
 }
 
 string Rectangle::toSVG(){
