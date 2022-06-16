@@ -77,12 +77,6 @@ float Rectangle::perimeter() const {
 
 
 void Rectangle::draw(wxPaintDC& dc){
-	wxPen pen = wxPen(*(wxBLUE));
-	dc.SetPen(pen);
-
-	wxBrush brush = wxBrush(*(wxBLUE_BRUSH));
-	dc.SetBrush(brush);
-	
 	dc.DrawRectangle(wxPoint(topLeftCorner.x, topLeftCorner.y), wxSize(width,height)) ;
 }
 
