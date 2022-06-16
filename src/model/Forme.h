@@ -7,12 +7,15 @@
     #include <wx/wx.h>
 #endif
 
+#include <array>
+#include <Couleur.h>
+
 
 class Forme {
 public:
     Forme();
     Forme(const std::string& label); // Avec un label
-    Forme(const std::string& label, const std::string& colorOutline, const std::string& colorFill); // Avec un label et des couleurs
+    Forme(const std::string& label, const Couleur colorOutline, const Couleur colorFill); // Avec un label et des couleurs
     Forme(const Forme& forme); // Construction par recopie
     virtual ~Forme();
 
@@ -21,13 +24,13 @@ public:
 
     // Setter
     void setLabel(const std::string& str);
-    void setcolorOutline(const std::string& str);
-    void setcolorFill(const std::string& str);
+    void setColorOutline(const Couleur colorOutline);
+    void setColorFill(const Couleur colorFill);
 
     // Getter
     std::string getLabel() const;
-    std::string getcolorOutline() const;
-    std::string getcolorFill() const;
+    const Couleur getColorOutline() const;
+    const Couleur getColorFill() const;
 
     virtual float surface() const { return 0.0f; }
     virtual float perimeter() const { return 0.0f; }
@@ -46,9 +49,11 @@ public:
 
 protected: 
     std::string label;
-    std::string colorOutline;
-    std::string colorFill;
 
+    Couleur colorOutline; // [R,G,B,Alpha]
+    Couleur colorFill; // [R,G,B,Alpha]
+
+private:
 
 };
 

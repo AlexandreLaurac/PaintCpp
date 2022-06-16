@@ -5,7 +5,7 @@ using namespace std;
 
 Forme::Forme(){}
 
-Forme::Forme(const string& label, const string& colorOutline, const string& colorFill) {
+Forme::Forme(const string& label, const Couleur colorOutline, const Couleur colorFill){
     this->label = label;
     this->colorOutline = colorOutline;
     this->colorFill = colorFill;
@@ -13,8 +13,8 @@ Forme::Forme(const string& label, const string& colorOutline, const string& colo
 
 Forme::Forme(const string& label) {
     this->label = label;
-    this->colorOutline = "BLACK";
-    this->colorFill = "TransparentColour";
+    colorOutline = Couleur(0,0,0,1);
+    colorFill = Couleur(255,255,255,1);
 }
 
 Forme::Forme(const Forme& forme) {
@@ -41,18 +41,17 @@ string Forme::getLabel() const {
     return label;
 }
 
-void Forme::setcolorOutline(const string& colorOutline) {
+
+void Forme::setColorOutline(const Couleur colorOutline) {
 	this->colorOutline = colorOutline;
 }
-
-string Forme::getcolorOutline() const {
+const Couleur Forme::getColorOutline() const {
     return colorOutline;
 }
 
-void Forme::setcolorFill(const string& colorFill) {
+void Forme::setColorFill(const Couleur colorFill) {
 	this->colorFill = colorFill;
 }
-
-string Forme::getcolorFill() const {
+const Couleur Forme::getColorFill() const {
     return colorFill;
 }
