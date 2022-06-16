@@ -126,8 +126,11 @@ void Controler::FormModification (int x, int y)
 
 void Controler::FormSelection (int x, int y)
 {
-    for (Forme * form : m_dessin.getList())
+    std::cout << "bonjour" << std::endl ;
+    //for (Forme * form : m_dessin.getList())
+    for (auto it = m_dessin.getList().rbegin() ; it != m_dessin.getList().rend() ; it++)
     {
+        Forme * form = (*it) ;
         if (form->Contains(x,y))
         {
             m_dessin.SetCurrentForm(form) ;
