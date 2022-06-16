@@ -10,7 +10,7 @@ find_package(wxWidgets REQUIRED COMPONENTS net core base)
 include(${wxWidgets_USE_FILE})
 
 # add the executable
-add_executable(skeleton ./src/skeleton.cpp  ./src/View/view.cpp ./src/Controler/controler.cpp ./src/model/Rectangle.cpp ./src/model/Dessin.cpp src/model/Forme.cpp src/model/Point.cpp src/model/Oval.cpp src/model/Ligne.cpp)
+add_executable(skeleton ./src/skeleton.cpp  ./src/View/MyFrame.cpp ./src/View/MyControlPanel.cpp ./src/View/MyDrawingPanel.cpp ./src/Controler/controler.cpp ./src/model/Rectangle.cpp ./src/model/Dessin.cpp src/model/Forme.cpp src/model/Point.cpp src/model/Oval.cpp src/model/Ligne.cpp ./src/model/Couleur.cpp)
 target_link_libraries(skeleton ${wxWidgets_LIBRARIES})
 
 include_directories(src src/View src/model src/Controler)
