@@ -13,6 +13,8 @@ using namespace std;
 
 int main()
 {
+    //****** NE FONCTIONNE PLUS, CE FICHIER A PERMIS DE TESTER LE MODEL AU DEBUT
+    // DES MODIFICATIONS ONT ETE APPORTEE DEPUIS ET NON PAS ETE IMPLMENTEE ICI
     Couleur bufferColor;
 
     cout << endl;
