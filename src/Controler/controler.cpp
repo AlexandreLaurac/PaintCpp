@@ -25,7 +25,6 @@ Controler::Controler(MyFrame * frame)
 
 void Controler::SetInformations(Forme* forme) {
     string buffer = forme->toString();
-    cout << buffer << endl;
     m_appFrame->SetStatusText(buffer);
 }
 
@@ -191,6 +190,8 @@ void Controler::FormSelection (int x, int y)
             {
                 currentForm->setColorOutline(m_dessin.getSavedColor()) ;
             }
+            form->setSelected(true);
+
             m_dessin.SetCurrentForm(form) ;
             m_dessin.SetSavedColor(form->getColorOutline()) ;
             form->setColorOutline(Couleur(255,0,0,1)) ;
@@ -200,6 +201,7 @@ void Controler::FormSelection (int x, int y)
     if (currentForm != nullptr)
     {
         currentForm->setColorOutline(m_dessin.getSavedColor()) ;
+        currentForm->setSelected(false);
     }
 }
 
