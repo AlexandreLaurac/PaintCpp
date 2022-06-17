@@ -21,7 +21,7 @@ class MyDrawingPanel : public wxPanel
 		void OnMouseLeftDown (wxMouseEvent &event) ;
 		void OnMouseLeftUp (wxMouseEvent &event) ;
 		void OnPaint (wxPaintEvent &event) ;
-		void OnDelete (wxKeyEvent & event) ;
+    	void OnLeftDoubleClick (wxMouseEvent & event) ;
 		MyFrame * m_parentFrame ;
 } ;
 
