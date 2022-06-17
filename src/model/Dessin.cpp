@@ -123,6 +123,20 @@ void Dessin::saveSVG(const char* path){
 }
 
 void Dessin::openSVG(const char* path){
+
+	/* L'alogrithme est le suivant
+
+	A chaque appele, la liste de formes de la classe Dessin est vidée.
+	Le fichier passé en argument est lu ligne à ligne.
+
+	(*)La ligne est vidée des espaces inutiles avant et après.
+	Si le deuxième élement de la ligne est un 'r' alors on appele un contructeur de rectangle avec comme paramètre la ligne courante.
+	En théorie toutes les formes devraient pouvoir se construire avec leur balise svg correspondate (implémenté seulement pour rectangle).
+	Puis ajout de cette forme crée à partir de la balise à la liste des formes de la classe Dessin
+
+	Tant que l'on est pas à la fin du fichier on boucle sur (*)
+	*/
+	
 	deleteList();
 
 	FILE* f = fopen(path, "r") ;
