@@ -14,6 +14,7 @@ public:
     Rectangle(const int x, const int y, const int w, const int h, const std::string& label, Couleur colorOutline, Couleur colorFill); // constructeur avec couleurs perso
     Rectangle(const int x, const int y, const int w, const int h, const std::string& label); // constructeur avec couleurs par défauts
     Rectangle(const Rectangle& rectangle);
+    Rectangle(std::string svg); // Constructeur par une ligne svg
 
     Rectangle& operator=(const Rectangle& rectangleToCopy);
 

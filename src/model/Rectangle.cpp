@@ -35,6 +35,31 @@ Rectangle::Rectangle(const Rectangle& rectangle) : Forme(rectangle.label){
 	height = rectangle.getHeight();
 }
 
+Rectangle::Rectangle(string line) : Forme("rectangle"){
+	line.erase(0, line.find("=\"") + 2);
+	string x = line.substr(0, line.find("\""));
+	topLeftCorner.x = stoi(x);
+
+	line.erase(0, line.find("=\"") + 2);
+	string y = line.substr(0, line.find("\""));
+	topLeftCorner.y = stoi(y);
+
+	line.erase(0, line.find("=\"") + 2);
+	string w = line.substr(0, line.find("\""));
+	width = stoi(w);
+
+	line.erase(0, line.find("=\"") + 2);
+	string h = line.substr(0, line.find("\""));
+	h = stoi(h);
+
+	line.erase(0, line.find("=\"") + 2);
+	string stroke = line.substr(0, line.find("\""));
+	colorOutline = Couleur(stroke);
+
+	line.erase(0, line.find("=\"") + 2);
+	string fill = line.substr(0, line.find("\""));
+	colorFill = Couleur(fill);
+}
 
 
 void Rectangle::setWidth(int w) {
