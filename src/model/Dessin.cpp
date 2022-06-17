@@ -1,7 +1,9 @@
 #include <string>
+#include <algorithm>
 #include <iostream>
 
 #include "Dessin.h"
+#include "Rectangle.h"
 
 using namespace std;
 
@@ -27,7 +29,7 @@ void Dessin::deleteForme(Forme* formeToDelete){
 			listFormes.erase(listFormes.begin()+i);
 			findForme = true;
 
-			delete formeToDelete;
+			delete formeToDelete; // Bug
 		}
 		i++;
 	}	
@@ -118,4 +120,37 @@ void Dessin::saveSVG(const char* path){
 		throw;
 	}
 
+}
+
+void Dessin::openSVG(const char* path){
+	deleteList();
+
+	FILE* f = fopen(path, "r") ;
+	if (f)
+	{
+		int c = getc(f);
+		while (c != EOF){
+			std::string line = "";
+			while (c != '\n' && c != -1){
+				line += c;
+				c = getc(f);
+			}
+
+			// Permet de trimer la chaine, TROUVER SUR INTERNET
+			auto it = find_if(line.begin(), line.end(),
+                    [](char c) {
+                        return !isspace<char>(c, locale::classic());
+                    });
+			line.erase(line.begin(), it);
+			// ************************************************
+
+			if (line[1] == 'r'){
+				Rectangle* r = new Rectangle(line);
+				addForme(r);
+			}
+
+			c = getc(f);
+		}
+		fclose(f) ;
+	}
 }
