@@ -101,12 +101,8 @@ void MyDrawingPanel::OnPaint(wxPaintEvent &event)
 void MyDrawingPanel::OpenFile(wxString fileName)
 {
 	// just to open (and close) any file
-	FILE* f = fopen(fileName, "r") ;
-	if (f)
-	{
-		wxMessageBox(wxT("The file was opened then closed")) ;
-		fclose(f) ;
-	}
+	m_parentFrame->GetControler()->GetDessin().openSVG(fileName);
+	Refresh();
 }
 
 //------------------------------------------------------------------------
