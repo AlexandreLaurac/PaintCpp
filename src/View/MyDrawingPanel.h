@@ -13,15 +13,15 @@ class MyDrawingPanel : public wxPanel
 {
 	public :
 		MyDrawingPanel (wxWindow * parent) ;
-		void OpenFile (wxString fileName) ;
-		void SaveFile (wxString fileName) ;
+		void openFile (wxString fileName) ;
+		void saveFile (wxString fileName) ;
 
 	private :
-		void OnMouseMove (wxMouseEvent &event) ;
-		void OnMouseLeftDown (wxMouseEvent &event) ;
-		void OnMouseLeftUp (wxMouseEvent &event) ;
-		void OnPaint (wxPaintEvent &event) ;
-    	void OnLeftDoubleClick (wxMouseEvent & event) ;
+		void onMouseMove (wxMouseEvent &event) ;
+		void onMouseLeftDown (wxMouseEvent &event) ;
+		void onMouseLeftUp (wxMouseEvent &event) ;
+		void onPaint (wxPaintEvent &event) ;
+    	void onLeftDoubleClick (wxMouseEvent & event) ;
 		MyFrame * m_parentFrame ;
 } ;
 

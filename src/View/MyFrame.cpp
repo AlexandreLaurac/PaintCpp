@@ -21,12 +21,12 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 	wxMenuBar *menuBar = new wxMenuBar();
 	menuBar->Append(fileMenu, wxT("&File"));
 
-	Bind(wxEVT_MENU, &MyFrame::OnOpenFile, this, ID_LOAD);
-	Bind(wxEVT_MENU, &MyFrame::OnSaveFile, this, ID_SAVE);
-	Bind(wxEVT_MENU, &MyFrame::OnQuit, this, ID_QUIT);
-	Bind(wxEVT_MENU, &MyFrame::OnAbout, this, ID_ABOUT);
-	Bind(wxEVT_CLOSE_WINDOW, &MyFrame::OnClose, this);
-	Bind(wxEVT_SIZE, &MyFrame::OnSize, this);
+	Bind(wxEVT_MENU, &MyFrame::onOpenFile, this, ID_LOAD);
+	Bind(wxEVT_MENU, &MyFrame::onSaveFile, this, ID_SAVE);
+	Bind(wxEVT_MENU, &MyFrame::onQuit, this, ID_QUIT);
+	Bind(wxEVT_MENU, &MyFrame::onAbout, this, ID_ABOUT);
+	Bind(wxEVT_CLOSE_WINDOW, &MyFrame::onClose, this);
+	Bind(wxEVT_SIZE, &MyFrame::onSize, this);
 
 	SetMenuBar( menuBar );
 
@@ -40,20 +40,20 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 	Centre() ; // Guess what it does ;-)
 }
 
-void MyFrame::SetControler (Controler * controler)
+void MyFrame::setControler (Controler * controler)
 {
 	m_controler = controler ;
 }
 
 //------------------------------------------------------------------------
-void MyFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
+void MyFrame::onQuit(wxCommandEvent& WXUNUSED(event))
 {
-	GetControler()->GetDessin().saveSVG("fichier.svg") ;
+	getControler()->getDessin().saveSVG("fichier.svg") ;
 	Close(true) ;
 }
 
 //------------------------------------------------------------------------
-void MyFrame::OnClose(wxCloseEvent& event)
+void MyFrame::onClose(wxCloseEvent& event)
 {
 	delete m_controlPanel ;
 	delete m_drawingPanel ;
@@ -61,7 +61,7 @@ void MyFrame::OnClose(wxCloseEvent& event)
 }
 
 //------------------------------------------------------------------------
-void MyFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
+void MyFrame::onAbout(wxCommandEvent& WXUNUSED(event))
 {
 	wxMessageBox(wxT("How to .. \n\n- use 2 panels (one for controls, one for drawings)\n- manage basic events (so that controls impact drawings)\n\n... with wxWidgets (3.0.2)\n\nPascal Bertolino UGA - GIPSA-lab, Grenoble - France\npascal.bertolino@gipsa-lab.fr"),
                   wxT(APP_NAME), wxOK | wxICON_INFORMATION ) ;
@@ -69,23 +69,23 @@ void MyFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
 }
 
 //------------------------------------------------------------------------
-void MyFrame::OnOpenFile(wxCommandEvent& WXUNUSED(event) )
+void MyFrame::onOpenFile(wxCommandEvent& WXUNUSED(event) )
 {
 	wxString filename = wxFileSelector(wxT("Select file"));
 	if ( !filename.empty() )
-		m_drawingPanel->OpenFile(filename) ;
+		m_drawingPanel->openFile(filename) ;
 }
 
 //------------------------------------------------------------------------
-void MyFrame::OnSaveFile(wxCommandEvent & WXUNUSED(event))
+void MyFrame::onSaveFile(wxCommandEvent & WXUNUSED(event))
 {
 	wxString filename = wxSaveFileSelector(wxT("Save file as"), wxT("*.svg"), wxT("data"));
 	if ( !filename.empty() )
-		m_drawingPanel->SaveFile(filename) ;
+		m_drawingPanel->saveFile(filename) ;
 }
 
 //------------------------------------------------------------------------
-void MyFrame::OnSize(wxSizeEvent &event)
+void MyFrame::onSize(wxSizeEvent &event)
 // Called when you resize the frame
 {
 	int w, h ;
@@ -94,7 +94,7 @@ void MyFrame::OnSize(wxSizeEvent &event)
 	m_drawingPanel->SetSize(wxRect(wxPoint(WIDGET_PANEL_WIDTH,0), wxPoint(w, h))) ;
 }
 
-void MyFrame::RefreshDrawing()
+void MyFrame::refreshDrawing()
 {
     m_drawingPanel->Refresh() ;
 }

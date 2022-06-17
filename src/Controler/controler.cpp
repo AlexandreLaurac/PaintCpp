@@ -20,53 +20,53 @@ Controler::Controler(MyFrame * frame)
     m_modeId = ID_MODE_NONE ; // aucun mode de fonctionnement par défaut
     m_formId = ID_FORM_NONE ; // aucune forme sélectionnée par défaut
     m_appFrame = frame ;
-    frame->SetControler (this) ;
+    frame->setControler (this) ;
 }
 
-void Controler::SetInformations(Forme* forme) {
+void Controler::setInformations(Forme* forme) {
     string buffer = forme->toString();
     m_appFrame->SetStatusText(buffer);
 }
 
-int Controler::GetModeId () const
+int Controler::getModeId () const
 {
     return m_modeId ;
 }
 
-int Controler::GetFormId () const
+int Controler::getFormId () const
 {
     return m_formId ;
 }
 
-int Controler::GetMouseId () const
+int Controler::getMouseId () const
 {
     return m_mouseId ;
 }
 
-void Controler::SetModeId(int modeId)
+void Controler::setModeId(int modeId)
 {
     m_modeId = modeId ;
 }
 
-void Controler::SetFormId(int formId)
+void Controler::setFormId(int formId)
 {
     m_formId = formId ;
 }
 
 
-void Controler::SetMouseId(int mouseId)
+void Controler::setMouseId(int mouseId)
 {
     m_mouseId = mouseId ;
 }
 
-void Controler::SetOutlineColor(int r, int g, int b, int a){
+void Controler::setOutlineColor(int r, int g, int b, int a){
     m_couleurCouranteOutline.r = r;
     m_couleurCouranteOutline.g = g;
     m_couleurCouranteOutline.b = b;
     m_couleurCouranteOutline.a = a/(255); // Pour être cohérent avec le modele
 }
 
-void Controler::SetFillColor(int r, int g, int b, int a){
+void Controler::setFillColor(int r, int g, int b, int a){
     m_couleurCouranteFill.r = r;
     m_couleurCouranteFill.g = g;
     m_couleurCouranteFill.b = b;
@@ -75,7 +75,7 @@ void Controler::SetFillColor(int r, int g, int b, int a){
 
 
 
-void Controler::FormCreation(int x, int y)
+void Controler::formCreation(int x, int y)
 {
     switch (m_formId)
     {
@@ -83,7 +83,7 @@ void Controler::FormCreation(int x, int y)
         {
             Rectangle * rectangle = new Rectangle (x, y, 0, 0, "rectangle", m_couleurCouranteOutline, m_couleurCouranteFill) ;
             rectangle->setPivotCorner(x,y);
-            SetInformations(rectangle);
+            setInformations(rectangle);
             m_dessin.addForme(rectangle) ;
             break ;
         }
@@ -91,21 +91,21 @@ void Controler::FormCreation(int x, int y)
         {
             Oval * oval = new Oval (x, y, 0, 0, "oval", m_couleurCouranteOutline, m_couleurCouranteFill) ;
             oval->setPivotCorner(x,y);
-            SetInformations(oval);
+            setInformations(oval);
             m_dessin.addForme(oval) ;
             break ;
         }
         case ID_LINE :
         {
             Ligne * line = new Ligne (x, y, x, y, "ligne",  m_couleurCouranteOutline, m_couleurCouranteFill) ;
-            SetInformations(line);
+            setInformations(line);
             m_dessin.addForme(line) ;
             break ;
         }
     }
 }
 
-void Controler::FormModification (int x, int y)
+void Controler::formModification (int x, int y)
 {
     switch (m_formId)
     {
@@ -133,7 +133,7 @@ void Controler::FormModification (int x, int y)
                 rectangle->setWidth(abs(x-rectangle->getPivotCorner().x)) ;
                 rectangle->setHeight(abs(y-rectangle->getPivotCorner().y)) ;
 
-                SetInformations(rectangle);
+                setInformations(rectangle);
             }
             break ;
         case ID_OVAL :
@@ -159,7 +159,7 @@ void Controler::FormModification (int x, int y)
 
                 oval->setWidth(abs(x-oval->getPivotCorner().x)) ;
                 oval->setHeight(abs(y-oval->getPivotCorner().y)) ;
-                SetInformations(oval);
+                setInformations(oval);
             }
             break ;
         case ID_LINE :
@@ -167,12 +167,12 @@ void Controler::FormModification (int x, int y)
             {
                 Ligne * line = (Ligne *) m_dessin.getList().back() ;
                 line->setPointEnd(x,y) ;
-                SetInformations(line);
+                setInformations(line);
             }
     }
 }
 
-void Controler::FormSelection (int x, int y)
+void Controler::formSelection (int x, int y)
 {
     Forme * form ;
     Forme * currentForm = m_dessin.getCurrentForm() ;
@@ -190,10 +190,8 @@ void Controler::FormSelection (int x, int y)
             {
                 currentForm->setColorOutline(m_dessin.getSavedColor()) ;
             }
-            form->setSelected(true);
-
-            m_dessin.SetCurrentForm(form) ;
-            m_dessin.SetSavedColor(form->getColorOutline()) ;
+            m_dessin.setCurrentForm(form) ;
+            m_dessin.setSavedColor(form->getColorOutline()) ;
             form->setColorOutline(Couleur(255,0,0,1)) ;
             return ;
         }
@@ -201,7 +199,7 @@ void Controler::FormSelection (int x, int y)
     if (currentForm != nullptr)
     {
         currentForm->setColorOutline(m_dessin.getSavedColor()) ;
-        currentForm->setSelected(false);
+
     }
 }
 

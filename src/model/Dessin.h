@@ -23,8 +23,8 @@ public:
     Couleur getSavedColor() const ;
 
     // Setters
-    void SetCurrentForm(Forme * form) ;
-    void SetSavedColor (Couleur color) ;
+    void setCurrentForm(Forme * form) ;
+    void setSavedColor (Couleur color) ;
 
     // Additional methods
     void deleteList();

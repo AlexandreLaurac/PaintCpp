@@ -15,22 +15,22 @@ class MyFrame : public wxFrame
 {
     public :
         MyFrame (const wxString& title, const wxPoint& pos, const wxSize& size) ;
-        MyControlPanel* GetControlPanel() {return m_controlPanel ;} ;
-        MyDrawingPanel* GetDrawingPanel() {return m_drawingPanel ;} ;
-		Controler * GetControler() {return m_controler ;} ;
-        void RefreshDrawing() ;
+        MyControlPanel* getControlPanel() {return m_controlPanel ;} ;
+        MyDrawingPanel* getDrawingPanel() {return m_drawingPanel ;} ;
+		Controler * getControler() {return m_controler ;} ;
+        void refreshDrawing() ;
 
         // Setter
-		void SetControler(Controler * controler) ;
+		void setControler(Controler * controler) ;
 
 
     protected:
-        void OnQuit(wxCommandEvent& event);
-        void OnAbout(wxCommandEvent& event);
-        void OnOpenFile(wxCommandEvent& WXUNUSED(event) ) ;
-        void OnSaveFile(wxCommandEvent & WXUNUSED(event)) ;
-        void OnClose(wxCloseEvent& event) ;
-        void OnSize(wxSizeEvent &event) ;
+        void onQuit(wxCommandEvent& event);
+        void onAbout(wxCommandEvent& event);
+        void onOpenFile(wxCommandEvent& WXUNUSED(event) ) ;
+        void onSaveFile(wxCommandEvent & WXUNUSED(event)) ;
+        void onClose(wxCloseEvent& event) ;
+        void onSize(wxSizeEvent &event) ;
         MyControlPanel * m_controlPanel; // the panel with controls
         MyDrawingPanel * m_drawingPanel; // the panel in which we draw
 		Controler * m_controler ;

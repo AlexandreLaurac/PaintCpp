@@ -54,14 +54,14 @@ Couleur Dessin::getSavedColor() const
 	return savedColor ;
 }
 
-void Dessin::SetSavedColor (Couleur color)
+void Dessin::setSavedColor (Couleur color)
 {
 	savedColor = color ;
 }
 
 
 
-void Dessin::SetCurrentForm(Forme * form)
+void Dessin::setCurrentForm(Forme * form)
 {
 	currentForm = form ;
 }

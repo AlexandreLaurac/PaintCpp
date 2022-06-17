@@ -14,28 +14,20 @@ class MyControlPanel : public wxPanel
 {
 	public :
 		MyControlPanel (wxWindow * parent) ;
-		// int GetSliderValue() { return m_slider->GetValue() ; } ;
-		// bool GetCheckBoxValue() { return m_checkBox->GetValue() ; } ;
 
 	private :
-		// void OnButton (wxCommandEvent &event) ;
-		// void OnSlider (wxScrollEvent &event) ;
-		// void OnCheckBox (wxCommandEvent &event) ;
 
-		void OnButtonRectangle (wxCommandEvent &event) ;
-		void OnButtonOval (wxCommandEvent &event) ;
-		void OnButtonLine (wxCommandEvent &event) ;
+		void onButtonRectangle (wxCommandEvent &event) ;
+		void onButtonOval (wxCommandEvent &event) ;
+		void onButtonLine (wxCommandEvent &event) ;
 
-		void OnButtonSelection (wxCommandEvent &event) ;
+		void onButtonSelection (wxCommandEvent &event) ;
 
-		void OnColorPickerOutline (wxColourPickerEvent &event) ;
-		void OnColorPickerFill (wxColourPickerEvent &event) ;
+		void onColorPickerOutline (wxColourPickerEvent &event) ;
+		void onColorPickerFill (wxColourPickerEvent &event) ;
 
 		MyFrame * m_parentFrame ;
 
-		// wxButton * m_button ;
-		// wxSlider * m_slider ;
-		// wxCheckBox * m_checkBox ;
 
 		wxButton * m_buttonRectangle ;		
 		wxButton * m_buttonOval ;

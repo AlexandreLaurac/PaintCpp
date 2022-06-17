@@ -18,24 +18,24 @@ class Controler
 
     public :
         Controler (MyFrame * frame) ;
-        int GetModeId () const ;
-        int GetFormId () const ;
-        int GetMouseId () const ;
+        int getModeId () const ;
+        int getFormId () const ;
+        int getMouseId () const ;
 
-        void SetInformations(Forme* forme);
+        void setInformations(Forme* forme);
 
-        Couleur GetOutlineColor() const {return m_couleurCouranteOutline;};
-        Couleur GetFillColor() const {return m_couleurCouranteFill;};
-        void SetOutlineColor(int r, int g, int b, int a);
-        void SetFillColor(int r, int g, int b, int a);
+        Couleur getOutlineColor() const {return m_couleurCouranteOutline;};
+        Couleur getFillColor() const {return m_couleurCouranteFill;};
+        void setOutlineColor(int r, int g, int b, int a);
+        void setFillColor(int r, int g, int b, int a);
         
-        void SetModeId (int modeId) ;
-        void SetFormId (int formId) ;
-        void SetMouseId (int mouseId) ;
-        Dessin GetDessin () { return m_dessin ;} ;
-        void FormCreation (int x, int y) ;
-        void FormModification (int x, int y) ;
-        void FormSelection (int x, int y) ;
+        void setModeId (int modeId) ;
+        void setFormId (int formId) ;
+        void setMouseId (int mouseId) ;
+        Dessin getDessin () { return m_dessin ;} ;
+        void formCreation (int x, int y) ; 
+        void formModification (int x, int y) ;
+        void formSelection (int x, int y) ;
 } ;
 
 

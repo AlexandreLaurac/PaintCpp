@@ -19,47 +19,46 @@ MyDrawingPanel::MyDrawingPanel(wxWindow *parent) : wxPanel(parent)
 	GetParent()->GetClientSize(&w,&h) ;
 	SetSize(wxRect(wxPoint(WIDGET_PANEL_WIDTH,0), wxPoint(w, h))) ;
 	SetBackgroundColour(wxColour(0xFF,0xFF,0xFF)) ;
-	Bind(wxEVT_MOTION, &MyDrawingPanel::OnMouseMove, this);
-	Bind(wxEVT_LEFT_DOWN, &MyDrawingPanel::OnMouseLeftDown, this);
-	Bind(wxEVT_PAINT, &MyDrawingPanel::OnPaint, this) ;
-	Bind(wxEVT_LEFT_UP, &MyDrawingPanel::OnMouseLeftUp, this);
-	Bind(wxEVT_LEFT_DCLICK, &MyDrawingPanel::OnLeftDoubleClick, this) ;
+	Bind(wxEVT_MOTION, &MyDrawingPanel::onMouseMove, this);
+	Bind(wxEVT_LEFT_DOWN, &MyDrawingPanel::onMouseLeftDown, this);
+	Bind(wxEVT_PAINT, &MyDrawingPanel::onPaint, this) ;
+	Bind(wxEVT_LEFT_UP, &MyDrawingPanel::onMouseLeftUp, this);
+	Bind(wxEVT_LEFT_DCLICK, &MyDrawingPanel::onLeftDoubleClick, this) ;
 	m_parentFrame = (MyFrame *) parent ;
 }
 
 //------------------------------------------------------------------------
-void MyDrawingPanel::OnMouseLeftDown(wxMouseEvent &event)
+void MyDrawingPanel::onMouseLeftDown(wxMouseEvent &event)
 // called when the mouse left button is pressed
 {
-	m_parentFrame->GetControler()->SetMouseId(ID_MOUSELEFTDOWN) ;
-	int mode = m_parentFrame->GetControler()->GetModeId() ;
+	m_parentFrame->getControler()->setMouseId(ID_MOUSELEFTDOWN) ;
+	int mode = m_parentFrame->getControler()->getModeId() ;
 	switch (mode)
 	{
 		case ID_MODE_SELECTION :
 		{
-			m_parentFrame->GetControler()->FormSelection(event.m_x, event.m_y) ;
+			m_parentFrame->getControler()->formSelection(event.m_x, event.m_y) ;
 			Refresh() ;
 			break ;
 		}
 		case ID_MODE_FORM :
 		{
-			m_parentFrame->GetControler()->FormCreation(event.m_x, event.m_y) ;
-			//string test = m_parentFrame->GetControler()->GetInformations();
+			m_parentFrame->getControler()->formCreation(event.m_x, event.m_y) ;
 			break ;
 		}
 	}
 }
 
 //------------------------------------------------------------------------
-void MyDrawingPanel::OnMouseMove(wxMouseEvent &event) // called when the mouse is moved
+void MyDrawingPanel::onMouseMove(wxMouseEvent &event) // called when the mouse is moved
 {
-	int mode = m_parentFrame->GetControler()->GetModeId() ;
-	int souris = m_parentFrame->GetControler()->GetMouseId() ;
+	int mode = m_parentFrame->getControler()->getModeId() ;
+	int souris = m_parentFrame->getControler()->getMouseId() ;
 	switch (mode)
 	{
 		case ID_MODE_SELECTION :
 		{
-			Forme * currentForm = m_parentFrame->GetControler()->GetDessin().getCurrentForm() ;
+			Forme * currentForm = m_parentFrame->getControler()->getDessin().getCurrentForm() ;
 			if (currentForm != nullptr && souris == ID_MOUSELEFTDOWN) // && currentForm->Contains(event.m_x, event.m_y))
 			{
 				currentForm->move(event.m_x, event.m_y) ;
@@ -69,20 +68,20 @@ void MyDrawingPanel::OnMouseMove(wxMouseEvent &event) // called when the mouse i
 		}
 		case ID_MODE_FORM :
 		{
-			m_parentFrame->GetControler()->FormModification(event.m_x, event.m_y) ;
+			m_parentFrame->getControler()->formModification(event.m_x, event.m_y) ;
 			Refresh() ;
 		}
 	}
 }
 
 //------------------------------------------------------------------------
-void MyDrawingPanel::OnMouseLeftUp(wxMouseEvent &event)
+void MyDrawingPanel::onMouseLeftUp(wxMouseEvent &event)
 {
-	m_parentFrame->GetControler()->SetMouseId(ID_MOUSELEFTUP) ;
+	m_parentFrame->getControler()->setMouseId(ID_MOUSELEFTUP) ;
 }
 
 //------------------------------------------------------------------------
-void MyDrawingPanel::OnLeftDoubleClick (wxMouseEvent & event)
+void MyDrawingPanel::onLeftDoubleClick (wxMouseEvent & event)
 {
 	// if (m_parentFrame->GetControler()->GetModeId() == ID_MODE_SELECTION)
 	// {
@@ -98,23 +97,23 @@ void MyDrawingPanel::OnLeftDoubleClick (wxMouseEvent & event)
 }
 
 //------------------------------------------------------------------------
-void MyDrawingPanel::OnPaint(wxPaintEvent &event)
+void MyDrawingPanel::onPaint(wxPaintEvent &event)
 {
 	wxPaintDC dc(this);
-	m_parentFrame->GetControler()->GetDessin().drawAllFormes(dc) ;
+	m_parentFrame->getControler()->getDessin().drawAllFormes(dc) ;
 }
 
 //------------------------------------------------------------------------
-void MyDrawingPanel::OpenFile(wxString fileName)
+void MyDrawingPanel::openFile(wxString fileName)
 {
 	// just to open (and close) any file
-	m_parentFrame->GetControler()->GetDessin().openSVG(fileName);
+	m_parentFrame->getControler()->getDessin().openSVG(fileName);
 	Refresh();
 }
 
 //------------------------------------------------------------------------
-void MyDrawingPanel::SaveFile(wxString fileName)
+void MyDrawingPanel::saveFile(wxString fileName)
 {
-	m_parentFrame->GetControler()->GetDessin().saveSVG(fileName.mb_str());
+	m_parentFrame->getControler()->getDessin().saveSVG(fileName.mb_str());
 	wxMessageBox(wxT("The file was saved")) ;
 }
