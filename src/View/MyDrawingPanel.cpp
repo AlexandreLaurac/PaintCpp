@@ -62,17 +62,17 @@ void MyDrawingPanel::onMouseMove(wxMouseEvent &event)
 	switch (mode)
 	{
 		case ID_MODE_SELECTION : // le bouton "Sélection" a été préalablement cliqué
-		{
+		{ // la méthode onMouseMove consiste alors à déplacer une forme
 			Forme * currentForm = m_parentFrame->getControler()->getDessin().getCurrentForm() ;
-			if (currentForm != nullptr && souris == ID_MOUSELEFTDOWN) // && currentForm->Contains(event.m_x, event.m_y))
+			if (currentForm != nullptr && souris == ID_MOUSELEFTDOWN) 
 			{
 				currentForm->move(event.m_x, event.m_y) ;
 				Refresh() ;
 			}
 			break ;
 		}
-		case ID_MODE_FORM :
-		{
+		case ID_MODE_FORM :      // un bouton de forme géométrique ("Rectangle", etc.) a été préalablement cliqué
+		{ // la méthode onMouseMove consiste alors à modifier une forme
 			m_parentFrame->getControler()->formModification(event.m_x, event.m_y) ;
 			Refresh() ;
 		}
@@ -104,6 +104,7 @@ void MyDrawingPanel::onLeftDoubleClick (wxMouseEvent & event)
 //------------------------------------------------------------------------
 void MyDrawingPanel::onPaint(wxPaintEvent &event)
 {
+	// La méthode consiste à redessiner toutes les formes
 	wxPaintDC dc(this);
 	m_parentFrame->getControler()->getDessin().drawAllFormes(dc) ;
 }
