@@ -18,8 +18,8 @@ Point::Point(const int x, const int y){
 
 void Point::move(int offsetX, int offsetY){
 	// Bouge le point d'un certains offset
-	x = x + offsetX;
-	y = y + offsetY;
+	x = offsetX;
+	y = offsetY;
 }
 
 void Point::display() const{

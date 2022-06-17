@@ -4,9 +4,12 @@
 #include "controler.h"
 
 #include "Forme.h"
+#include "Dessin.h"
 
 #include <vector>
 #include <algorithm>
+
+using namespace std ;
 
 //------------------------------------------------------------------------
 MyDrawingPanel::MyDrawingPanel(wxWindow *parent) : wxPanel(parent)
@@ -20,7 +23,7 @@ MyDrawingPanel::MyDrawingPanel(wxWindow *parent) : wxPanel(parent)
 	Bind(wxEVT_LEFT_DOWN, &MyDrawingPanel::OnMouseLeftDown, this);
 	Bind(wxEVT_PAINT, &MyDrawingPanel::OnPaint, this) ;
 	Bind(wxEVT_LEFT_UP, &MyDrawingPanel::OnMouseLeftUp, this);
-	Bind(wxEVT_KEY_DOWN, &MyDrawingPanel::OnDelete, this);
+	Bind(wxEVT_LEFT_DCLICK, &MyDrawingPanel::OnLeftDoubleClick, this) ;
 	m_parentFrame = (MyFrame *) parent ;
 }
 
@@ -35,6 +38,7 @@ void MyDrawingPanel::OnMouseLeftDown(wxMouseEvent &event)
 		case ID_MODE_SELECTION :
 		{
 			m_parentFrame->GetControler()->FormSelection(event.m_x, event.m_y) ;
+			Refresh() ;
 			break ;
 		}
 		case ID_MODE_FORM :
@@ -47,51 +51,54 @@ void MyDrawingPanel::OnMouseLeftDown(wxMouseEvent &event)
 }
 
 //------------------------------------------------------------------------
-void MyDrawingPanel::OnMouseMove(wxMouseEvent &event)
-// called when the mouse is moved
+void MyDrawingPanel::OnMouseMove(wxMouseEvent &event) // called when the mouse is moved
 {
-	m_parentFrame->GetControler()->FormModification(event.m_x, event.m_y) ;
-	Refresh() ;	// send an event that calls the OnPaint method
-}
-
-//------------------------------------------------------------------------
-void MyDrawingPanel::OnMouseLeftUp(wxMouseEvent &event)
-{
-	std::cout << "entrée callback MouseLeftUp" << std::endl ;
-	m_parentFrame->GetControler()->SetMouseId(ID_MOUSELEFTUP) ;
-}
-
-//------------------------------------------------------------------------
-void MyDrawingPanel::OnDelete (wxKeyEvent &event)
-{
-	std::cout << "entrée callback OnDelete" << std::endl ;
-	if (m_parentFrame->GetControler()->GetModeId() == ID_MODE_SELECTION && event.GetKeyCode() == WXK_BACK)
+	int mode = m_parentFrame->GetControler()->GetModeId() ;
+	int souris = m_parentFrame->GetControler()->GetMouseId() ;
+	switch (mode)
 	{
-		std::cout << "entrée if du callback" << std::endl ;
-		Forme * currentForm = m_parentFrame->GetControler()->GetDessin().getCurrentForm() ;
-		if (currentForm != nullptr)
+		case ID_MODE_SELECTION :
 		{
-			auto listFormes = m_parentFrame->GetControler()->GetDessin().getList() ;
-			int i = 0 ;
-			for (Forme * form : listFormes)
+			Forme * currentForm = m_parentFrame->GetControler()->GetDessin().getCurrentForm() ;
+			if (currentForm != nullptr && souris == ID_MOUSELEFTDOWN) // && currentForm->Contains(event.m_x, event.m_y))
 			{
-				if (form == currentForm)
-				{
-					break ;
-				}
-				i++ ;
+				currentForm->move(event.m_x, event.m_y) ;
+				Refresh() ;
 			}
-			listFormes.erase(listFormes.begin()+i) ;
+			break ;
+		}
+		case ID_MODE_FORM :
+		{
+			m_parentFrame->GetControler()->FormModification(event.m_x, event.m_y) ;
 			Refresh() ;
 		}
 	}
 }
 
 //------------------------------------------------------------------------
+void MyDrawingPanel::OnMouseLeftUp(wxMouseEvent &event)
+{
+	m_parentFrame->GetControler()->SetMouseId(ID_MOUSELEFTUP) ;
+}
+
+//------------------------------------------------------------------------
+void MyDrawingPanel::OnLeftDoubleClick (wxMouseEvent & event)
+{
+	// if (m_parentFrame->GetControler()->GetModeId() == ID_MODE_SELECTION)
+	// {
+	// 	Forme * currentForm = m_parentFrame->GetControler()->GetDessin().getCurrentForm() ;
+	// 	if (currentForm != nullptr && currentForm->Contains(event.m_x, event.m_y))
+	// 	{
+	// 		m_parentFrame->GetControler()->GetDessin().deleteForme(currentForm) ;
+	// 		m_parentFrame->GetControler()->GetDessin().SetCurrentForm(nullptr) ;
+	// 		Refresh() ;
+	// 	}
+	// }
+	cout << "Suppression pas encore fonctionnelle" << endl ;
+}
+
+//------------------------------------------------------------------------
 void MyDrawingPanel::OnPaint(wxPaintEvent &event)
-// called automatically when the panel is shown for the first time or
-// when the panel is resized
-// You have to call OnPaint with Refresh() when you need to update the panel content
 {
 	wxPaintDC dc(this);
 	m_parentFrame->GetControler()->GetDessin().drawAllFormes(dc) ;
