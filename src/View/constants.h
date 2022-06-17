@@ -20,9 +20,6 @@ enum
 	ID_ABOUT,
 	ID_LOAD,
 	ID_SAVE,
-	ID_BUTTON1,
-	ID_SLIDER1,
-	ID_CHECKBOX1,
 	ID_BUTTON_RECT,    // Bouton rectangle du panneau de contrôle
 	ID_BUTTON_OVAL,    // Bouton ovale du panneau de contrôle
 	ID_BUTTON_LINE,    // Bouton ligne du panneau de contrôle
