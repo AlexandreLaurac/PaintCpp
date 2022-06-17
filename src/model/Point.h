@@ -11,7 +11,7 @@ public :
 	Point();
 	Point(const int x, const int y);
 
-	void move(int offsetX, int offsetY);
+	void move(int X, int Y);  // attention, c'est un déplacement direct au point écrit
 
 	void display() const;
 

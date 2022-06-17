@@ -29,34 +29,39 @@ MyDrawingPanel::MyDrawingPanel(wxWindow *parent) : wxPanel(parent)
 
 //------------------------------------------------------------------------
 void MyDrawingPanel::onMouseLeftDown(wxMouseEvent &event)
-// called when the mouse left button is pressed
 {
+	// Récupération de l'état de l'interface
 	m_parentFrame->getControler()->setMouseId(ID_MOUSELEFTDOWN) ;
 	int mode = m_parentFrame->getControler()->getModeId() ;
+
+	// Actions en fonction de cet état
 	switch (mode)
 	{
-		case ID_MODE_SELECTION :
+		case ID_MODE_SELECTION : // le bouton "Sélection" a été préalablement cliqué
 		{
-			m_parentFrame->getControler()->formSelection(event.m_x, event.m_y) ;
+			m_parentFrame->getControler()->formSelection(event.m_x, event.m_y) ;  // la méthode onMouseLeftDown consiste alors à sélectionner une forme
 			Refresh() ;
 			break ;
 		}
-		case ID_MODE_FORM :
+		case ID_MODE_FORM :      // un bouton de forme géométrique ("Rectangle", etc.) a été préalablement cliqué
 		{
-			m_parentFrame->getControler()->formCreation(event.m_x, event.m_y) ;
+			m_parentFrame->getControler()->formCreation(event.m_x, event.m_y) ; // la méthode onMouseLeftDown consiste alors à créer une forme
 			break ;
 		}
 	}
 }
 
 //------------------------------------------------------------------------
-void MyDrawingPanel::onMouseMove(wxMouseEvent &event) // called when the mouse is moved
+void MyDrawingPanel::onMouseMove(wxMouseEvent &event)
 {
+	// Récupération de l'état de l'interface
 	int mode = m_parentFrame->getControler()->getModeId() ;
 	int souris = m_parentFrame->getControler()->getMouseId() ;
+
+	// Actions en fonction de cet état
 	switch (mode)
 	{
-		case ID_MODE_SELECTION :
+		case ID_MODE_SELECTION : // le bouton "Sélection" a été préalablement cliqué
 		{
 			Forme * currentForm = m_parentFrame->getControler()->getDessin().getCurrentForm() ;
 			if (currentForm != nullptr && souris == ID_MOUSELEFTDOWN) // && currentForm->Contains(event.m_x, event.m_y))

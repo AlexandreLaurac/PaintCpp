@@ -16,10 +16,10 @@ Point::Point(const int x, const int y){
 	this->y = y;
 }
 
-void Point::move(int offsetX, int offsetY){
-	// Bouge le point d'un certains offset
-	x = offsetX;
-	y = offsetY;
+void Point::move(int X, int Y){
+	// Déplace le point aux coordonnées fournies en paramètres
+	x = X ;
+	y = Y ;
 }
 
 void Point::display() const{
