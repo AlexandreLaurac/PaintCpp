@@ -13,6 +13,7 @@ public :
 	Couleur();
 	Couleur(const unsigned int& r, const unsigned int& g, const unsigned int& b, const unsigned int& a);
 	Couleur(const Couleur& toCopy);
+	Couleur(std::string line); // Constructeur avec une chaine rgba(...)
 
 	~Couleur(){}
 

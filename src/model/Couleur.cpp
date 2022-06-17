@@ -25,6 +25,25 @@ Couleur::Couleur(const Couleur& toCopy){
 	a = toCopy.a;
 }
 
+Couleur::Couleur(string line){
+	line.erase(0,5);
+	string r = line.substr(0, line.find(","));
+	this->r = stoi(r);
+
+	line.erase(0,line.find(",")+1);
+	string g = line.substr(0, line.find(","));
+	this->g = stoi(g);
+
+	line.erase(0,line.find(",")+1);
+	string b = line.substr(0, line.find(","));
+	this->b = stoi(b);
+
+	line.erase(0,line.find(",")+1);
+	string a = line.substr(0, line.find(")"));
+	this->a = stoi(a);
+	// this->a = 255;
+}
+
 Couleur& Couleur::operator=(const Couleur& couleur){
 	r = couleur.r;
 	g = couleur.g;
