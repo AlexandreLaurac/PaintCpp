@@ -31,7 +31,7 @@
     #include "wx/wx.h"
 #endif
 
-#include<wx/filedlg.h>
+#include <wx/filedlg.h>
 #include <wx/image.h>
 #include <wx/file.h>
 #include <wx/bitmap.h>

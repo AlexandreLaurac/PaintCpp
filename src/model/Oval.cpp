@@ -88,7 +88,7 @@ float Oval::getSurface() const {
 }
 
 float Oval::getPerimeter() const {
-    return (float)(M_PI * (3 * ( (width+height) / 2) - sqrt( (3 * (width/2) + height/2) * ((width/2)+3*(height/2))) ) ); // Formule de Ramanujan avaec précision de 0.01%
+    return (float)(M_PI * (3 * ( (width+height) / 2) - sqrt( (3 * (width/2) + height/2) * ((width/2)+3*(height/2))) ) ); // Formule de Ramanujan avec précision de 0.01%
 }
 
 

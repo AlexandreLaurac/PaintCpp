@@ -202,5 +202,3 @@ void Controler::formSelection (int x, int y)
 
     }
 }
-
-// Commentaire à la con

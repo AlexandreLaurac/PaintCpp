@@ -129,16 +129,5 @@ int main()
     d2.saveSVG("test.svg");
 
 
-
-    
-
-
-
-
-
-    
-
-
-
     return EXIT_SUCCESS;
 }
